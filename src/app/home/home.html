@@ -1,0 +1,16 @@
+<div class="g-bdg f-ct f-cb f-mt20 f-mb20" id='app-home' ms-controller='appHome'>
+  <div class="g-mng">
+    <div class="g-mngc f-cb g-bd f-p20" id='j-main-container'>
+      首页
+    </div>
+  </div>
+  <div class="g-sdg">
+    <div class='g-sdbd f-mb20' ms-repeat='categorys'>
+      <div class='g-sdgh'>
+        <i ms-class="f-mr5 fa fa-{[{el.Icon}]}" ms-if="el.Icon != ''"></i>{[{el.CategoryName}]}
+      </div>
+      <a ms-repeat-child='el.News' class='g-sdgl j-ajax' ms-href='#!/g/{[{game.Id}]}/{[{child.Id}]}'>{[{child.Title}]}</a>
+      <p class='f-p10 f-tac text-muted' ms-if="el.News.size() == 0">暂无内容</p>
+    </div>
+  </div>
+</div>
