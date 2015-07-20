@@ -2,8 +2,8 @@ package router
 
 import (
 	"github.com/ascoders/as"
-	"newWoku/controllers/app"
-	"newWoku/controllers/user"
+	"woku/controllers/app"
+	"woku/controllers/user"
 	
 )
 

@@ -3,7 +3,7 @@ package app
 import (
 	"github.com/martini-contrib/sessions"
 	"net/http"
-	"newWoku/models/user"
+	"woku/models/user"
 )
 
 // 获取登陆用户信息

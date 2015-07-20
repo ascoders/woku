@@ -1,9 +1,16 @@
-// node
 node_modules
-npm-debug.log
 
-// ÏîÄ¿
-*.exe
+
+output
+
+
+components
+
+
 woku
+
+
 conf
-static
+
+
+fis-conf.js

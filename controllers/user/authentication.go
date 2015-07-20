@@ -5,9 +5,9 @@ import (
 	"github.com/martini-contrib/sessions"
 	"math/rand"
 	"net/http"
-	"newWoku/models/user"
 	"strconv"
 	"time"
+	"woku/models/user"
 )
 
 // 登陆（获取授权令牌）

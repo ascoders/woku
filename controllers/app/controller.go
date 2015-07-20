@@ -2,8 +2,8 @@ package app
 
 import (
 	"github.com/ascoders/as"
-	"newWoku/models/app"
-	"newWoku/models/user"
+	"woku/models/app"
+	"woku/models/user"
 )
 
 type Controller struct {

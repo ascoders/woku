@@ -4,8 +4,8 @@ import (
 	"github.com/ascoders/as"
 	"github.com/go-martini/martini"
 	"net/http"
-	"newWoku/models/app"
-	"newWoku/models/user"
+	"woku/models/app"
+	"woku/models/user"
 )
 
 // 获取某个app信息

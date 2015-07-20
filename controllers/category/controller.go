@@ -2,7 +2,7 @@ package category
 
 import (
 	"github.com/ascoders/as"
-	"newWoku/models/category"
+	"woku/models/category"
 )
 
 type Controller struct {

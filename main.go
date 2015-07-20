@@ -2,8 +2,8 @@ package main
 
 import (
 	"github.com/ascoders/as"
-	_ "newWoku/conf"
-	_ "newWoku/router"
+	_ "woku/conf"
+	_ "woku/router"
 )
 
 func main() {

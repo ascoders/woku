@@ -2,7 +2,7 @@ package article
 
 import (
 	"github.com/ascoders/as"
-	"newWoku/models/user"
+	"woku/models/user"
 )
 
 type Controller struct {

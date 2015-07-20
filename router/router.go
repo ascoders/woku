@@ -2,9 +2,9 @@ package router
 
 import (
 	"github.com/ascoders/as"
-	"newWoku/controllers/app"
-	"newWoku/controllers/article"
-	"newWoku/controllers/user"
+	"woku/controllers/app"
+	"woku/controllers/article"
+	"woku/controllers/user"
 )
 
 func init() {
