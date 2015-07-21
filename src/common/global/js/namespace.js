@@ -79,7 +79,7 @@ wk.ajax = function (method, opts) {
 				wk.notice(message, 'red')
 
 				opts.error()
-			});
+			})
 	})
 }
 wk.get = function (opts) {

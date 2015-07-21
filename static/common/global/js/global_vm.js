@@ -17,7 +17,7 @@ var global = avalon.define({
 			global.my.isLogin = true;
 
 			// 信息获取完毕
-			global.temp.myDeferred.resolve();
+			global.$myDeferred.resolve();
 		},
 
 		// 是否已登陆

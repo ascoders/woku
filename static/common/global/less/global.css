@@ -1,0 +1,123 @@
+.g-doc {
+  position: relative;
+  min-height: 100%;
+  _height: 100%;
+  padding: 0 0 30px;
+  zoom: 1;
+}
+.g-doc .m-nav-empty {
+  width: 100%;
+  height: 40px;
+}
+.g-doc .m-nav {
+  background: #F8F8F8;
+  height: 40px;
+  color: #333;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  border-bottom: 1px solid #ddd;
+}
+.g-doc .m-nav .f-ct {
+  width: 90%;
+}
+.g-doc .m-nav .header {
+  padding: 0;
+  height: 40px;
+}
+.g-doc .m-nav ul {
+  margin: 0;
+  padding: 0;
+}
+.g-doc .m-nav ul li {
+  list-style: none;
+  float: left;
+  margin: 0;
+}
+.g-doc .m-nav ul li a {
+  display: block;
+  color: #333;
+  height: 40px;
+  line-height: 40px;
+  padding: 0 15px;
+  font-size: 14px;
+}
+.g-doc .m-nav ul li a:hover {
+  color: #4183C4;
+  text-decoration: none;
+}
+.g-doc .m-nav .msg {
+  width: 500px;
+}
+.g-doc .m-nav .msg a {
+  display: inline-block;
+  padding: 0 13px;
+}
+.g-doc .m-nav .j-drop {
+  position: relative;
+}
+.g-doc .m-nav .j-drop-content {
+  background: #F8F8F8;
+  border: 1px solid #ddd;
+  border-top: none;
+  margin-top: -1px;
+}
+.g-doc .m-nav .j-drop-content li {
+  float: none;
+}
+.g-doc .m-nav .j-drop-content li a {
+  height: 35px;
+  line-height: 35px;
+  min-width: 150px;
+}
+.g-doc .m-nav .j-right-drop {
+  position: relative;
+}
+.g-doc .m-nav .j-right-drop-content {
+  background: #F8F8F8;
+  border: 1px solid #ddd;
+  border-left: none;
+  left: 150px;
+  top: -1px;
+}
+.g-doc .m-nav .cut {
+  height: 0px;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid white;
+}
+.g-doc .m-nav .pro-label {
+  width: 250px;
+}
+.g-doc .m-nav .pro {
+  padding: 0 10px 10px 10px;
+}
+.g-doc .m-nav .pro .progress {
+  height: 12px;
+  margin-bottom: 0px;
+}
+.g-doc .m-nav .header-button {
+  cursor: default;
+  padding: 0 10px 10px 10px;
+}
+.g-doc .m-nav .header-button input {
+  vertical-align: middle;
+  margin-top: -2px;
+  margin-bottom: 1px;
+  border: none;
+}
+.g-doc .m-nav .info-number {
+  top: 5px;
+  left: 20px;
+}
+.g-doc .m-nav .user-image {
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  top: 7px;
+  left: 10px;
+}
+.g-doc .m-nav .user-name {
+  margin-left: 25px;
+}

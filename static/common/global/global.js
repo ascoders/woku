@@ -23,7 +23,7 @@ avalon.filters.toFixed = function (str, number) {
 };
 
 require.config({
-	baseUrl: "/static/common/global",
+	baseUrl: "/static",
 	paths: {
 		"jquery": "http://cdn.bootcss.com/jquery/1.11.2/jquery.min",
 		"jQuery": "http://cdn.bootcss.com/jquery/1.11.2/jquery.min",
@@ -46,7 +46,7 @@ require.config({
 		"mmPromise": "plugin/avalon/mmPromise",
 		"jquery.typetype": "plugin/jquery/jquery.typetype", //模拟输入
 		"jquery.taboverride": "plugin/jquery/taboverride", //tab键变为缩进
-		"jquery.contextMenu": "plugin/jquery/jquery.contextMenu", //右键菜单
+		"jquery.contextMenu": "jplugin/query/jquery.contextMenu", //右键菜单
 		"jquery.jbox": "plugin/jbox/jBox", //迷你提示框
 		"marked": "plugin/marked/marked", //markdown解析
 		"frontia": "plugin/baidu/baidu.frontia.1.0.0", //百度社会化组件
@@ -119,7 +119,7 @@ var global = avalon.define({
 			global.my.isLogin = true;
 
 			// 信息获取完毕
-			global.temp.myDeferred.resolve();
+			global.$myDeferred.resolve();
 		},
 
 		// 是否已登陆
@@ -620,7 +620,7 @@ require(['jquery'], function ($) {
 
 require(['jquery', 'mmState'], function ($) {
 	//获取登陆用户信息
-	global.temp.myDeferred = $.Deferred();
+	global.$myDeferred = $.Deferred();
 	wk.get({
 		url: '/api/users/current',
 		success: function success(data) {
@@ -631,7 +631,7 @@ require(['jquery', 'mmState'], function ($) {
 			global.my.setInfo(data);
 		},
 		error: function error() {
-			global.temp.myDeferred.resolve(); // 未登录
+			global.$myDeferred.resolve(); // 未登录
 		}
 	});
 

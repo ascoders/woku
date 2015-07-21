@@ -5,7 +5,7 @@
 
 require(['jquery', 'mmState'], function ($) {
 	//获取登陆用户信息
-	global.temp.myDeferred = $.Deferred();
+	global.$myDeferred = $.Deferred();
 	wk.get({
 		url: '/api/users/current',
 		success: function success(data) {
@@ -16,7 +16,7 @@ require(['jquery', 'mmState'], function ($) {
 			global.my.setInfo(data);
 		},
 		error: function error() {
-			global.temp.myDeferred.resolve(); // 未登录
+			global.$myDeferred.resolve(); // 未登录
 		}
 	});
 
