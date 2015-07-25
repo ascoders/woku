@@ -37,10 +37,10 @@
 .f-oh {
     overflow: hidden;
 }
-.f-fs1 {
+.f-fs12 {
     font-size: 12px;
 }
-.f-fs2 {
+.f-fs14 {
     font-size: 14px;
 }
 .f-fwn {
@@ -121,4 +121,31 @@
     -ms-user-select: none;
     -o-user-select: none;
     user-select: none;
+}
+//鼠标移上去变颜色
+.f-hvc, .f-hvc-danger {
+    user-select: none;
+    cursor: pointer;
+    cursor: hand;
+    color: #333;
+}
+.f-hvc:hover {
+    color: #369;
+    text-decoration: none;
+}
+.f-hvc-danger:hover {
+    color: #D9534F;
+}
+//能拖拽状态
+.f-drag {
+    cursor: move;
+    cursor: -webkit-grab;
+    cursor: -moz-grab;
+    overflow: hidden;
+}
+//拖拽中
+.f-dragging {
+    cursor: move;
+    cursor: -webkit-grabbing;
+    cursor: -moz-grabbing;
 }

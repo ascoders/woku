@@ -136,3 +136,21 @@ require(['jquery'], function ($) {
 		autoHidePreHeight = $(window).scrollTop()
 	})
 })
+
+//获取登陆用户信息
+require(['jquery'], function ($) {
+	global.$myDeferred = $.Deferred();
+	wk.get({
+		url: '/api/users/current',
+		success: function (data) {
+			if (data === false) {
+				return
+			}
+
+			global.my.setInfo(data)
+		},
+		error: function () {
+			global.$myDeferred.resolve(); // 未登录
+		}
+	})
+})

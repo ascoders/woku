@@ -2,31 +2,42 @@
 // 状态路由
 
 require(['jquery', 'mmState'], function ($) {
-	//获取登陆用户信息
-	global.$myDeferred = $.Deferred();
-	wk.get({
-		url: '/api/users/current',
-		success: function (data) {
-			if (data === false) {
-				return
-			}
 
-			global.my.setInfo(data)
-		},
-		error: function () {
-			global.$myDeferred.resolve(); // 未登录
-		}
+	function state(opts) {
+		opts = $.extend(opts, {
+			controller: 'global', // 默认父级控制器为全局控制器
+			url: '/', // 访问url地址
+			module: 'common/home/home', // 模块名
+			ignoreChange: true
+		})
+
+		avalon.state(opts.module, {
+			controller: opts.controller,
+			url: opts.url,
+			views: {
+				'container': {
+					templateUrl: 'static/' + opts.module + '.html',
+					controllerUrl: [opts.module],
+					ignoreChange: function (changeType) {
+						if (!opts.ignoreChange) {
+							return false
+						}
+						if (changeType) return true
+					}
+				}
+			}
+		})
+	}
+
+	// 找不到的页面跳转到404
+	avalon.router.error(function () {
+		avalon.router.navigate('/404')
 	})
 
-	//找不到的页面跳转到404
-	avalon.router.error(function () {
-		avalon.router.navigate('/404');
-	});
-
-	//模版无法加载跳转404
+	// 模版无法加载跳转404
 	avalon.state.config({
 		onloadError: function () {
-			avalon.router.navigate("/404");
+			avalon.router.navigate("/404")
 		},
 		onBeforeUnload: function () {
 			// 清空所有jbox
@@ -35,33 +46,15 @@ require(['jquery', 'mmState'], function ($) {
 	})
 
 	//404
-	avalon.state("404", {
-		controller: "global",
-		url: "/404",
-		views: {
-			"container": {
-				templateUrl: '/static/public/404.html',
-				controllerUrl: ['public/404.js'],
-				ignoreChange: function (changeType) {
-					if (changeType) return true;
-				}
-			}
-		}
-	});
+	state({
+		module: 'common/404/404',
+		url: '/404'
+	})
 
 	//首页
-	avalon.state("index", {
-		controller: "global",
-		url: "/",
-		views: {
-			"container": {
-				templateUrl: '/static/index/home.html',
-				controllerUrl: ['index/index'],
-				ignoreChange: function (changeType) {
-					if (changeType) return true;
-				}
-			}
-		}
+	state({
+		module: 'common/home/home',
+		url: '/'
 	})
 
 	//登陆

@@ -1,24 +1,30 @@
 // avalon_init.js
 //改变模板标签
-"use strict";
-
 avalon.config({
 	interpolate: ["{[{", "}]}"]
-});
+})
 
 //过滤markdown标签
 avalon.filters.cleanmark = function (str) {
 	//移除所有 * ` [ ] # - >
-	str = str.replace(/[!.*](.*)/g, "【图片】").replace(/\*/g, "").replace(/\`/g, "").replace(/\[/g, "").replace(/\]/g, "").replace(/\#/g, "").replace(/\-/g, "").replace(/\>/g, "");
+	str = str
+		.replace(/[!.*](.*)/g, "【图片】")
+		.replace(/\*/g, "")
+		.replace(/\`/g, "")
+		.replace(/\[/g, "")
+		.replace(/\]/g, "")
+		.replace(/\#/g, "")
+		.replace(/\-/g, "")
+		.replace(/\>/g, "")
 
-	return str;
-};
+	return str
+}
 
 //处理小数点
 avalon.filters.toFixed = function (str, number) {
-	str = str.toFixed(number);
-	return str;
-};
+	str = str.toFixed(number)
+	return str
+}
 
 require.config({
 	baseUrl: "/static",
@@ -36,12 +42,12 @@ require.config({
 		"prettify": "http://cdn.bootcss.com/prettify/r298/prettify.min", //code美化
 		// "chart": "http://cdn.bootcss.com/Chart.js/1.0.1-beta.2/Chart.min", //表格
 		"md5": "http://cdn.bootcss.com/blueimp-md5/1.1.0/js/md5.min", //md5加密
-		"echarts": "http://cdn.bootcss.com/echarts/2.1.10/echarts-all", // 百度表格
+		"echarts": 'http://cdn.bootcss.com/echarts/2.1.10/echarts-all', // 百度表格
 
-		"mmState": "plugin/avalon/mmState",
-		"mmRouter": "plugin/avalon/mmRouter",
-		"mmHistory": "plugin/avalon/mmHistory",
-		"mmPromise": "plugin/avalon/mmPromise",
+		"mmState": 'plugin/avalon/mmState',
+		"mmRouter": 'plugin/avalon/mmRouter',
+		"mmHistory": 'plugin/avalon/mmHistory',
+		"mmPromise": 'plugin/avalon/mmPromise',
 		"jquery.typetype": "plugin/jquery/jquery.typetype", //模拟输入
 		"jquery.taboverride": "plugin/jquery/taboverride", //tab键变为缩进
 		"jquery.contextMenu": "jplugin/query/jquery.contextMenu", //右键菜单
@@ -54,47 +60,47 @@ require.config({
 		"avalon.page": "public/avalon.page" //分页
 	},
 	shim: {
-		"jquery.timeago": {
-			deps: ["jquery"]
+		'jquery.timeago': {
+			deps: ['jquery']
 		},
-		"jquery.ui": {
-			deps: ["jquery"]
+		'jquery.ui': {
+			deps: ['jquery']
 		},
-		"jquery.jbox": {
-			deps: ["jquery"]
+		'jquery.jbox': {
+			deps: ['jquery']
 		},
-		"jquery.autosize": {
-			deps: ["jquery"]
+		'jquery.autosize': {
+			deps: ['jquery']
 		},
-		"jquery.taboverride": {
-			deps: ["jquery"]
+		'jquery.taboverride': {
+			deps: ['jquery']
 		},
-		"jquery.selection": {
-			deps: ["jquery"]
+		'jquery.selection': {
+			deps: ['jquery']
 		},
-		"jquery.qrcode": {
-			deps: ["jquery"]
+		'jquery.qrcode': {
+			deps: ['jquery']
 		},
-		"jquery.typetype": {
-			deps: ["jquery"]
+		'jquery.typetype': {
+			deps: ['jquery']
 		},
-		"jquery.autocomplete": {
-			deps: ["jquery"]
+		'jquery.autocomplete': {
+			deps: ['jquery']
 		},
-		"jquery.tree": {
-			deps: ["jquery"]
+		'jquery.tree': {
+			deps: ['jquery']
 		},
-		"md5": {
-			exports: "md5"
+		'md5': {
+			exports: 'md5'
 		},
-		"frontia": {
-			exports: "baidu.frontia"
+		'frontia': {
+			exports: 'baidu.frontia'
 		},
-		"jquery.contextMenu": {
-			deps: ["jquery"]
+		'jquery.contextMenu': {
+			deps: ['jquery']
 		},
-		"echarts": {
+		'echarts': {
 			exports: "echarts"
 		}
 	}
-});
+})
