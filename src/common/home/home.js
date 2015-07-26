@@ -1,4 +1,4 @@
-define("common/home", ["jquery"], function ($) {
+define("common/home", ["jquery", "css!common/home/home.css"], function ($) {
 	var vm = avalon.define({
 		$id: "common/home",
 		games: [],

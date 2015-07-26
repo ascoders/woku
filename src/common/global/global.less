@@ -1,10 +1,18 @@
-// 整体
+@import "less/reset.less";
+@import "less/animation.less";
+@import "less/base.less";
+@import "less/bootstrap.less";
+@import "less/function.less";
+@import "less/plugin.less";
+@import "less/step.less";
+// 主体
 .g-doc {
     position: relative;
     min-height: 100%;
     _height: 100%;
-    padding: 0 0 30px;
     zoom: 1;
+    box-sizing: border-box;
+    padding-bottom: 31px;
     // 占位导航条
     .m-nav-empty {
         width: 100%;
@@ -69,6 +77,7 @@
             position: relative;
         }
         .j-drop-content {
+            position: absolute;
             background: #F8F8F8;
             border: 1px solid #ddd;
             border-top: none;
@@ -86,6 +95,7 @@
             position: relative;
         }
         .j-right-drop-content {
+            position: absolute;
             background: #F8F8F8;
             border: 1px solid #ddd;
             border-left: none;
@@ -135,5 +145,22 @@
             margin-left: 5px;
             margin-right: 0;
         }
+    }
+}
+// 页尾
+.g-ft {
+    height: 30px;
+    line-height: 30px;
+    margin: -31px 0 0;
+    background: #F5F5F5;
+    color: #888;
+    border-top: 1px solid #ccc;
+    a {
+        color: #888;
+    }
+    #j-qrcode img {
+        bottom: 0;
+        right: 0;
+        width: 80px;
     }
 }
