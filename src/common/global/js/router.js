@@ -45,34 +45,32 @@ require(['jquery', 'mmState'], function ($) {
 		}
 	})
 
-	//404
+	// 404
 	state({
 		module: 'common/404/404',
 		url: '/404'
 	})
 
-	//首页
+	// 首页
 	state({
 		module: 'common/home/home',
 		url: '/'
 	})
 
-	//登陆
-	avalon.state("login", {
-		controller: "global",
-		url: "/login",
-		views: {
-			"container": {
-				templateUrl: '/static/check/login.html',
-				controllerUrl: ['check/login'],
-				ignoreChange: function (changeType) {
-					if (changeType) return true;
-				}
-			}
-		}
+	// 登陆
+	state({
+		module: 'authority/login/login',
+		url: '/login'
+	})
+
+	// 注册
+	state({
+		module: 'authority/register/register',
+		url: '/register'
 	})
 
 	//第三方平台登陆
+	/*
 	avalon.state("loginOauth", {
 		controller: "global",
 		url: "/login/oauth",
@@ -80,21 +78,6 @@ require(['jquery', 'mmState'], function ($) {
 			"container": {
 				templateUrl: '/static/check/loginOauth.html',
 				controllerUrl: ['check/loginOauth'],
-				ignoreChange: function (changeType) {
-					if (changeType) return true;
-				}
-			}
-		}
-	})
-
-	//注册
-	avalon.state("register", {
-		controller: "global",
-		url: "/register",
-		views: {
-			"container": {
-				templateUrl: '/static/check/register.html',
-				controllerUrl: ['check/register'],
 				ignoreChange: function (changeType) {
 					if (changeType) return true;
 				}
@@ -415,7 +398,7 @@ require(['jquery', 'mmState'], function ($) {
 			}
 		}
 	})
-
+*/
 	// 启动路由
 	avalon.history.start({
 		basepath: "/",
