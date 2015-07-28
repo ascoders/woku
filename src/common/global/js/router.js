@@ -4,12 +4,12 @@
 require(['jquery', 'mmState'], function ($) {
 
 	function state(opts) {
-		opts = $.extend(opts, {
+		opts = $.extend({
 			controller: 'global', // 默认父级控制器为全局控制器
 			url: '/', // 访问url地址
 			module: 'common/home/home', // 模块名
 			ignoreChange: true
-		})
+		}, opts)
 
 		avalon.state(opts.module, {
 			controller: opts.controller,
@@ -59,13 +59,13 @@ require(['jquery', 'mmState'], function ($) {
 
 	// 登陆
 	state({
-		module: 'authority/login/login',
+		module: 'auth/login/login',
 		url: '/login'
 	})
 
 	// 注册
 	state({
-		module: 'authority/register/register',
+		module: 'auth/register/register',
 		url: '/register'
 	})
 
@@ -403,7 +403,6 @@ require(['jquery', 'mmState'], function ($) {
 	avalon.history.start({
 		basepath: "/",
 		html5Mode: true,
-		hashPrefix: '!',
 		routeElementJudger: function (element) {
 			return typeof $(element).attr('router') !== 'undefined'
 		}
