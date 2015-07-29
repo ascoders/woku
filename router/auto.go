@@ -10,10 +10,10 @@ import (
 func init() {
     
     app := app.New()
-    as.Router.Routes.Get("/api/apps", app.Gets)
-    as.Router.Routes.Get("/api/apps/type/:id", app.Type)
     as.Router.Routes.Get("/api/apps/:path", app.Get)
     as.Router.Routes.Post("/api/apps", app.User, app.Add)
+    as.Router.Routes.Get("/api/apps", app.Gets)
+    as.Router.Routes.Get("/api/apps/type/:id", app.Type)
 		
     user := user.New()
     as.Router.Routes.Get("/api/users/authentication", user.Authentication)
