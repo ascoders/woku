@@ -3,7 +3,7 @@ var wk = wk || {}
 
 // 提示框
 wk.notice = function (text, color) {
-	require(['jquery', 'jquery.jbox'], function ($) {
+	require(['jquery', 'jquery.jbox', 'css!plugin/jbox/jBox.css'], function ($) {
 		new jBox('Notice', {
 			content: text,
 			attributes: {
@@ -38,7 +38,7 @@ wk.confirm = function (content, callback) {
 wk.userImage = function (str) {
 	if (str != undefined && str != "") {
 		if (!isNaN(str)) {
-			return "/static/img/user/" + str + ".jpg";
+			return "/static/common/global/image/user/" + str + ".jpg";
 		}
 		return str;
 	}

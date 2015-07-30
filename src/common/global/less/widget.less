@@ -1,6 +1,4 @@
-// 公共组件
-
-//导航条
+// 导航条
 .g-hd {
     background: #F8F8F8;
     padding: 25px 0;
@@ -26,4 +24,116 @@
 }
 // 正文
 .g-bd {
+}
+// 左自适应右定宽
+.g-bdg {
+    margin: 0 0 10px;
+}
+.g-sdg {
+    position: relative;
+    float: right;
+    width: 300px;
+    margin-left: -300px
+}
+.g-sdbd {
+    border: 1px solid #ccc;
+    background: #FFF;
+}
+.g-sdgh {
+    background: whitesmoke;
+    padding: 7px 10px;
+    color: #333;
+    border-bottom: 1px solid #ccc;
+}
+.g-sdgl {
+    position: relative;
+    display: block;
+    word-wrap: break-word;
+    padding: 0 60px 0 15px;
+    color: #333;
+    height: 34px;
+    line-height: 34px;
+    overflow: hidden;
+    &.active {
+        padding-left: 10px;
+        border-left: 5px solid #4CAE4C;
+    }
+    &:hover {
+        text-decoration: none;
+        background: #f5f5f5;
+    }
+}
+.g-sdgl-noright {
+    padding-right: 15px;
+}
+.g-sdgl {
+    border-bottom: 1px solid #ddd;
+}
+.g-sdgr {
+    position: absolute;
+    right: 0;
+    top: 0px;
+    font-size: 14px;
+    width: 55px;
+    text-align: right;
+}
+.g-sdgr .views {
+    background: #5CB85C;
+    padding: 9px 5px;
+    color: white;
+}
+.g-mng {
+    float: left;
+    width: 100%;
+}
+.g-mngc {
+    margin-right: 310px;
+}
+// 分页按钮
+.g-pa {
+    border: 1px solid #ddd;
+    padding: 0;
+}
+.g-pa li {
+    float: left;
+    list-style: none;
+    margin: 0;
+}
+.g-pa li+li {
+    margin-left: -1px;
+}
+.g-pa li a {
+    display: block;
+    padding: 0 15px;
+    border: 1px solid #ddd;
+    border-top: none;
+    border-bottom: none;
+    height: 34px;
+    line-height: 34px;
+}
+.g-pa li a:not(.disabled):not(.active):hover {
+    background: whitesmoke;
+    text-decoration: none;
+}
+.g-pa li .disabled {
+    color: #ccc;
+}
+.g-pa li .disabled:hover, .g-pa li a.active:hover {
+    cursor: default;
+    text-decoration: none;
+}
+.g-pa li a.active {
+    background: #428BCA;
+    color: white;
+}
+.g-pas {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    padding: 5px 10px;
+    width: 100px;
+    height: 34px;
+    border-top: none;
+    border-right: none;
+    border-bottom: none;
 }

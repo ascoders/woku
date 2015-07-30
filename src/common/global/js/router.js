@@ -69,6 +69,12 @@ require(['jquery', 'mmState'], function ($) {
 		url: '/register'
 	})
 
+	// 应用首页
+	state({
+		module: 'app/home/home',
+		url: '/app'
+	})
+
 	//第三方平台登陆
 	/*
 	avalon.state("loginOauth", {
