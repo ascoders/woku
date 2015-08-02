@@ -26,10 +26,10 @@ define("auth/login", ['jquery', 'css!auth/login/login.css'], function ($) {
 			});
 		},
 		submit: function () { //点击登陆按钮
-			if (vm.account == '') {
+			if (vm.account === '') {
 				return wk.notice('账号不能为空', 'red')
 			}
-			if (vm.password == '') {
+			if (vm.password === '') {
 				return wk.notice('密码不能为空', 'red')
 			}
 

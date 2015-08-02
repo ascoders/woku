@@ -22,17 +22,17 @@ define("auth/register", ['jquery', 'css!auth/register/register.css'], function (
 			})
 		},
 		submit: function () { //点击登陆按钮
-			if (vm.email == '') {
+			if (vm.email === '') {
 				return wk.notice('邮箱不能为空', 'red')
 			}
-			if (vm.nickname == '') {
+			if (vm.nickname === '') {
 				return wk.notice('昵称不能为空', 'red')
 			}
-			if (vm.password == '') {
+			if (vm.password === '') {
 				return wk.notice('密码不能为空', 'red')
 			}
-			if (vm.passwordRepeat == '' ||
-				vm.passwordRepeat != vm.password) {
+			if (vm.passwordRepeat === '' ||
+				vm.passwordRepeat !== vm.password) {
 				return wk.notice('重复密码不正确', 'red')
 			}
 

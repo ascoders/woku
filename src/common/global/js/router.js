@@ -7,7 +7,7 @@ require(['jquery', 'mmState'], function ($) {
 		opts = $.extend({
 			controller: 'global', // 默认父级控制器为全局控制器
 			url: '/', // 访问url地址
-			module: 'common/home/home', // 模块名
+			module: 'common/home', // 模块名
 			ignoreChange: true
 		}, opts)
 
@@ -16,8 +16,8 @@ require(['jquery', 'mmState'], function ($) {
 			url: opts.url,
 			views: {
 				'container': {
-					templateUrl: 'static/' + opts.module + '.html',
-					controllerUrl: [opts.module],
+					templateUrl: 'static/' + opts.module + '/index.html',
+					controllerUrl: [opts.module + '/index'],
 					ignoreChange: function (changeType) {
 						if (!opts.ignoreChange) {
 							return false
@@ -47,32 +47,38 @@ require(['jquery', 'mmState'], function ($) {
 
 	// 404
 	state({
-		module: 'common/404/404',
+		module: 'common/404',
 		url: '/404'
 	})
 
 	// 首页
 	state({
-		module: 'common/home/home',
+		module: 'common/home',
 		url: '/'
 	})
 
 	// 登陆
 	state({
-		module: 'auth/login/login',
+		module: 'auth/login',
 		url: '/login'
 	})
 
 	// 注册
 	state({
-		module: 'auth/register/register',
+		module: 'auth/register',
 		url: '/register'
 	})
 
 	// 应用首页
 	state({
-		module: 'app/home/home',
+		module: 'app/home',
 		url: '/app'
+	})
+
+	// 应用首页：分类
+	state({
+		module: 'app/home',
+		url: '/app/{id}'
 	})
 
 	//第三方平台登陆
