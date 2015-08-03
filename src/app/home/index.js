@@ -1,12 +1,7 @@
-avalon.controller(function ($ctrl) {
-	$ctrl.$onEnter = function (param, rs, rj) {
-		// 根据参数设置获取资源的url
-		var appUrl = '/api/apps'
-		if (param.type) {
-			appUrl += '/type/' + param.type
-		}
+ctrl.$onEnter = function (param, rs, rj) {
 
-		vm.type = param.type || ''
-	}
-	$ctrl.$onRendered = function () {}
-})
+}
+
+ctrl.$onRendered = function () {
+
+}

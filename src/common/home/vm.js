@@ -1,5 +1,4 @@
 var vm = avalon.define({
-	$id: "common/home",
 	games: [],
 	tops: [],
 	news: [],

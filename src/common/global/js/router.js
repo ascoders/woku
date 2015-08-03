@@ -8,12 +8,29 @@ require(['jquery', 'mmState'], function ($) {
 			controller: 'global', // 默认父级控制器为全局控制器
 			url: '/', // 访问url地址
 			module: 'common/home', // 模块名
-			ignoreChange: true
+			ignoreChange: true,
+			absolute: false,
+			child: null,
+			parentModule: '', // 父级模块名
 		}, opts)
 
-		avalon.state(opts.module, {
-			controller: opts.controller,
+		// 模块名过滤特殊字符
+		opts.stateName = opts.module.replace(/\//g, '').replace(/\./g, '')
+		opts.parentStateName = opts.parentModule.replace(/\//g, '').replace(/\./g, '')
+
+		// 设置模块全名
+		if (opts.parentStateName !== '') {
+			opts.stateName = opts.parentStateName + '.' + opts.stateName
+		}
+
+		// 当父级模块名不为空时，控制器为父级模块名
+		var controller = opts.parentModule || opts.controller
+
+		// 设置路由属性
+		avalon.state(opts.stateName, {
+			controller: controller,
 			url: opts.url,
+			absolute: opts.absolute,
 			views: {
 				'container': {
 					templateUrl: 'static/' + opts.module + '/index.html',
@@ -27,6 +44,22 @@ require(['jquery', 'mmState'], function ($) {
 				}
 			}
 		})
+
+		console.group(opts);
+		console.log("stateName", opts.stateName);
+		console.log("controller", controller);
+		console.log("url", opts.url);
+		console.log("absolute", opts.absolute);
+		console.log("templateUrl", 'static/' + opts.module + '/index.html')
+		console.log('controllerUrl', opts.module + '/index')
+		console.log('ignoreChange', opts.ignoreChange)
+		console.groupEnd();
+
+		// 设置子属性
+		if (opts.child !== null) {
+			opts.child.parentModule = opts.module
+			state(opts.child)
+		}
 	}
 
 	// 找不到的页面跳转到404
@@ -69,17 +102,27 @@ require(['jquery', 'mmState'], function ($) {
 		url: '/register'
 	})
 
-	// 应用首页
+	// 应用 /////////////////
+
+	// 应用专区（应用列表）
 	state({
-		module: 'app/home',
+		module: 'app/index',
 		url: '/app'
 	})
 
-	// 应用首页：分类
+	// 基础
 	state({
-		module: 'app/home',
-		url: '/app/{id}'
+		module: 'app/base',
+		absolute: true,
+		child: {
+			module: 'app/home',
+			url: '/app/{path}'
+		}
 	})
+
+
+
+	// 应用首页
 
 	//第三方平台登陆
 	/*
