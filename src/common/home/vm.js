@@ -7,6 +7,7 @@ var vm = avalon.define({
 	name: '', //新增名称
 	path: '', //路径
 	type: '', //类型
+	test: 'ccc',
 	submit: function () { //提交
 		var teshu = /[`~!！@#$%^&*()_+<>?:"”{},.，。\/;；‘'[\]]/im;
 		if (vm.name === "" || teshu.test(vm.name)) { //名称不能为空，不能包含特殊符号

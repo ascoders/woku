@@ -1,7 +1,7 @@
 // router.js
 // 状态路由
 
-require(['jquery', 'mmState'], function ($) {
+require(['mmState'], function () {
 
 	function state(opts) {
 		opts = $.extend({
@@ -9,7 +9,7 @@ require(['jquery', 'mmState'], function ($) {
 			url: '/', // 访问url地址
 			module: 'common/home', // 模块名
 			ignoreChange: true,
-			absolute: false,
+			abstract: false,
 			child: null,
 			parentModule: '', // 父级模块名
 		}, opts)
@@ -30,7 +30,7 @@ require(['jquery', 'mmState'], function ($) {
 		avalon.state(opts.stateName, {
 			controller: controller,
 			url: opts.url,
-			absolute: opts.absolute,
+			abstract: opts.abstract,
 			views: {
 				'container': {
 					templateUrl: 'static/' + opts.module + '/index.html',
@@ -45,15 +45,17 @@ require(['jquery', 'mmState'], function ($) {
 			}
 		})
 
-		console.group(opts);
-		console.log("stateName", opts.stateName);
-		console.log("controller", controller);
-		console.log("url", opts.url);
-		console.log("absolute", opts.absolute);
+		/*
+		console.group(opts)
+		console.log("stateName", opts.stateName)
+		console.log("controller", controller)
+		console.log("url", opts.url)
+		console.log("abstract", opts.abstract)
 		console.log("templateUrl", 'static/' + opts.module + '/index.html')
 		console.log('controllerUrl', opts.module + '/index')
 		console.log('ignoreChange', opts.ignoreChange)
-		console.groupEnd();
+		console.groupEnd()
+		*/
 
 		// 设置子属性
 		if (opts.child !== null) {
@@ -93,13 +95,13 @@ require(['jquery', 'mmState'], function ($) {
 	// 登陆
 	state({
 		module: 'auth/login',
-		url: '/login'
+		url: '/ccc/ccc/ccc'
 	})
 
 	// 注册
 	state({
 		module: 'auth/register',
-		url: '/register'
+		url: '/auth/register'
 	})
 
 	// 应用 /////////////////
@@ -113,10 +115,11 @@ require(['jquery', 'mmState'], function ($) {
 	// 基础
 	state({
 		module: 'app/base',
-		absolute: true,
+		abstract: true,
+		url: '/a',
 		child: {
 			module: 'app/home',
-			url: '/app/{path}'
+			url: '/a'
 		}
 	})
 

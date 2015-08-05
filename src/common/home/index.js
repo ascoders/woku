@@ -1,5 +1,7 @@
 ctrl.$onEnter = function (param, rs, rj) {
 	document.title = '我酷游戏'
+	avalon.vmodels.global.menuName = ''
+	avalon.vmodels.global.menuDark = true
 
 	//获取信息
 	wk.get({
@@ -37,4 +39,16 @@ ctrl.$onEnter = function (param, rs, rj) {
 		}
 	})
 }
-ctrl.$onRendered = function () {}
+
+ctrl.$onRendered = function () {
+	$('select.dropdown').dropdown({
+		onChange: function (value, text, $selectedItem) {
+			console.log(value, text, $selectedItem)
+		}
+	})
+}
+
+ctrl.$onBeforeUnload = function () {
+	// 菜单变白色
+	avalon.vmodels.global.menuDark = false
+}

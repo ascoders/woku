@@ -3,22 +3,12 @@ var wk = wk || {}
 
 // 提示框
 wk.notice = function (text, color) {
-	require(['jquery', 'jquery.jbox', 'css!plugin/jbox/jBox.css'], function ($) {
-		new jBox('Notice', {
-			content: text,
-			attributes: {
-				x: 'right',
-				y: 'bottom'
-			},
-			animation: 'flip',
-			color: color
-		})
-	})
+
 }
 
 // 选择框
 wk.confirm = function (content, callback) {
-	require(['jquery', 'jquery.jbox'], function ($) {
+	require(['jquery.jbox'], function () {
 		var myModal = new jBox('Confirm', {
 			minWidth: '200px',
 			content: content,
@@ -55,8 +45,8 @@ wk.ajax = function (method, opts) {
 	}
 	opts = $.extend(defaultOpts, opts)
 
-	require(['jquery', 'jquery.cookie'], function ($) {
-		var csrf = $.cookie("_csrf") || ''
+	require(['cookie'], function (cookie) {
+		var csrf = cookie.get('_csrf') || ''
 
 		return $.ajax({
 				url: opts.url,
@@ -122,7 +112,7 @@ wk.subStr = function (str, start, end) {
 
 // 上传组件
 wk.createDropzone = function (obj, url, data, accept, callback) {
-	require(['jquery', 'dropzone', 'md5', 'jquery.jbox'], function ($, Dropzone, md5) {
+	require(['dropzone', 'md5', 'jquery.jbox'], function (Dropzone, md5) {
 		//上传框组
 		var modals = {};
 
@@ -290,7 +280,7 @@ wk.timediff = function (element, options, callback) {
 
 // jbox插件渲染dom
 wk.jbox = function () {
-	require(['jquery', 'jquery.jbox'], function ($) {
+	require(['jquery.jbox'], function () {
 		// jbox插件
 		$('.jbox').each(function () {
 			var title = $(this).attr('title');

@@ -1,4 +1,4 @@
-define('editor', ['jquery', 'marked', 'prettify', 'jquery.jbox', 'jquery.selection', 'jquery.autosize'], function ($, marked, prettify) {
+define('editor', ['marked', 'prettify', 'jquery.jbox', 'jquery.selection', 'jquery.autosize'], function (marked, prettify) {
 	$.fn.MarkEditor = function (options) {
 		//参数
 		var opts = $.extend({}, $.fn.MarkEditor.defaults, options);

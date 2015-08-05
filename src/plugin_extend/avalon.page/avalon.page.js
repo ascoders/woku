@@ -1,4 +1,4 @@
-define(["jquery", "text!plugin_extend/avalon.page/avalon.page.html"], function ($, templateHtml) {
+define(["text!plugin_extend/avalon.page/avalon.page.html"], function (templateHtml) {
 
     var uiName = 'page'
 

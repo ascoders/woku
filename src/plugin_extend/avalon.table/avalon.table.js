@@ -1,6 +1,6 @@
 'use strict';
 
-define(["jquery", "text!plugin_extend/plugin_extend/avalon.table/avalon.table.html", 'avalon.page', 'jquery.timeago', 'jquery.contextMenu', 'jquery.jbox'], function ($, tableHtml, pageVm) {
+define(["text!plugin_extend/plugin_extend/avalon.table/avalon.table.html", 'avalon.page', 'jquery.timeago', 'jquery.contextMenu', 'jquery.jbox'], function (tableHtml, pageVm) {
 
     var uiName = 'table';
 
