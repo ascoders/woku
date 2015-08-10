@@ -16,8 +16,8 @@
 				ms-class-1='disabled:isLoading'
 				ms-click='jump(el)'
 				href="javascript:void(0)">
-				<span ms-if='!isLoading'>{[{el}]}</span>
-				<span ms-if='isLoading'><i ms-if='el == page' class="fa fa-refresh fa-spin f-mr5"></i>{[{el}]}</span>
+				<span ms-if='!isLoading'>{{el}}</span>
+				<span ms-if='isLoading'><i ms-if='el == page' class="fa fa-refresh fa-spin f-mr5"></i>{{el}}</span>
 			</a>
 
 			<a class='disabled no-jumping' ms-if='el == -1' href="javascript:void(0)">...</a>

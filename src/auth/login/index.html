@@ -1,27 +1,28 @@
-<div class="ui form container main">
+<div class="ui container main">
 	<div class="ui two column middle aligned very relaxed stackable grid">
 	  <div class="column">
 	    <div class="ui form">
 	      <div class="field">
-	        <label>账号</label>
-	        <div class="ui left icon input">
-	          <input type="text" name='account' placeholder="邮箱 手机号">
-	          <i class="user icon"></i>
+	        <div class="ui left labeled icon input">
+	        	<div class="ui label">账号</div>
+				<input type="text" name='account' placeholder="邮箱 用户名">
+				<i class="user icon"></i>
 	        </div>
 	      </div>
 	      <div class="field">
-	        <label>密码</label>
-	        <div class="ui left icon input">
+	        <div class="ui left labeled icon input">
+	          <div class="ui label">密码</div>
 	          <input type="password" name='password'>
 	          <i class="lock icon"></i>
 	        </div>
 	      </div>
-	      <div class="ui blue submit button">登陆</div>
+	      <div class="ui blue submit button large">登陆</div>
+	      <div class="ui error message"></div>
 	    </div>
 	  </div>
 	  <div class="ui vertical divider">Or </div>
 	  <div class="center aligned column">
-	    <div class="ui big green labeled icon button"><i class="signup icon"></i>注册</div>
+	    <a href='/auth/register' router class="ui big green labeled icon button"><i class="signup icon"></i>注册</a>
 	  </div>
 	</div>
 </div>

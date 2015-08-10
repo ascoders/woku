@@ -1,9 +1,4 @@
 // avalon_init.js
-//改变模板标签
-avalon.config({
-	interpolate: ["{[{", "}]}"]
-})
-
 //过滤markdown标签
 avalon.filters.cleanmark = function (str) {
 	//移除所有 * ` [ ] # - >

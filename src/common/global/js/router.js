@@ -33,7 +33,7 @@ require(['mmState'], function () {
 			abstract: opts.abstract,
 			views: {
 				'container': {
-					templateUrl: 'static/' + opts.module + '/index.html',
+					templateUrl: '/static/' + opts.module + '/index.html',
 					controllerUrl: [opts.module + '/index'],
 					ignoreChange: function (changeType) {
 						if (!opts.ignoreChange) {
@@ -75,8 +75,8 @@ require(['mmState'], function () {
 			avalon.router.navigate("/404")
 		},
 		onBeforeUnload: function () {
-			// 清空所有jbox
-			$('.jBox-wrapper').remove()
+			// 清除window对象上所有绑定
+			$(window).unbind()
 		}
 	})
 
@@ -95,7 +95,7 @@ require(['mmState'], function () {
 	// 登陆
 	state({
 		module: 'auth/login',
-		url: '/ccc/ccc/ccc'
+		url: '/auth/login'
 	})
 
 	// 注册

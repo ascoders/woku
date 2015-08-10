@@ -1,41 +1,29 @@
-<div class='g-hd'>
-	<div class='f-cb f-ct'>
-		<div class='f-fl'>
-			<span class='f-fs20 f-fwb'>应用专区</span>
-		</div>
-		<ul class='f-fr crumb'>
-			<li>
-				<a href='#!//'>首页</a>
-			</li>
-			<li>&gt;</li>
-			<li class='active'>专区</li>
-		</ul>
+<div class="ui bottom attached pushable main">
+	<div class="ui visible inverted left vertical sidebar menu">
+		<a router href='/app' class="item" ms-class="active:type == ''"><i class="fire icon"></i>综合推荐</a>
+		<a router href='/app?type=brains' class="item" ms-class="active:type == 'brains'"><i class="cubes icon"></i>智益休闲</a>
+		<a router href='/app?type=other' class="item" ms-class="active:type == 'other'"><i class="grid layout icon"></i>其它</a>
 	</div>
-</div>
+	<div class="pusher app-container">
 
-<div class='f-ct f-mt20 f-mb20'>
-	<div class="g-bdg f-cb">
-		<div class="g-mng">
-			<div class="g-mngc g-bd f-cb">
-				<a router class='game-box f-fl' ms-repeat='list' ms-href="/a/{[{el.path}]}">
-					<img ms-src='{[{el.icon}]}'>
-					<p class='f-tac'>{[{el.name}]}</p>
-				</a>
+	<div class="ui basic segment">
+		<div class="ui link cards">
+
+			<div class="card" ms-repeat='list' ms-href="/a/{{el.path}}">
+				<div class="image">
+					<img ms-src="{{el.icon}}">
+				</div>
+				<div class="content">
+					<div class="header">{{el.name}}</div>
+					<div class="description">Matthew is an interior</div>
+				</div>
+				<div class="extra content">
+					<span><i class="user icon"></i>75 Users</span>
+				</div>
 			</div>
-		</div>
-		<div class="g-sdg">
-			<div class='g-sdbd'>
-				<div class='g-sdgh'>分类</div>
-				<a router href='/app' class='g-sdgl' ms-class='active:type == ""'>全部</a>
-				<a router href='/app?type=brains' class='g-sdgl' ms-class='active:type == "brains"'>智益休闲</a>
-				<a router href='/app?type=rpg' class='g-sdgl' ms-class='active:type == "rpg"'>养成RPG</a>
-				<a router href='/app?type=pk' class='g-sdgl' ms-class='active:type == "pk"'>竞技类</a>
-				<a router href='/app?type=chess' class='g-sdgl' ms-class='active:type == "chess"'>棋牌类</a>
-				<a router href='/app?type=other' class='g-sdgl' ms-class='active:type == "other"'>非游戏</a>
-			</div>
+			<div ms-widget="page, page, $pageOpts"></div>
 		</div>
 	</div>
 
-	<!-- 分页按纽 -->
-	<div ms-widget="page, page, $pageOpts"></div>
+  </div>
 </div>

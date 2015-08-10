@@ -2,8 +2,26 @@
 var wk = wk || {}
 
 // 提示框
-wk.notice = function (text, color) {
+wk.notice = function (opts) {
+	if (wk._noticeTimeout) {
+		clearTimeout(wk._noticeTimeout)
+	}
 
+	$('#j-logo')
+		.popup(opts)
+		.popup('show')
+
+	wk._noticeTimeout = setTimeout(function () {
+		clearTimeout(wk._noticeTimeout)
+		wk._noticeTimeout = null
+		$('#j-logo')
+			.popup('hide')
+
+		setTimeout(function () {
+			$('#j-logo')
+				.popup('destroy')
+		}, 200)
+	}, 2000)
 }
 
 // 选择框
@@ -66,9 +84,7 @@ wk.ajax = function (method, opts) {
 				} else {
 					message = xhr.responseText
 				}
-				wk.notice(message, 'red')
-
-				opts.error()
+				opts.error(message)
 			})
 	})
 }

@@ -38,6 +38,18 @@ ctrl.$onEnter = function (param, rs, rj) {
 			vm.hots = data.HotTopics || []
 		}
 	})
+
+	$(window).scroll(function () {
+		if ($(document).scrollTop() > $('#j-head').offset().top + $('#j-head').height()) {
+			if (avalon.vmodels.global.menuDark) {
+				avalon.vmodels.global.menuDark = false
+			}
+		} else {
+			if (!avalon.vmodels.global.menuDark) {
+				avalon.vmodels.global.menuDark = true
+			}
+		}
+	})
 }
 
 ctrl.$onRendered = function () {

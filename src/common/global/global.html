@@ -16,194 +16,57 @@
 <title>我酷</title>
 
 <body ms-controller='global'>
-  <!-- 导航条 -->
-  <!--
-  <div class='g-doc'>
-    <div class='m-nav-empty'></div>
-    <div class='m-nav'>
-      <div class='f-ct f-cb'>
-        <a class='header f-fl' href='/' router>
-          <img src='image/logo.png'>
-        </a>
-        <ul class='f-fl'>
-          <li>
-            <a href='/app' router><i class="fa fa-rocket"></i>浏览</a>
-          </li>
-          <li>
-            <a href="/g/doc/api/doc" router><i class="fa fa-book"></i>开发手册</a>
-          </li>
-          <li class="j-drop">
-            <a href="#">
-              其他<i class="fa fa-caret-down"></i>
-            </a>
-            <ul class="j-drop-content f-dn f-z3">
-              <li class='j-right-drop'>
-                <a href="#">归类文档<i class="fa fa-caret-right"></i></a>
-                <ul class="j-right-drop-content f-dn f-z3">
-                  <li>
-                    <a href="/g/blog" router>博客</a>
-                  </li>
-                  <li>
-                    <a href="/g/design" router>游戏设计</a>
-                  </li>
-                </ul>
-              </li>
-              <li class='j-right'>
-                <a href="/yuqing" router>舆情分析</a>
-              </li>
-            </ul>
-          </li>
-        </ul>
-        <ul class='f-fr'>
-          <li>
-            <form action="http://zhannei.baidu.com/cse/search" method="get" target="_blank" class="bdcs-search-form" id="bdcs-search-form">
-              <input type="hidden" name="s" value="11980850384642570746">
-              <input type="hidden" name="entry" value="1">
-              <input type="text" name="q" class="bdcs-search-form-input f-fl" id="bdcs-search-form-input" placeholder="请输入关键词" autocomplete="off">
-              <input type="submit" class="btn btn-default f-fl f-ml-1" value="搜索">
-            </form>
-          </li>
-          <li class='j-drop'>
-            <a href="#">
-              <i class="fa fa-cog"></i>
-            </a>
-            <ul class="j-drop-content f-dn f-z3 f-r0">
-              <li>
-                <a class='pro-label f-tac'>页面宽度</a>
-              </li>
-              <li class='f-cb'>
-                <div class='f-w6 f-tac header-button'>
-                  <input type='radio' name='windowsize' id='j-window-df'>
-                  <label for='j-window-df'>标准</label>
-                </div>
-                <div class='f-w6 f-tac header-button'>
-                  <input type='radio' name='windowsize' id='j-window-lg'>
-                  <label for='j-window-lg'>宽屏</label>
-                </div>
-              </li>
-              <li class='cut'></li>
-              <li>
-                <a class='pro-label f-tac'>颜色风格</a>
-              </li>
-              <li class='f-cb'>
-                <div class='f-w6 f-tac header-button'>
-                  <input type='radio' name='colorstyle' id='j-color-df'>
-                  <label for='j-color-df'>标准</label>
-                </div>
-                <div class='f-w6 f-tac header-button'>
-                  <input type='radio' name='colorstyle' id='j-color-dk'>
-                  <label for='j-color-dk'>暗系</label>
-                </div>
-              </li>
-            </ul>
-          </li>
-          <li class='j-drop' ms-if='my.isLogin'>
-            <a href="#">
-              <i class="fa fa-tasks f-mt12"></i>
-            </a>
-            <ul class="j-drop-content f-dn f-z3 f-r0">
-              <li>
-                <a class='pro-label'>
-                  本日已用上传流量
-                  <span class='f-fr' id='j-upload'>{[{my.info.uploadSize / 1024 / 1024 | toFixed(1)}]}M</span>
-                </a>
-              </li>
-              <li class='pro'>
-                <div class="progress">
-                  <div class="progress-bar progress-bar-success progress-bar-striped active" id='j-upload-progress'></div>
-                </div>
-              </li>
-              <li class='cut'></li>
-              <li>
-                <a class='pro-label'>
-                  本月已用免费额度
-                  <span class='f-fr' id='j-money'>0元</span>
-                </a>
-              </li>
-              <li class='pro'>
-                <div class="progress">
-                  <div class="progress-bar progress-bar-success progress-bar-striped active" id='j-money-progress'></div>
-                </div>
-              </li>
-              <li class='cut'></li>
-              <li>
-                <a class='f-tac' href="/user.html">查看详情</a>
-              </li>
-            </ul>
-          </li>
-          <li class='j-drop f-pr' ms-if='my.isLogin' ms-mouseenter='getMessage'>
-            <a href="#">
-              <i class="fa fa-info-circle f-mt12"></i>
-            </a>
-            <ul class="j-drop-content f-dn f-z3 f-r0 msg"></ul>
-            <span class='u-info info-number f-dn'></span>
-          </li>
-          <li class='j-drop' ms-if='my.isLogin'>
-            <a href="#">
-              <img class='user-image' ms-src='my.info.image'>	
-              <span class='user-name'>{[{my.info.nickname}]}</span> 	
-              <i class="fa fa-caret-down"></i>
-            </a>
-            <ul class="j-drop-content f-z3 f-r0 f-dn">
-              <li>
-                <a href="/user/account/base" router>
-                  <i class='fa fa-cog'></i>我的账号
-                </a>
-              </li>
-              <li>
-                <a ms-click='my.signout'>
-                  <i class='fa fa-external-link'></i>退出
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li id='j-login' ms-if='!my.isLogin'>
-            <a href='/login' router>登录</a>
-          </li>
-          <li id='j-register' ms-if='!my.isLogin'>
-            <a href='/register' router>注册</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-    
-
-    
-  </div>
-    -->
-
+ 
   <div class="ui fixed pointing menu" ms-class='inverted:menuDark'>
     <div class='ui container'>
-
-      <a href="/" router class="header item" ms-class="active:menuName == ''">
+      <a href="/" router class="header item" id='j-logo' ms-class="active:menuName == ''">
         <img class="logo" src="image/logo.png">
         我酷
       </a>
 
-      <a class="item" ms-class="active:menuName == 'app'">浏览</a>
+      <div class="item">
+        <div class="ui icon input" ms-class='transparent:!menuDark'>
+          <input type="text" placeholder="搜搜看吧...">
+          <i class="search link icon"></i>
+        </div>
+      </div>
+
+      <a class="item" href="/app" router ms-class="active:menuName == 'app'">浏览</a>
       <a class="item" ms-class="active:menuName == 'doc'">文档</a>
       <a class="item" ms-class="active:menuName == 'blog'">博客</a>
 
       <div class="right menu">
-        <div class="item">
-          <div class="ui icon input" ms-class='transparent:!menuDark'>
-            <input type="text" placeholder="Search...">
-            <i class="search link icon"></i>
+        <a class="item" ms-class="active:menuName == 'login'" ms-if='!my.isLogin' href='/auth/login' router>登录</a>
+
+        <div class="ui simple dropdown item" ms-if='my.isLogin'>
+          <div class="text">
+            <img class="ui avatar image" ms-src="my.info.image">
+            {{my.info.nickname}}
+          </div>
+          <i class="dropdown icon"></i>
+          <div class="menu">
+            <a class="item">
+              <i class="user icon"></i>
+              信息
+            </a>
+            <a class="item" ms-click="my.signout">
+              <i class="sign out icon"></i>
+              退出
+            </a>
           </div>
         </div>
-        
-        <a class="item" ms-class="active:menuName == 'login'" ms-if='!my.isLogin' href='/auth/login' router>登录</a>
       </div>
-
     </div>
   </div>
-  <div class='menu-placeholder'></div>
 
   <!-- 页中部位置，引入子元素模版 -->
-  <div ms-view='container'></div>
+  <div id="doc">
+    <div ms-view="container"></div>
+    <div id="push"></div>
+  </div>
 
   <!-- 页面底部 -->
-  <div class="ui inverted vertical footer segment">
+  <div class="ui inverted vertical footer segment" id="footer">
     <div class="ui center aligned container">
       <div class="ui stackable inverted divided grid">
         <div class="three wide column">
@@ -239,12 +102,12 @@
         </div>
       </div>
       <div class="ui inverted section divider"></div>
-      <img src="assets/images/logo.png" class="ui centered mini image">
+      <img src="image/logo.png" class="ui centered image">
       <div class="ui horizontal inverted small divided link list">
         <a class="item" href="#">Site Map</a>
         <a class="item" href="#">Contact Us</a>
-        <a class="item" href="#">Terms and Conditions</a>
-        <a class="item" href="#">Privacy Policy</a>
+        <p class="item">&copy; 2015 合肥我酷网络科技有限公司 All Rights Reserved</p>
+        <a class='item' href='http://www.miitbeian.gov.cn/' target='_blank'>皖ICP备14002099号-1</a>
       </div>
     </div>
   </div>
