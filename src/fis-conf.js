@@ -2,6 +2,7 @@
 // npm install jshint
 // npm install lesslint
 // npm install fis-parser-babelcore
+// npm install fis-parser-less
 
 // 升级fis3
 // npm install -g fis3
