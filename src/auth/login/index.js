@@ -1,6 +1,6 @@
 ctrl.$onEnter = function (param, rs, rj) {
 	document.title = '登陆'
-	avalon.vmodels.global.menuName = 'login'
+	avalon.vmodels.global.menu.current = 'login'
 
 	// 如果已登陆，返回首页
 	$.when(global.$myDeferred).done(function () { // 此时获取用户信息完毕

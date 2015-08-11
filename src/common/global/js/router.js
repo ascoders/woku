@@ -31,18 +31,17 @@ require(['mmState'], function () {
 			controller: controller,
 			url: opts.url,
 			abstract: opts.abstract,
-			views: {
-				'container': {
-					templateUrl: '/static/' + opts.module + '/index.html',
-					controllerUrl: [opts.module + '/index'],
-					ignoreChange: function (changeType) {
-						if (!opts.ignoreChange) {
-							return false
-						}
-						if (changeType) return true
+			views: [{
+				name: "container@" + opts.parentStateName,
+				templateUrl: '/static/' + opts.module + '/index.html',
+				controllerUrl: [opts.module + '/index'],
+				ignoreChange: function (changeType) {
+					if (!opts.ignoreChange) {
+						return false
 					}
+					if (changeType) return true
 				}
-			}
+			}]
 		})
 
 		/*
@@ -116,10 +115,10 @@ require(['mmState'], function () {
 	state({
 		module: 'app/base',
 		abstract: true,
-		url: '/a',
+		url: '/app/{path}',
 		child: {
 			module: 'app/home',
-			url: '/a'
+			url: '/'
 		}
 	})
 
@@ -129,334 +128,334 @@ require(['mmState'], function () {
 
 	//第三方平台登陆
 	/*
-	avalon.state("loginOauth", {
-		controller: "global",
-		url: "/login/oauth",
-		views: {
-			"container": {
-				templateUrl: '/static/check/loginOauth.html',
-				controllerUrl: ['check/loginOauth'],
-				ignoreChange: function (changeType) {
-					if (changeType) return true;
+		avalon.state("loginOauth", {
+			controller: "global",
+			url: "/login/oauth",
+			views: {
+				"container": {
+					templateUrl: '/static/check/loginOauth.html',
+					controllerUrl: ['check/loginOauth'],
+					ignoreChange: function (changeType) {
+						if (changeType) return true;
+					}
 				}
 			}
-		}
-	})
+		})
 
-	// 自动验证
-	avalon.state("auth", {
-		controller: "global",
-		url: "/auth",
-		views: {
-			"container": {
-				templateUrl: '/static/check/auth.html',
-				controllerUrl: ['check/auth'],
-				ignoreChange: function (changeType) {
-					if (changeType) return true;
+		// 自动验证
+		avalon.state("auth", {
+			controller: "global",
+			url: "/auth",
+			views: {
+				"container": {
+					templateUrl: '/static/check/auth.html',
+					controllerUrl: ['check/auth'],
+					ignoreChange: function (changeType) {
+						if (changeType) return true;
+					}
 				}
 			}
-		}
-	})
+		})
 
-	// 创建网站
-	avalon.state("create", {
-		controller: "global",
-		url: "/create",
-		views: {
-			"container": {
-				templateUrl: '/static/create/create.html',
-				controllerUrl: ['create/create'],
-				ignoreChange: function (changeType) {
-					if (changeType) return true;
+		// 创建网站
+		avalon.state("create", {
+			controller: "global",
+			url: "/create",
+			views: {
+				"container": {
+					templateUrl: '/static/create/create.html',
+					controllerUrl: ['create/create'],
+					ignoreChange: function (changeType) {
+						if (changeType) return true;
+					}
 				}
 			}
-		}
-	})
+		})
 
-	// 总应用列表
-	avalon.state("appList", {
-		controller: "global",
-		url: "/app",
-		views: {
-			"container": {
-				templateUrl: '/static/app/app.html',
-				controllerUrl: ['app/app'],
-				ignoreChange: function (changeType) {
-					if (changeType) return true;
+		// 总应用列表
+		avalon.state("appList", {
+			controller: "global",
+			url: "/app",
+			views: {
+				"container": {
+					templateUrl: '/static/app/app.html',
+					controllerUrl: ['app/app'],
+					ignoreChange: function (changeType) {
+						if (changeType) return true;
+					}
 				}
 			}
-		}
-	})
+		})
 
-	// 各分类应用列表
-	avalon.state("appListType", {
-		controller: "global",
-		url: "/app/{type}",
-		views: {
-			"container": {
-				templateUrl: '/static/app/app.html',
-				controllerUrl: ['app/app'],
-				ignoreChange: function (changeType) {
-					if (changeType) return true;
+		// 各分类应用列表
+		avalon.state("appListType", {
+			controller: "global",
+			url: "/app/{type}",
+			views: {
+				"container": {
+					templateUrl: '/static/app/app.html',
+					controllerUrl: ['app/app'],
+					ignoreChange: function (changeType) {
+						if (changeType) return true;
+					}
 				}
 			}
-		}
-	})
+		})
 
-	// 板块
-	avalon.state("app", {
-		controller: "global",
-		url: "/a/{app}",
-		views: {
-			"container": {
-				templateUrl: '/static/app/base.html',
-				controllerUrl: ['app/base'],
-				ignoreChange: function (changeType) {
-					if (changeType) return true;
+		// 板块
+		avalon.state("app", {
+			controller: "global",
+			url: "/a/{app}",
+			views: {
+				"container": {
+					templateUrl: '/static/app/base.html',
+					controllerUrl: ['app/base'],
+					ignoreChange: function (changeType) {
+						if (changeType) return true;
+					}
+				}
+			},
+			abstract: true
+		})
+
+		//板块.首页
+		avalon.state("app.home", {
+			controller: "appBase",
+			url: "",
+			views: {
+				"appContainer": {
+					templateUrl: '/static/app/home.html',
+					controllerUrl: ['app/home'],
+					ignoreChange: function (changeType) {
+						if (changeType) return true;
+					}
 				}
 			}
-		},
-		abstract: true
-	})
+		})
 
-	//板块.首页
-	avalon.state("app.home", {
-		controller: "appBase",
-		url: "",
-		views: {
-			"appContainer": {
-				templateUrl: '/static/app/home.html',
-				controllerUrl: ['app/home'],
-				ignoreChange: function (changeType) {
-					if (changeType) return true;
+		// 管理
+		avalon.state("app.admin", {
+			controller: "appBase",
+			url: "/admin",
+			views: {
+				"appContainer": {
+					templateUrl: '/static/app/admin.html',
+					controllerUrl: ['app/admin'],
+					ignoreChange: function (changeType) {
+						if (changeType) return true;
+					}
+				}
+			},
+			abstract: true
+		})
+
+		// 管理 首页
+		avalon.state("app.admin.home", {
+			controller: "appAdmin",
+			url: "",
+			views: {
+				"appAdminContainer": {
+					templateUrl: '/static/app/adminHome.html',
+					controllerUrl: ['app/adminHome'],
+					ignoreChange: function (changeType) {
+						if (changeType) return true;
+					}
 				}
 			}
-		}
-	})
+		})
 
-	// 管理
-	avalon.state("app.admin", {
-		controller: "appBase",
-		url: "/admin",
-		views: {
-			"appContainer": {
-				templateUrl: '/static/app/admin.html',
-				controllerUrl: ['app/admin'],
-				ignoreChange: function (changeType) {
-					if (changeType) return true;
+		// 管理 具体项目
+		avalon.state("app.admin.info", {
+			controller: "appAdmin",
+			url: "/{info}",
+			views: {
+				"appAdminContainer": {
+					templateUrl: function (param) {
+						return '/static/app/admin/' + param.info + '.html';
+					},
+					controllerUrl: function (param) {
+						return ['app/admin/' + param.info];
+					},
+					cacheController: false
 				}
 			}
-		},
-		abstract: true
-	})
+		})
 
-	// 管理 首页
-	avalon.state("app.admin.home", {
-		controller: "appAdmin",
-		url: "",
-		views: {
-			"appAdminContainer": {
-				templateUrl: '/static/app/adminHome.html',
-				controllerUrl: ['app/adminHome'],
-				ignoreChange: function (changeType) {
-					if (changeType) return true;
+		// 板块.标签
+		avalon.state("app.tag", {
+			controller: "appBase",
+			url: "/tag",
+			views: {
+				"appContainer": {
+					templateUrl: '/static/app/list.html',
+					controllerUrl: ['app/list'],
+					ignoreChange: function (changeType) {
+						if (changeType) return true;
+					}
 				}
 			}
-		}
-	})
+		})
 
-	// 管理 具体项目
-	avalon.state("app.admin.info", {
-		controller: "appAdmin",
-		url: "/{info}",
-		views: {
-			"appAdminContainer": {
-				templateUrl: function (param) {
-					return '/static/app/admin/' + param.info + '.html';
-				},
-				controllerUrl: function (param) {
-					return ['app/admin/' + param.info];
-				},
-				cacheController: false
-			}
-		}
-	})
-
-	// 板块.标签
-	avalon.state("app.tag", {
-		controller: "appBase",
-		url: "/tag",
-		views: {
-			"appContainer": {
-				templateUrl: '/static/app/list.html',
-				controllerUrl: ['app/list'],
-				ignoreChange: function (changeType) {
-					if (changeType) return true;
+		//板块.分类列表
+		avalon.state("app.list", {
+			controller: "appBase",
+			url: "/{category:[a-z]{1,10}}",
+			views: {
+				"appContainer": {
+					templateUrl: '/static/app/list.html',
+					controllerUrl: ['app/list'],
+					ignoreChange: function (changeType) {
+						if (changeType) return true;
+					}
 				}
 			}
-		}
-	})
+		})
 
-	//板块.分类列表
-	avalon.state("app.list", {
-		controller: "appBase",
-		url: "/{category:[a-z]{1,10}}",
-		views: {
-			"appContainer": {
-				templateUrl: '/static/app/list.html',
-				controllerUrl: ['app/list'],
-				ignoreChange: function (changeType) {
-					if (changeType) return true;
+		//板块.分类列表
+		avalon.state("app.list", {
+			controller: "appBase",
+			url: "/{category:[a-z]{1,10}}/doc",
+			views: {
+				"appContainer": {
+					templateUrl: '/static/app/listDoc.html',
+					controllerUrl: ['app/listDoc'],
+					ignoreChange: function (changeType) {
+						if (changeType) return true;
+					}
 				}
 			}
-		}
-	})
+		})
 
-	//板块.分类列表
-	avalon.state("app.list", {
-		controller: "appBase",
-		url: "/{category:[a-z]{1,10}}/doc",
-		views: {
-			"appContainer": {
-				templateUrl: '/static/app/listDoc.html',
-				controllerUrl: ['app/listDoc'],
-				ignoreChange: function (changeType) {
-					if (changeType) return true;
+		//板块.文章信息
+		avalon.state("app.page", {
+			controller: "appBase",
+			url: "/{id:[0-9a-z]{24}}",
+			views: {
+				"appContainer": {
+					templateUrl: '/static/app/page.html',
+					controllerUrl: ['app/page'],
+					ignoreChange: function (changeType) {
+						if (changeType) return true;
+					}
 				}
 			}
-		}
-	})
+		})
 
-	//板块.文章信息
-	avalon.state("app.page", {
-		controller: "appBase",
-		url: "/{id:[0-9a-z]{24}}",
-		views: {
-			"appContainer": {
-				templateUrl: '/static/app/page.html',
-				controllerUrl: ['app/page'],
-				ignoreChange: function (changeType) {
-					if (changeType) return true;
+		//板块.文档.文章信息
+		avalon.state("app.list.doc", {
+			controller: "appListDoc",
+			url: "/{id:[0-9a-z]{24}}",
+			views: {
+				"appListDocContainer": {
+					templateUrl: '/static/app/pageDoc.html',
+					controllerUrl: ['app/page'],
+					ignoreChange: function (changeType) {
+						if (changeType) return true;
+					}
 				}
 			}
-		}
-	})
+		})
 
-	//板块.文档.文章信息
-	avalon.state("app.list.doc", {
-		controller: "appListDoc",
-		url: "/{id:[0-9a-z]{24}}",
-		views: {
-			"appListDocContainer": {
-				templateUrl: '/static/app/pageDoc.html',
-				controllerUrl: ['app/page'],
-				ignoreChange: function (changeType) {
-					if (changeType) return true;
+		// 账号后台
+		avalon.state("user", {
+			controller: "global",
+			url: "/user",
+			views: {
+				"container": {
+					templateUrl: '/static/user/base.html',
+					controllerUrl: ['user/base'],
+					ignoreChange: function (changeType) {
+						if (changeType) return true;
+					}
 				}
-			}
-		}
-	})
+			},
+			abstract: true
+		})
 
-	// 账号后台
-	avalon.state("user", {
-		controller: "global",
-		url: "/user",
-		views: {
-			"container": {
-				templateUrl: '/static/user/base.html',
-				controllerUrl: ['user/base'],
-				ignoreChange: function (changeType) {
-					if (changeType) return true;
-				}
-			}
-		},
-		abstract: true
-	})
+		// 账号后台 - 分类 - 页面
+		avalon.state("user.page", {
+			controller: "userBase",
+			url: "/{category}/{page}",
+			views: {
+				"userContainer": {
+					templateUrl: function (params) {
+						console.log('templateUrl')
+						return '/static/user/' + params.category + '/' + params.page + '.html';
+					},
+					controllerUrl: function (params) {
+						//设置当前分类和页面
+						avalon.vmodels.userBase.category = params.category;
+						avalon.vmodels.userBase.page = params.page;
 
-	// 账号后台 - 分类 - 页面
-	avalon.state("user.page", {
-		controller: "userBase",
-		url: "/{category}/{page}",
-		views: {
-			"userContainer": {
-				templateUrl: function (params) {
-					console.log('templateUrl')
-					return '/static/user/' + params.category + '/' + params.page + '.html';
-				},
-				controllerUrl: function (params) {
-					//设置当前分类和页面
-					avalon.vmodels.userBase.category = params.category;
-					avalon.vmodels.userBase.page = params.page;
-
-					//改变当前标题
-					for (var key in avalon.vmodels.userBase.lists.$model) {
-						if (avalon.vmodels.userBase.lists[key].url == params.category) {
-							for (var _key in avalon.vmodels.userBase.lists[key].childs.$model) {
-								if (avalon.vmodels.userBase.lists[key].childs[_key].url == params.page) {
-									avalon.vmodels.userBase.title = '<i class="f-mr5 fa ' + avalon.vmodels.userBase.lists[key].childs[_key].icon + '"></i>' + avalon.vmodels.userBase.lists[key].childs[_key].name;
-									document.title = '我的账号 - ' + avalon.vmodels.userBase.lists[key].childs[_key].name + ' - 我酷游戏';
+						//改变当前标题
+						for (var key in avalon.vmodels.userBase.lists.$model) {
+							if (avalon.vmodels.userBase.lists[key].url == params.category) {
+								for (var _key in avalon.vmodels.userBase.lists[key].childs.$model) {
+									if (avalon.vmodels.userBase.lists[key].childs[_key].url == params.page) {
+										avalon.vmodels.userBase.title = '<i class="f-mr5 fa ' + avalon.vmodels.userBase.lists[key].childs[_key].icon + '"></i>' + avalon.vmodels.userBase.lists[key].childs[_key].name;
+										document.title = '我的账号 - ' + avalon.vmodels.userBase.lists[key].childs[_key].name + ' - 我酷游戏';
+									}
 								}
 							}
 						}
+
+						return ['user/' + params.category + '/' + params.page];
+					},
+					cacheController: false
+				}
+			}
+		})
+
+		// 更新/新增第三方平台
+		avalon.state("oauth", {
+			controller: "global",
+			url: "/oauth",
+			views: {
+				"container": {
+					templateUrl: '/static/check/oauth.html',
+					controllerUrl: ['check/oauth'],
+					ignoreChange: function (changeType) {
+						if (changeType) return true;
 					}
-
-					return ['user/' + params.category + '/' + params.page];
-				},
-				cacheController: false
-			}
-		}
-	})
-
-	// 更新/新增第三方平台
-	avalon.state("oauth", {
-		controller: "global",
-		url: "/oauth",
-		views: {
-			"container": {
-				templateUrl: '/static/check/oauth.html',
-				controllerUrl: ['check/oauth'],
-				ignoreChange: function (changeType) {
-					if (changeType) return true;
 				}
 			}
-		}
-	})
+		})
 
-	// 第三方平台二跳地址
-	avalon.router.get("/oauth/jump", function () {
-		location.href = "https://openapi.baidu.com/social/oauth/2.0/receiver" + location.search;
-	})
+		// 第三方平台二跳地址
+		avalon.router.get("/oauth/jump", function () {
+			location.href = "https://openapi.baidu.com/social/oauth/2.0/receiver" + location.search;
+		})
 
-	// 舆情分析
-	avalon.state("yuqing", {
-		controller: "global",
-		url: "/yuqing",
-		views: {
-			"container": {
-				templateUrl: '/static/yuqing/yuqing.html',
-				controllerUrl: ['yuqing/yuqing'],
-				ignoreChange: function (changeType) {
-					if (changeType) return true;
+		// 舆情分析
+		avalon.state("yuqing", {
+			controller: "global",
+			url: "/yuqing",
+			views: {
+				"container": {
+					templateUrl: '/static/yuqing/yuqing.html',
+					controllerUrl: ['yuqing/yuqing'],
+					ignoreChange: function (changeType) {
+						if (changeType) return true;
+					}
 				}
 			}
-		}
-	})
+		})
 
-	// 舆情分析详细列表
-	avalon.state("yuqingList", {
-		controller: "global",
-		url: "/yuqing/{category}",
-		views: {
-			"container": {
-				templateUrl: '/static/yuqing/list.html',
-				controllerUrl: ['yuqing/list'],
-				ignoreChange: function (changeType) {
-					if (changeType) return true;
+		// 舆情分析详细列表
+		avalon.state("yuqingList", {
+			controller: "global",
+			url: "/yuqing/{category}",
+			views: {
+				"container": {
+					templateUrl: '/static/yuqing/list.html',
+					controllerUrl: ['yuqing/list'],
+					ignoreChange: function (changeType) {
+						if (changeType) return true;
+					}
 				}
 			}
-		}
-	})
-*/
+		})
+	*/
 	// 启动路由
 	avalon.history.start({
 		basepath: "/",

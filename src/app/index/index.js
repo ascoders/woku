@@ -1,6 +1,6 @@
 ctrl.$onEnter = function (param, rs, rj) {
     document.title = '浏览'
-    avalon.vmodels.global.menuName = 'app'
+    avalon.vmodels.global.menu.current = 'app'
 
     // 根据参数设置获取资源的url
     var appUrl = '/api/apps'

@@ -9,7 +9,7 @@
 	<div class="ui basic segment">
 		<div class="ui link cards">
 
-			<div class="card" ms-repeat='list' ms-href="/a/{{el.path}}">
+			<a class="card" ms-repeat='list' ms-href="/app/{{el.path}}" router>
 				<div class="image">
 					<img ms-src="{{el.icon}}">
 				</div>
@@ -20,7 +20,7 @@
 				<div class="extra content">
 					<span><i class="user icon"></i>75 Users</span>
 				</div>
-			</div>
+			</a>
 			<div ms-widget="page, page, $pageOpts"></div>
 		</div>
 	</div>
