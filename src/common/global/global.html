@@ -17,26 +17,28 @@
 
 <body ms-controller='global'>
  
-  <div class="ui fixed pointing menu" ms-class='inverted:menuDark'>
+  <div class="ui fixed pointing menu"
+    ms-class='inverted:menu.dark'
+    ms-if='menu.show'>
     <div class='ui container'>
-      <a href="/" router class="header item" id='j-logo' ms-class="active:menuName == ''">
+      <a href="/" router class="header item" id='j-logo' ms-class="active:menu.current == ''">
         <img class="logo" src="image/logo.png">
         我酷
       </a>
 
       <div class="item">
-        <div class="ui icon input" ms-class='transparent:!menuDark'>
+        <div class="ui icon input" ms-class='transparent:!menu.dark'>
           <input type="text" placeholder="搜搜看吧...">
           <i class="search link icon"></i>
         </div>
       </div>
 
-      <a class="item" href="/app" router ms-class="active:menuName == 'app'">浏览</a>
-      <a class="item" ms-class="active:menuName == 'doc'">文档</a>
-      <a class="item" ms-class="active:menuName == 'blog'">博客</a>
+      <a class="item" href="/app" router ms-class="active:menu.current == 'app'">浏览</a>
+      <a class="item" ms-class="active:menu.current == 'doc'">文档</a>
+      <a class="item" ms-class="active:menu.current == 'blog'">博客</a>
 
       <div class="right menu">
-        <a class="item" ms-class="active:menuName == 'login'" ms-if='!my.isLogin' href='/auth/login' router>登录</a>
+        <a class="item" ms-class="active:menu.current == 'login'" ms-if='!my.isLogin' href='/auth/login' router>登录</a>
 
         <div class="ui simple dropdown item" ms-if='my.isLogin'>
           <div class="text">

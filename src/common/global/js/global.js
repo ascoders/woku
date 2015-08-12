@@ -46,11 +46,18 @@ var global = avalon.define({
 
 	$myDeferred: null,
 
-	// 当前菜单主题颜色
-	menuDark: false,
-
 	// 菜单选择栏
-	menuName: ''
+	menuName: '',
+
+	// 菜单
+	menu: {
+		// 是否显示
+		show: true,
+		// 当前选择栏
+		current: '',
+		// 主题颜色
+		dark: false
+	}
 })
 
 global.$myDeferred = $.Deferred()

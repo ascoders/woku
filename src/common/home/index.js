@@ -1,7 +1,7 @@
 ctrl.$onEnter = function (param, rs, rj) {
 	document.title = '我酷游戏'
-	avalon.vmodels.global.menuName = ''
-	avalon.vmodels.global.menuDark = true
+	avalon.vmodels.global.menu.current = ''
+	avalon.vmodels.global.menu.dark = true
 
 	//获取信息
 	wk.get({
@@ -41,12 +41,12 @@ ctrl.$onEnter = function (param, rs, rj) {
 
 	$(window).scroll(function () {
 		if ($(document).scrollTop() > $('#j-head').offset().top + $('#j-head').height()) {
-			if (avalon.vmodels.global.menuDark) {
-				avalon.vmodels.global.menuDark = false
+			if (avalon.vmodels.global.menu.dark) {
+				avalon.vmodels.global.menu.dark = false
 			}
 		} else {
-			if (!avalon.vmodels.global.menuDark) {
-				avalon.vmodels.global.menuDark = true
+			if (!avalon.vmodels.global.menu.dark) {
+				avalon.vmodels.global.menu.dark = true
 			}
 		}
 	})
@@ -62,5 +62,5 @@ ctrl.$onRendered = function () {
 
 ctrl.$onBeforeUnload = function () {
 	// 菜单变白色
-	avalon.vmodels.global.menuDark = false
+	avalon.vmodels.global.menu.dark = false
 }

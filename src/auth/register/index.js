@@ -1,6 +1,6 @@
 ctrl.$onEnter = function (param, rs, rj) {
 	document.title = '注册'
-	avalon.vmodels.global.menuName = 'register'
+	avalon.vmodels.global.menu.current = 'register'
 
 	// 如果已登陆，返回首页
 	$.when(global.$myDeferred).done(function () { // 此时获取用户信息完毕
