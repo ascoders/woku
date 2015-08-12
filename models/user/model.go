@@ -8,8 +8,6 @@ package user
 
 import (
 	"github.com/ascoders/as"
-	"gopkg.in/mgo.v2"
-	"gopkg.in/mgo.v2/bson"
 )
 
 type Model struct {
@@ -22,10 +20,6 @@ var (
 
 func init() {
 	ModelInstance = &Model{}
-	ModelInstance.Registe("users", mgo.Index{
-		Key:    []string{"e"},
-		Unique: true,
-	})
 }
 
 func (this *Model) NewData() interface{} {
@@ -35,7 +29,7 @@ func (this *Model) NewData() interface{} {
 
 func (this *Model) NewDataWithId() interface{} {
 	var r Data
-	r.Id = bson.NewObjectId()
+	//r.Id = bson.NewObjectId()
 	return &r
 }
 

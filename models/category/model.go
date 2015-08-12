@@ -22,7 +22,6 @@ var (
 
 func init() {
 	ModelInstance = &Model{}
-	ModelInstance.Registe("categorys")
 }
 
 func (this *Model) NewData() interface{} {

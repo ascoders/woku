@@ -1,20 +1,24 @@
 package app
 
 import (
-	"gopkg.in/mgo.v2/bson"
 	"time"
+
+	"github.com/ascoders/as"
 )
 
-type Data struct {
-	Id        bson.ObjectId `bson:"_id" json:"id" valid:"-"`        // 主键
-	Name      string        `bson:"n" json:"name" valid:"required"` // 讨论组名称
-	Path      string        `bson:"p" json:"path" valid:"required"` // 英文路径
-	Manager   string        `bson:"m" json:"manager"`               // 管理员id
-	Managers  []string      `bson:"ms" json:"managers"`             // 版主id列表（协助版主只能操作帖子，不能进管理台）
-	Type      string        `bson:"t" json:"type"`                  // 分类
-	Logo      string        `bson:"l" json:"logo"`                  // logo地址 ! gi
-	Icon      string        `bson:"i" json:"icon"`                  // icon地址
-	Hot       int           `bson:"h" json:"hot"`                   // 活跃度
-	Categorys int           `bson:"c" json:"categorys"`             // 分类数
-	Created   time.Time     `bson:"ct" json:"created"`              // 成立时间 !tm
+type App struct {
+	Path    string `json:"path" sql:"varchar(10)" gorm:"primary_key" valid:"required;minLength(2);maxLength(10)"` // 英文路径
+	Name    string `json:"name" sql:"char(10);unique" valid:"required;minLength(1);maxLength(10)"`       // 讨论组名称
+	Manager int    `json:"manager"`                                                                            // 管理员id
+	// Managers  []string      `json:"managers"`             // 版主id列表（协助版主只能操作帖子，不能进管理台）
+	Type    string    `json:"type" sql:"char(10)"` // 分类
+	Logo    string    `json:"logo" sql:"char(50)"` // logo地址
+	Icon    string    `json:"icon" sql:"char(50)"` // icon地址
+	Hot     int       `json:"hot" sql:"tinyint"`   // 活跃度
+	Created time.Time `json:"created"`             // 成立时间
+}
+
+func init() {
+	// 初始化表
+	as.Db.AutoMigrate(&App{})
 }

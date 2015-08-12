@@ -4,16 +4,17 @@ import (
 	"github.com/ascoders/as"
 	"github.com/go-martini/martini"
 	"net/http"
-	"woku/models/app"
+	//"woku/models/app"
 	"woku/models/user"
 )
 
 // 获取某个app信息
 // @router /apps/:path [get]
 func (this *Controller) Get(param martini.Params) (int, []byte) {
-	appData := app.Data{}
-	err := app.ModelInstance.Collection.Find(as.M{"p": param["path"]}).One(&appData)
-	return this.Must(appData, err)
+	//appData := app.Data{}
+	//err := app.ModelInstance.Collection.Find(as.M{"p": param["path"]}).One(&appData)
+	//return this.Must(appData, err)
+	return this.Success("")
 }
 
 // 新增app
