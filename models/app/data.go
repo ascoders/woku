@@ -39,8 +39,9 @@ type App struct {
 
 func init() {
 	// 初始化表
+	
 	as.Db.AutoMigrate(&App{})
-
-	value := as.Db.Where(map[string]interface{}{}).Count(&App{}).Value
-	fmt.Println(value)
+	var count *int
+	err:=as.Db.Model(&App{}).Count(&count).Error
+	fmt.Println(*count,err)
 }
