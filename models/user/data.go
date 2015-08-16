@@ -7,30 +7,48 @@
 package user
 
 import (
-	"gopkg.in/mgo.v2/bson"
+	"github.com/ascoders/as"
 	"time"
 )
 
-type Data struct {
-	Id            bson.ObjectId `bson:"_id" json:"id" valid:"-"`                                       // 主键
-	Nickname      string        `bson:"n" json:"nickname" valid:"required;minLength(1);maxLength(10)"` // 昵称
-	Password      string        `bson:"p" json:"password" valid:"required;minLength(6);maxLength(30)"` // 密码
-	Email         string        `bson:"e" json:"email" valid:"required;email"`                         // 电子邮箱
-	Image         string        `bson:"i" json:"image"`                                                // 头像地址
-	Money         float32       `bson:"mo" json:"money" valid:"-"`                                     // 账户余额
-	Free          int           `bson:"f" json:"free" valid:"-"`                                       // 每月免费额度 !!!!!!!!mf
-	LogCount      int           `bson:"l" json:"logCount" valid:"-"`                                   // 登陆次数
-	LastLogTime   time.Time     `bson:"la" json:"lastTime" valid:"-"`                                  // 最后登陆时间
-	ErrorChance   int           `bson:"er" json:"errorChance" valid:"-"`                               // 账号输错机会次数
-	StopTime      time.Time     `bson:"st" json:"stopTime" valid:"-"`                                  // 账号封停截至时间
-	Type          int           `bson:"t" json:"type" valid:"-"`                                       // 账号类型 0:超级管理员/董事长 1:会员 2:高级会员 3:白金会员
-	Power         []string      `bson:"po" json:"power" valid:"-"`                                     // 模块权限
-	UploadSize    int           `bson:"u" json:"uploadSize" valid:"-"`                                 // 今天上传大小
-	UploadTime    time.Time     `bson:"ut" json:"uploadTime" valid:"-"`                                // 最后上传文件的时间 !!!!!!!!ud
-	LockVersion   int           `bson:"lv" json:"lockVersion" valid:"-"`                               // 乐观锁
-	HasOrder      bool          `bson:"h" json:"hasOrder" valid:"-"`                                   // 是否有未处理的账单
-	Token         string        `bson:"tk" json:"token" valid:"-"`                                     // 每个账号的密钥
-	MessageNumber int           `bson:"mn" json:"messageNumber" valid:"-"`                             // 未读消息数量
-	MessageAll    int           `bson:"ma" json:"messageAll" valid:"-"`                                // 总消息数
-	AppCount      int           `bson:"a" json:"appCount" valid:"-"`                                   // 建立应用数量 !!!!!!!!!g
+type User struct {
+	as.Data
+
+	// 昵称 唯一索引
+	Nickname string `json:"nickname" sql:"type:varchar(10);unique_index" valid:"required;minLength(1);maxLength(10)"`
+
+	// 电子邮箱 唯一索引
+	Email string `json:"email" sql:"type:char(30);unique_index" valid:"required;email"`
+
+	// 密码
+	Password string `json:"password" sql:"type:char(32)" valid:"required;length(32)"`
+
+	// 头像地址
+	Portrait string `json:"portrait" sql:"type:char(30)"`
+
+	// 账户余额
+	Money float32 `json:"money" sql:"type:decimal(10,3)" valid:"-"`
+
+	// 登陆次数
+	LogCount int `json:"log_count" sql:"type:mediumint unsigned" valid:"-"`
+
+	// 最后登陆时间
+	LastLogin time.Time `json:"last_login" sql:"type:timestamp" valid:"-"`
+
+	// 账号输错机会次数
+	ErrorChance int `json:"error_chance" sql:"type:tinyint unsigned" valid:"-"`
+
+	// 账号封停截至时间
+	StopTime time.Time `json:"stop_time" sql:"type:timestamp" valid:"-"`
+
+	// 账号类型 admin member vip
+	Type int `json:"type" sql:"type:enum('admin','member','vip')" valid:"-"`
+
+	//Power []string `json:"power" valid:"-"` // 模块权限
+
+	// 今天上传大小 kb
+	UploadSize int `json:"upload_size" sql="type:mediumint unsigned" valid:"-"`
+
+	// 密钥
+	Token string `json:"token" sql:"type:char(32)" valid:"-"`
 }

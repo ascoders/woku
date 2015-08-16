@@ -8,11 +8,13 @@ import (
 
 type Controller struct {
 	as.Controller
-	currentUser *user.Data
+	currentUser *user.User
+	model       *app.Model
 }
 
 func New() *Controller {
 	controllerInstance := &Controller{}
 	controllerInstance.NewModel(app.ModelInstance)
+	controllerInstance.model = app.ModelInstance
 	return controllerInstance
 }

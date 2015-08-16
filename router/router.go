@@ -4,6 +4,7 @@ import (
 	"github.com/ascoders/as"
 	"woku/controllers/app"
 	"woku/controllers/article"
+	"woku/controllers/category"
 	"woku/controllers/user"
 )
 
@@ -12,5 +13,6 @@ func init() {
 		app.Controller{},
 		article.Controller{},
 		user.Controller{},
+		category.Controller{},
 	)
 }

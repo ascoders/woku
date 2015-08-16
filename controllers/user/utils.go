@@ -54,13 +54,13 @@ func CheckSign(token string, req *http.Request) error {
 }
 
 // 用户注册&登陆 统一返回的信息格式
-func AuthenticationInfo(user *user.Data) map[string]interface{} {
+func AuthenticationInfo(user *user.User) map[string]interface{} {
 	return map[string]interface{}{
-		"id":          user.Id.Hex(),
-		"email":       user.Email,
-		"nickname":    user.Nickname,
-		"money":       user.Money,
-		"lastLogTime": user.LastLogTime,
-		"image":       user.Image,
+		//		"id":          user.Id.Hex(),
+		"email":      user.Email,
+		"nickname":   user.Nickname,
+		"money":      user.Money,
+		"last_login": user.LastLogin,
+		"portrait":   user.Portrait,
 	}
 }

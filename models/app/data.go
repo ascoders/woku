@@ -1,7 +1,6 @@
 package app
 
 import (
-	"fmt"
 	"time"
 
 	"github.com/ascoders/as"
@@ -10,10 +9,10 @@ import (
 type App struct {
 	as.Data
 
-	// 英文路径 注册后无法修改
-	Path string `json:"path" sql:"type:varchar(10);unique_index" valid:"required;minLength(2);maxLength(10)"`
+	// 英文路径 唯一索引
+	Path string `json:"path" sql:"type:char(10);unique_index" valid:"required;minLength(2);maxLength(10)"`
 
-	// app名称
+	// 名称 索引
 	Name string `json:"name" sql:"type:char(10);unique" valid:"required;minLength(1);maxLength(10)"`
 
 	// 管理员id 关联后无法修改
@@ -22,7 +21,7 @@ type App struct {
 	// Managers  []string      `json:"managers"`             // 版主id列表（协助版主只能操作帖子，不能进管理台）
 
 	// 所属分类
-	Type string `json:"type" sql:"type:char(10)"`
+	Type string `json:"type" sql:"type:char(10);index"`
 
 	// logo地址
 	Logo string `json:"logo" sql:"type:char(100)"`
@@ -35,13 +34,4 @@ type App struct {
 
 	// 创建时间
 	Created time.Time `json:"created" sql:"type:timestamp"`
-}
-
-func init() {
-	// 初始化表
-	
-	as.Db.AutoMigrate(&App{})
-	var count *int
-	err:=as.Db.Model(&App{}).Count(&count).Error
-	fmt.Println(*count,err)
 }
