@@ -14,7 +14,7 @@ type Category struct {
 	AppId string `json:"app" sql:"type:int unsigned"`
 
 	// 路径 索引
-	Path string `json:"path" sql:"type:char(10);index`
+	Path string `json:"path" sql:"type:char(10);index"`
 
 	// 图标
 	Icon string `json:"icon" sql:"type:char(8)"`
