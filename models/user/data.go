@@ -30,7 +30,7 @@ type User struct {
 	Money float32 `json:"money" sql:"type:decimal(10,3)" valid:"-"`
 
 	// 登陆次数
-	LogCount int `json:"log_count" sql:"type:mediumint unsigned" valid:"-"`
+	LoginCount int `json:"login_count" sql:"type:mediumint unsigned" valid:"-"`
 
 	// 最后登陆时间
 	LastLogin time.Time `json:"last_login" sql:"type:timestamp" valid:"-"`

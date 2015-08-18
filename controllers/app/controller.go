@@ -9,7 +9,7 @@ import (
 type Controller struct {
 	as.Controller
 	currentUser *user.User
-	model       *app.Model
+	model       *app.Model 
 }
 
 func New() *Controller {

@@ -56,7 +56,7 @@ func CheckSign(token string, req *http.Request) error {
 // 用户注册&登陆 统一返回的信息格式
 func AuthenticationInfo(user *user.User) map[string]interface{} {
 	return map[string]interface{}{
-		//		"id":          user.Id.Hex(),
+		"id":         user.Id,
 		"email":      user.Email,
 		"nickname":   user.Nickname,
 		"money":      user.Money,

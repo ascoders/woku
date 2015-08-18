@@ -103,6 +103,12 @@ require(['mmState'], function () {
 		url: '/auth/register'
 	})
 
+	// 邮箱注册
+	state({
+		module: 'auth/register_email',
+		url: '/auth/register_email'
+	})
+
 	// 应用 /////////////////
 
 	// 应用专区（应用列表）
