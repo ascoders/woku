@@ -33,16 +33,16 @@ type User struct {
 	LoginCount int `json:"login_count" sql:"type:mediumint unsigned" valid:"-"`
 
 	// 最后登陆时间
-	LastLogin time.Time `json:"last_login" sql:"type:timestamp" valid:"-"`
+	LastLogin time.Time `json:"last_login" sql:"type:timestamp;default:current_timestamp" valid:"-"`
 
 	// 账号输错机会次数
 	ErrorChance int `json:"error_chance" sql:"type:tinyint unsigned" valid:"-"`
 
 	// 账号封停截至时间
-	StopTime time.Time `json:"stop_time" sql:"type:timestamp" valid:"-"`
+	StopTime time.Time `json:"stop_time" sql:"type:timestamp;default:current_timestamp" valid:"-"`
 
 	// 账号类型 admin member vip
-	Type int `json:"type" sql:"type:enum('admin','member','vip')" valid:"-"`
+	Type string `json:"type" sql:"type:enum('admin','member','vip');default:'member'" valid:"-"`
 
 	//Power []string `json:"power" valid:"-"` // 模块权限
 

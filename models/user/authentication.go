@@ -62,7 +62,6 @@ func (this *Model) Authentication(account string, password string) (*User, error
 // 设置初始值（新增用户时）
 func (this *Model) SetDefaults(data *User) {
 	data.Token = CreateToken()
-	data.Type = "number"
 	//随机分配头像
 	data.Portrait = strconv.Itoa(rand.Intn(9))
 }

@@ -71,7 +71,7 @@ func (this *Controller) AuthenticationCreate(req *http.Request) (int, []byte) {
 	as.Redis.SetWithExpire(sign, []byte(token), int64(expire))
 
 	// 发送邮件
-	go as.Email.Send([]string{userData.Email}, "我酷游戏：激活账号", `<a href="`+
+	go as.Email.Send([]string{userData.Email}, "我酷：激活账号", `<a href="`+
 		"http://wokugame.com/auth/register_email?"+
 		"expire="+expireUnix+"&"+
 		"sign="+sign+"&"+

@@ -1,20 +1,14 @@
 {
-    "cmd": "<command to execute>",
+    "cmd": "go",
     "name": "<name of target>",
-    "args": [],
-    "sh": true,
-    "cwd": "<current working directory for `cmd`>",
+    "args": ["build", "-i", ""],
+    "cwd": "D:/GoPro/src/woku",
+    "sh": false,
     "env": {
 
     },
     "errorMatch": [
         "^regexp1$",
         "^regexp2$"
-    ],
-    "targets": {
-        "<name of target>": {
-            "cmd": "<command to execute>",
-
-        }
-    }
+    ]
 }
