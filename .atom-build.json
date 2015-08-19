@@ -1,0 +1,20 @@
+{
+    "cmd": "<command to execute>",
+    "name": "<name of target>",
+    "args": [],
+    "sh": true,
+    "cwd": "<current working directory for `cmd`>",
+    "env": {
+
+    },
+    "errorMatch": [
+        "^regexp1$",
+        "^regexp2$"
+    ],
+    "targets": {
+        "<name of target>": {
+            "cmd": "<command to execute>",
+
+        }
+    }
+}
