@@ -1,69 +1,65 @@
 <div class="ui container center main">
-	<div class="ui steps grid">
-	  <a ms-repeat="steps"
-	  	class="step"
-	  	ms-click='setStep($key)'
-	  	ms-class="active:step == $key"
-	  	ms-class-1="disabled:$val.locked">
-	    <i class="icon" ms-class="{{$val.icon}}"></i>
-	    <div class="content">
-	      <div class="title">{{$val.name}}</div>
-	    </div>
-	  </a>
-	</div>
+    <div class="ui steps grid">
+        <a ms-repeat="steps" class="step" ms-click='setStep($key)' ms-class="active:step == $key" ms-class-1="disabled:$val.locked">
+            <i class="icon" ms-class="{{$val.icon}}"></i>
+            <div class="content">
+                <div class="title">{{$val.name}}</div>
+            </div>
+        </a>
+    </div>
 </div>
 
 <div class="ui text container second-main">
-	<div class="ui column middle aligned very relaxed stackable grid register-content">
+    <div class="ui column middle aligned very relaxed stackable grid register-content">
 
-	  <div class="column" ms-if="step == 'info'">
-	    <div class="ui form" id="j-form-info">
-	      <div class="field">
-	        <div class="ui left labeled icon input">
-	        	<div class="ui label">用户名</div>
-				<input type="text" name='nickname' placeholder="" ms-duplex="data.nickname">
-				<i class="user icon"></i>
-	        </div>
-	      </div>
-	      <div class="field">
-	      	<div class="ui left labeled icon input">
-	        	<div class="ui label">密码</div>
-				<input type="password" name='password' ms-duplex="data.password">
-				<i class="lock icon"></i>
-	        </div>
-	      </div>
-	      <div class="ui green submit button">下一步</div>
-	      <div class="ui error message"></div>
-		</div>
-	  </div>
+        <div class="column" ms-if="step == 'info'">
+            <div class="ui form" id="j-form-info">
+                <div class="field">
+                    <div class="ui left labeled icon input">
+                        <div class="ui label">用户名</div>
+                        <input type="text" name='nickname' placeholder="推荐英文" ms-duplex="data.nickname">
+                        <i class="user icon"></i>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="ui left labeled icon input">
+                        <div class="ui label">密码</div>
+                        <input type="password" name='password' ms-duplex="data.password">
+                        <i class="lock icon"></i>
+                    </div>
+                </div>
+                <div class="ui green submit button">下一步</div>
+                <div class="ui error message"></div>
+            </div>
+        </div>
 
-	  <div class="column" ms-if="step == 'email'">
-	    <div class="ui form" id="j-form-email">
-	      <div class="field">
-	        <div class="ui left labeled icon input">
-	        	<div class="ui label">邮箱</div>
-				<input type="text" name='email' placeholder="" ms-duplex="data.email">
-				<i class="mail icon"></i>
-	        </div>
-	      </div>
-	      <div class="fields">
-	      	<div class='ten wide field'>
-	      		<div class="ui left labeled icon input">
-		        	<div class="ui label">验证码</div>
-					<input type="text" name='captcha' ms-duplex="data.captcha" placeholder="请输入右侧的数字">
-					<i class="captha icon"></i>
-		        </div>
-	      	</div>
-	      	<img class='six wide field' ms-if='data.capid' ms-src="/api/captcha/{{data.capid}}" ms-click='freshCap'>
-	      </div>
-	      <div class="ui green submit button">下一步</div>
-	      <div class="ui error message"></div>
-	    </div>
-	  </div>
+        <div class="column" ms-if="step == 'email'">
+            <div class="ui form" id="j-form-email">
+                <div class="field">
+                    <div class="ui left labeled icon input">
+                        <div class="ui label">邮箱</div>
+                        <input type="text" name='email' placeholder="" ms-duplex="data.email">
+                        <i class="mail icon"></i>
+                    </div>
+                </div>
+                <div class="fields">
+                    <div class='ten wide field'>
+                        <div class="ui left labeled icon input">
+                            <div class="ui label">验证码</div>
+                            <input type="text" name='captcha' ms-duplex="data.captcha" placeholder="请输入右侧的数字">
+                            <i class="captha icon"></i>
+                        </div>
+                    </div>
+                    <img class='six wide field' ms-if='data.capid' ms-src="/api/captcha/{{data.capid}}" ms-click='freshCap'>
+                </div>
+                <div class="ui green submit button">下一步</div>
+                <div class="ui error message"></div>
+            </div>
+        </div>
 
-	  <div class="column" ms-if="step == 'success'">
-	  	<div class="ui success message"><i class="checkmark icon"></i>注册成功，请查收邮件！</div>
-	  </div>
+        <div class="column" ms-if="step == 'success'">
+            <div class="ui success message"><i class="checkmark icon"></i>注册成功，请查收邮件！</div>
+        </div>
 
-	</div>
+    </div>
 </div>

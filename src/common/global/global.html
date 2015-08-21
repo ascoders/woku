@@ -16,105 +16,99 @@
 <title>我酷</title>
 
 <body ms-controller='global'>
- 
-  <div class="ui fixed pointing menu"
-    ms-class='inverted:menu.dark'
-    ms-if='menu.show'>
-    <div class='ui container'>
-      <a href="/" router class="header item" id='j-logo' ms-class="active:menu.current == ''">
-        <img class="logo" src="image/logo.png">
-        我酷
-      </a>
 
-      <div class="item">
-        <div class="ui icon input" ms-class='transparent:!menu.dark'>
-          <input type="text" placeholder="搜搜看吧...">
-          <i class="search link icon"></i>
-        </div>
-      </div>
-
-      <a class="item" href="/app" router ms-class="active:menu.current == 'app'">浏览</a>
-      <a class="item" ms-class="active:menu.current == 'doc'">文档</a>
-      <a class="item" ms-class="active:menu.current == 'blog'">博客</a>
-
-      <div class="right menu">
-        <a class="item" ms-class="active:menu.current == 'login'" ms-if='!my.isLogin' href='/auth/login' router>登录</a>
-
-        <div class="ui simple dropdown item" ms-if='my.isLogin'>
-          <div class="text">
-            <img class="ui avatar image" ms-src="my.info.image">
-            {{my.info.nickname}}
-          </div>
-          <i class="dropdown icon"></i>
-          <div class="menu">
-            <a class="item">
-              <i class="user icon"></i>
-              信息
+    <div class="ui fixed pointing menu" ms-class='inverted:menu.dark' ms-if='menu.show'>
+        <div class='ui container'>
+            <a href="/" router class="header item" id='j-logo' ms-class="active:menu.current == ''">
+                <img class="logo" src="image/logo.png"> 我酷
             </a>
-            <a class="item" ms-click="my.signout">
-              <i class="sign out icon"></i>
-              退出
-            </a>
-          </div>
+
+            <div class="item">
+                <div class="ui icon input" ms-class='transparent:!menu.dark'>
+                    <input type="text" placeholder="搜搜看吧...">
+                    <i class="search link icon"></i>
+                </div>
+            </div>
+
+            <a class="item" href="/app" router ms-class="active:menu.current == 'app'">浏览</a>
+            <a class="item" ms-class="active:menu.current == 'doc'">文档</a>
+            <a class="item" ms-class="active:menu.current == 'blog'">博客</a>
+
+            <div class="right menu">
+                <a class="item" ms-class="active:menu.current == 'login'" ms-if='!my.isLogin' href='/auth/login' router>登录</a>
+
+                <div class="ui simple dropdown item" ms-if='my.isLogin'>
+                    <div class="text">
+                        <img class="ui avatar image" ms-src="my.info.image"> {{my.info.nickname}}
+                    </div>
+                    <i class="dropdown icon"></i>
+                    <div class="menu">
+                        <a class="item">
+                            <i class="user icon"></i> 信息
+                        </a>
+                        <a class="item" ms-click="my.signout">
+                            <i class="sign out icon"></i> 退出
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 
-  <!-- 页中部位置，引入子元素模版 -->
-  <div id="doc">
-    <div ms-view="container"></div>
-    <div id="push"></div>
-  </div>
-
-  <!-- 页面底部 -->
-  <div class="ui inverted vertical footer segment" id="footer">
-    <div class="ui center aligned container">
-      <div class="ui stackable inverted divided grid">
-        <div class="three wide column">
-          <h4 class="ui inverted header">Group 1</h4>
-          <div class="ui inverted link list">
-            <a href="#" class="item">Link One</a>
-            <a href="#" class="item">Link Two</a>
-            <a href="#" class="item">Link Three</a>
-            <a href="#" class="item">Link Four</a>
-          </div>
-        </div>
-        <div class="three wide column">
-          <h4 class="ui inverted header">Group 2</h4>
-          <div class="ui inverted link list">
-            <a href="#" class="item">Link One</a>
-            <a href="#" class="item">Link Two</a>
-            <a href="#" class="item">Link Three</a>
-            <a href="#" class="item">Link Four</a>
-          </div>
-        </div>
-        <div class="three wide column">
-          <h4 class="ui inverted header">Group 3</h4>
-          <div class="ui inverted link list">
-            <a href="#" class="item">Link One</a>
-            <a href="#" class="item">Link Two</a>
-            <a href="#" class="item">Link Three</a>
-            <a href="#" class="item">Link Four</a>
-          </div>
-        </div>
-        <div class="seven wide column">
-          <h4 class="ui inverted header">Footer Header</h4>
-          <p>Extra space for a call to action inside the footer that could help re-engage users.</p>
-        </div>
-      </div>
-      <div class="ui inverted section divider"></div>
-      <img src="image/logo.png" class="ui centered image">
-      <div class="ui horizontal inverted small divided link list">
-        <a class="item" href="#">Site Map</a>
-        <a class="item" href="#">Contact Us</a>
-        <p class="item">&copy; 2015 合肥我酷网络科技有限公司 All Rights Reserved</p>
-        <a class='item' href='http://www.miitbeian.gov.cn/' target='_blank'>皖ICP备14002099号-1</a>
-      </div>
+    <!-- 页中部位置，引入子元素模版 -->
+    <div id="doc">
+        <div ms-view="container"></div>
+        <div id="push"></div>
     </div>
-  </div>
 
-  <!--
+    <!-- 页面底部 -->
+    <div class="ui inverted vertical footer segment" id="footer">
+        <div class="ui center aligned container">
+            <div class="ui stackable inverted divided grid">
+                <div class="three wide column">
+                    <h4 class="ui inverted header">Group 1</h4>
+                    <div class="ui inverted link list">
+                        <a href="#" class="item">Link One</a>
+                        <a href="#" class="item">Link Two</a>
+                        <a href="#" class="item">Link Three</a>
+                        <a href="#" class="item">Link Four</a>
+                    </div>
+                </div>
+                <div class="three wide column">
+                    <h4 class="ui inverted header">Group 2</h4>
+                    <div class="ui inverted link list">
+                        <a href="#" class="item">Link One</a>
+                        <a href="#" class="item">Link Two</a>
+                        <a href="#" class="item">Link Three</a>
+                        <a href="#" class="item">Link Four</a>
+                    </div>
+                </div>
+                <div class="three wide column">
+                    <h4 class="ui inverted header">Group 3</h4>
+                    <div class="ui inverted link list">
+                        <a href="#" class="item">Link One</a>
+                        <a href="#" class="item">Link Two</a>
+                        <a href="#" class="item">Link Three</a>
+                        <a href="#" class="item">Link Four</a>
+                    </div>
+                </div>
+                <div class="seven wide column">
+                    <h4 class="ui inverted header">Footer Header</h4>
+                    <p>Extra space for a call to action inside the footer that could help re-engage users.</p>
+                </div>
+            </div>
+            <div class="ui inverted section divider"></div>
+            <img src="image/logo.png" class="ui centered image">
+            <div class="ui horizontal inverted small divided link list">
+                <a class="item" href="#">Site Map</a>
+                <a class="item" href="#">Contact Us</a>
+                <p class="item">&copy; 2015 合肥我酷网络科技有限公司 All Rights Reserved</p>
+                <a class='item' href='http://www.miitbeian.gov.cn/' target='_blank'>皖ICP备14002099号-1</a>
+            </div>
+        </div>
+    </div>
+
+    <!--
   <div class='g-ft f-fs14 f-tac'>
     &copy; 2015 合肥我酷网络科技有限公司 All Rights Reserved
     <a class='f-ml20' href='http://www.miitbeian.gov.cn/' target='_blank'>皖ICP备14002099号-1</a>

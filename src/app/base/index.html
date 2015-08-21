@@ -1,41 +1,37 @@
 <div class="ui fixed pointing menu" ms-class='inverted:menuDark'>
-	<div class='ui container'>
-	  <a ms-href="/app/{{app.path}}" router class="header item" id='j-logo' ms-class="active:menuName == ''">
-	    <img class="logo" src="../index/image/app.png">
-	    {{app.name}}
-	  </a>
+    <div class='ui container'>
+        <a ms-href="/app/{{app.path}}" router class="header item" id='j-logo' ms-class="active:menuName == ''">
+            <img class="logo" src="../index/image/app.png"> {{app.name}}
+        </a>
 
-	  <div class="item">
-	    <div class="ui icon input" ms-class='transparent:!menuDark'>
-	      <input type="text" placeholder="应用内搜索...">
-	      <i class="search link icon"></i>
-	    </div>
-	  </div>
+        <div class="item">
+            <div class="ui icon input" ms-class='transparent:!menuDark'>
+                <input type="text" placeholder="应用内搜索...">
+                <i class="search link icon"></i>
+            </div>
+        </div>
 
-	  <a class="item" href="/app" router ms-class="active:menuName == 'app'">浏览</a>
+        <a class="item" href="/app" router ms-class="active:menuName == 'app'">浏览</a>
 
-	  <div class="right menu">
-	    <a class="item" ms-class="active:menuName == 'login'" ms-if='!my.isLogin' href='/auth/login' router>登录</a>
+        <div class="right menu">
+            <a class="item" ms-class="active:menuName == 'login'" ms-if='!my.isLogin' href='/auth/login' router>登录</a>
 
-	    <div class="ui simple dropdown item" ms-if='my.isLogin'>
-	      <div class="text">
-	        <img class="ui avatar image" ms-src="my.info.image">
-	        {{my.info.nickname}}
-	      </div>
-	      <i class="dropdown icon"></i>
-	      <div class="menu">
-	        <a class="item">
-	          <i class="user icon"></i>
-	          信息
-	        </a>
-	        <a class="item" ms-click="my.signout">
-	          <i class="sign out icon"></i>
-	          退出
-	        </a>
-	      </div>
-	    </div>
-	  </div>
-	</div>
+            <div class="ui simple dropdown item" ms-if='my.isLogin'>
+                <div class="text">
+                    <img class="ui avatar image" ms-src="my.info.image"> {{my.info.nickname}}
+                </div>
+                <i class="dropdown icon"></i>
+                <div class="menu">
+                    <a class="item">
+                        <i class="user icon"></i> 信息
+                    </a>
+                    <a class="item" ms-click="my.signout">
+                        <i class="sign out icon"></i> 退出
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- 子模版 -->
