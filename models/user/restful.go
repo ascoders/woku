@@ -14,5 +14,13 @@ func (this *Model) GetByEmail(email string) (*User, error) {
 		"email": email,
 	}).Error
 	return data, err
+}
 
+// 通过用户名获取用户
+func (this *Model) GetByNickname(nickname string) (*User, error) {
+	data := &User{}
+	err := this.Db.First(data, map[string]interface{}{
+		"nickname": nickname,
+	}).Error
+	return data, err
 }

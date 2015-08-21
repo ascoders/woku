@@ -2,6 +2,7 @@ package user
 
 import (
 	"errors"
+	"github.com/ascoders/as"
 	"math/rand"
 	"strconv"
 	"time"
@@ -11,11 +12,18 @@ import (
 func (this *Model) Authentication(account string, password string) (*User, error) {
 	userData := &User{}
 
-	// 根据邮箱查找用户
-	userData, emailError := this.GetByEmail(account)
-
-	if emailError != nil {
-		return nil, errors.New("账号不存在")
+	if err := as.Lib.Valid.Email(account); err == nil {
+		// 根据邮箱查找用户
+		userData, err = this.GetByEmail(account)
+		if err != nil {
+			return nil, errors.New("账号不存在")
+		}
+	} else {
+		// 根据用户名查找用户
+		userData, err = this.GetByNickname(account)
+		if err != nil {
+			return nil, errors.New("帐号不存在")
+		}
 	}
 
 	// 账户锁定情况
@@ -28,23 +36,23 @@ func (this *Model) Authentication(account string, password string) (*User, error
 		if userData.ErrorChance == 1 {
 			// 如果尽验证机会，账号锁定10分钟
 			minute := time.Duration(10) * time.Minute
-			this.Update(userData.Id, map[string]interface{}{
+			this.UpdateMap(userData.Id, map[string]interface{}{
 				"error_chance": 6,
 				"stop_time":    time.Now().Add(minute),
 			})
 			return nil, errors.New("为保障安全，您的账号在10分钟后解除锁定状态")
 		} else {
 			if userData.ErrorChance == 0 {
-				// 默认错误机会为0，重新把错误机会设置为(6-1)
+				// 默认错误机会为0，重新把错误机会设置为5
 				userData.ErrorChance = 5
-				this.Update(userData.Id, map[string]interface{}{
+				this.UpdateMap(userData.Id, map[string]interface{}{
 					"error_chance": userData.ErrorChance,
 				})
 
 			} else {
 				// 验证机会减少1次
 				userData.ErrorChance--
-				this.Update(userData.Id, map[string]interface{}{
+				this.UpdateMap(userData.Id, map[string]interface{}{
 					"error_chance": userData.ErrorChance,
 				})
 			}
@@ -53,7 +61,7 @@ func (this *Model) Authentication(account string, password string) (*User, error
 	}
 
 	// 重置验证次数
-	this.Update(userData.Id, map[string]interface{}{
+	this.UpdateMap(userData.Id, map[string]interface{}{
 		"error_chance": 6,
 	})
 	return userData, nil

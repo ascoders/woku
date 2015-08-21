@@ -1,6 +1,7 @@
 package user
 
 import (
+	"fmt"
 	"github.com/ascoders/as"
 	"github.com/martini-contrib/sessions"
 	"math/rand"
@@ -28,7 +29,11 @@ func (this *Controller) Authentication(req *http.Request, session sessions.Sessi
 	// 更新密码错误次数
 	userData.ErrorChance = 6
 
-	if err := this.model.Update(userData.Id, userData); err != nil {
+	if err := this.model.UpdateMap(userData.Id, map[string]interface{}{
+		"last_login":   userData.LastLogin,
+		"login_count":  userData.LoginCount,
+		"error_chance": userData.ErrorChance,
+	}); err != nil {
 		return this.Error(err.Error())
 	}
 
@@ -69,6 +74,7 @@ func (this *Controller) AuthenticationCreate(req *http.Request) (int, []byte) {
 
 	// 保存有效令牌到缓存
 	as.Redis.SetWithExpire(sign, []byte(token), int64(expire))
+	fmt.Println("生成缓存", sign, expire)
 
 	// 发送邮件
 	go as.Email.Send([]string{userData.Email}, "我酷：激活账号", `<a href="`+
@@ -87,14 +93,15 @@ func (this *Controller) AuthenticationCreate(req *http.Request) (int, []byte) {
 // 验证邮箱令牌，并注册用户
 // @router /users/authentication/email [post]
 func (this *Controller) CreateEmailAuthentication(req *http.Request, session sessions.Session) (int, []byte) {
-	// 缓存是否存在此签名
 	req.ParseForm()
 
 	var token []byte
 	var err error
+	a, b := as.Redis.Get(req.Form.Get("sign"))
+	fmt.Println("获取缓存", req.Form.Get("sign"), a, b)
 	if token, err = as.Redis.Get(req.Form.Get("sign")); err != nil {
 		// 没有通过邮箱注册生成的缓存
-		return this.Error("签名已失效")
+		return this.Error("签名缓存未生成")
 	}
 
 	// 删除缓存
@@ -124,8 +131,6 @@ func (this *Controller) CreateEmailAuthentication(req *http.Request, session ses
 	session.Set("id", userData.Id)
 
 	return this.Success(AuthenticationInfo(userData))
-
-	return this.Success("")
 }
 
 // 获得当前登录的用户
