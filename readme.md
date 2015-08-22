@@ -14,3 +14,6 @@ brew install redis
 ```go
 go get github.com/ascoders/woku
 ```
+
+## todo
+- 第一次注册缓存未生成

@@ -2,29 +2,19 @@ ctrl.$onEnter = function (param, rs, rj) {
     document.title = '注册'
     avalon.vmodels.global.menu.current = 'register'
 
-    // 如果已登陆，返回首页
+    // 如果已登陆，返回上一级
     $.when(global.$myDeferred).done(function () { // 此时获取用户信息完毕
         if (global.myLogin) {
-            avalon.router.navigate('/')
+            wk.jumpLastLocation()
             return
         }
     })
-
-    // 如果包含签名标签，则请求激活用户
-    /*
-    if (mmState.query.sign) {
-    	wk.post({
-    		url: '/api/users/authentication/email',
-    		data: mmState.query,
-    		success: function (data) {
-    			console.log(data)
-    		}
-    	})
-    }
-    */
 }
 
 ctrl.$onRendered = function () {
+    // 用户名获取焦点
+    $('input[name="nickname"]').focus()
+
     var infoForm = $("#j-form-info")
     infoForm.form({
         fields: {
@@ -61,6 +51,9 @@ ctrl.$onRendered = function () {
 
             vm.steps.email.locked = false
             vm.step = 'email'
+
+            // 邮箱输入框获取焦点
+            $('input[name="email"]').focus()
         }
     })
 

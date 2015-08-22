@@ -1,7 +1,6 @@
 package user
 
 import (
-	"fmt"
 	"github.com/ascoders/as"
 	"github.com/martini-contrib/sessions"
 	"math/rand"
@@ -50,7 +49,7 @@ func (this *Controller) AuthenticationCreate(req *http.Request) (int, []byte) {
 	// url参数解析到结构体
 	userData := &user.User{}
 	req.ParseForm()
-	req.Form.Set("password", as.Lib.Md5(req.Form.Get("password")))
+	req.Form.Set("password", user.EncodePassword(req.Form.Get("password")))
 	params := this.ReqFormToMap(req)
 
 	if err := this.Parse(userData, params); err != nil {
@@ -65,7 +64,7 @@ func (this *Controller) AuthenticationCreate(req *http.Request) (int, []byte) {
 	// 获得安全令牌
 	// 先生成随机数作为token
 	token := strconv.Itoa(int(rand.New(rand.NewSource(time.Now().UnixNano())).Uint32()))
-	expire := 30
+	expire := 60 * 60
 	sign, expireUnix := CreateSign(token, expire, map[string]string{
 		"email":    userData.Email,
 		"nickname": userData.Nickname,
@@ -74,7 +73,6 @@ func (this *Controller) AuthenticationCreate(req *http.Request) (int, []byte) {
 
 	// 保存有效令牌到缓存
 	as.Redis.SetWithExpire(sign, []byte(token), int64(expire))
-	fmt.Println("生成缓存", sign, expire)
 
 	// 发送邮件
 	go as.Email.Send([]string{userData.Email}, "我酷：激活账号", `<a href="`+
@@ -97,8 +95,6 @@ func (this *Controller) CreateEmailAuthentication(req *http.Request, session ses
 
 	var token []byte
 	var err error
-	a, b := as.Redis.Get(req.Form.Get("sign"))
-	fmt.Println("获取缓存", req.Form.Get("sign"), a, b)
 	if token, err = as.Redis.Get(req.Form.Get("sign")); err != nil {
 		// 没有通过邮箱注册生成的缓存
 		return this.Error("签名缓存未生成")

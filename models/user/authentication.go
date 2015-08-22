@@ -1,10 +1,10 @@
 package user
 
 import (
-	"errors"
 	"github.com/ascoders/as"
 	"math/rand"
 	"strconv"
+	"errors"
 	"time"
 )
 
@@ -48,7 +48,6 @@ func (this *Model) Authentication(account string, password string) (*User, error
 				this.UpdateMap(userData.Id, map[string]interface{}{
 					"error_chance": userData.ErrorChance,
 				})
-
 			} else {
 				// 验证机会减少1次
 				userData.ErrorChance--
