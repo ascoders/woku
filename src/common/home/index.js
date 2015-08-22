@@ -1,66 +1,118 @@
 ctrl.$onEnter = function (param, rs, rj) {
-	document.title = '我酷游戏'
-	avalon.vmodels.global.menu.current = ''
-	avalon.vmodels.global.menu.dark = true
-
-	//获取信息
-	wk.get({
-		url: '/api/home',
-		success: function (data) {
-			//最火游戏
-			var key
-			for (key in data.Games) {
-				if (data.Games[key].GameImage === "") {
-					data.Games[key].GameImage = "/static/img/app.png";
-				} else {
-					data.Games[key].GameImage = "http://img.wokugame.com/" + data.Games[key].GameImage
-				}
-			}
-			vm.games = data.Games || []
-
-			//最新资讯
-			vm.tops = data.Tops || []
-
-			//最新游戏
-			for (key in data.NewGames) {
-				if (data.NewGames[key].GameImage === "") {
-					data.NewGames[key].GameImage = "/static/img/app.png";
-				} else {
-					data.NewGames[key].GameImage = "http://img.wokugame.com/" + data.NewGames[key].GameImage
-				}
-			}
-			vm.newgames = data.NewGames || []
-
-			//本周热帖
-			for (key in data.HotTopics) {
-				data.HotTopics[key].AuthorImage = userImage(data.HotTopics[key].AuthorImage)
-			}
-			vm.hots = data.HotTopics || []
-		}
-	})
-
-	$(window).scroll(function () {
-		if ($(document).scrollTop() > $('#j-head').offset().top + $('#j-head').height()) {
-			if (avalon.vmodels.global.menu.dark) {
-				avalon.vmodels.global.menu.dark = false
-			}
-		} else {
-			if (!avalon.vmodels.global.menu.dark) {
-				avalon.vmodels.global.menu.dark = true
-			}
-		}
-	})
+    document.title = '我酷游戏'
+    avalon.vmodels.global.menu.current = ''
+    avalon.vmodels.global.menu.dark = true
 }
 
 ctrl.$onRendered = function () {
-	$('select.dropdown').dropdown({
-		onChange: function (value, text, $selectedItem) {
-			console.log(value, text, $selectedItem)
-		}
-	})
+    init()
+    listen()
 }
 
 ctrl.$onBeforeUnload = function () {
-	// 菜单变白色
-	avalon.vmodels.global.menu.dark = false
+    // 菜单变白色
+    avalon.vmodels.global.menu.dark = false
+}
+
+// app表单
+var appForm
+
+// 页面初始化
+function init() {
+    appForm = $('#j-create-app-modal .ui.form');
+    appForm.form({
+        fields: {
+            name: {
+                identifier: 'name',
+                rules: [{
+                    type: 'empty',
+                    prompt: '<i class="bookmark icon"></i>应用名称：请填写'
+                }, {
+                    type: 'minLength[2]',
+                    prompt: '<i class="bookmark icon"></i>应用名称：至少2位'
+                }, {
+                    type: 'maxLength[10]',
+                    prompt: '<i class="bookmark icon"></i>应用名称：最多10位'
+                }]
+            },
+            path: {
+                identifier: 'path',
+                optional: true,
+                rules: [{
+                    type: 'minLength[2]',
+                    prompt: '<i class="linkify icon"></i>应用地址：至少2位'
+                }, {
+                    type: 'maxLength[10]',
+                    prompt: '<i class="linkify icon"></i>应用地址：最多10位'
+                }]
+            }
+        }
+    })
+}
+
+// 监听
+function listen() {
+    menuAutoColor()
+    showCreateApp()
+    customPath()
+}
+
+// 导航栏变色
+function menuAutoColor() {
+    $(window).scroll(function () {
+        if ($(document).scrollTop() > $('#j-head').offset().top + $('#j-head').height()) {
+            if (avalon.vmodels.global.menu.dark) {
+                avalon.vmodels.global.menu.dark = false
+            }
+        } else {
+            if (!avalon.vmodels.global.menu.dark) {
+                avalon.vmodels.global.menu.dark = true
+            }
+        }
+    })
+}
+
+// 创建按钮点击后弹出模态框
+function showCreateApp() {
+    $('#j-create-app').click(function () {
+        $('#j-create-app-modal').modal({
+            blurring: true,
+            onApprove: function () {
+                appForm.form('validate form')
+
+                // 如果验证不通过，窗口不关闭
+                if (!appForm.form('s valid')) {
+                    return false
+                }
+
+                // 创建新app
+                wk.post({
+                    url: '/api/apps',
+                    data: {
+                        name: vm.name,
+                        path: vm.path,
+                        type: vm.type
+                    },
+                    success: function () {
+                        wk.notice(vm.name + ' 已创建成功！', 'green')
+
+                        // 跳转到游戏首页
+                        avalon.router.navigate('/a/' + vm.path)
+                    }
+                })
+            }
+        }).modal('show')
+    })
+}
+
+// 自定义路径复选框回调
+function customPath() {
+    $('#j-custom-path').checkbox({
+        onChecked: function () {
+            vm.customPath = true
+        },
+        onUnchecked: function () {
+            vm.customPath = false
+        }
+    })
 }

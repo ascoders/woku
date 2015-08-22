@@ -13,7 +13,7 @@ type App struct {
 	Path string `json:"path" sql:"type:char(10);unique_index" valid:"required;minLength(2);maxLength(10)"`
 
 	// 名称 索引
-	Name string `json:"name" sql:"type:char(10);unique" valid:"required;minLength(1);maxLength(10)"`
+	Name string `json:"name" sql:"type:char(10);unique" valid:"required;minLength(2);maxLength(10)"`
 
 	// 管理员id 关联后无法修改
 	Manager int `json:"manager" sql:"type:int unsigned"` // 管理员id

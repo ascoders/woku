@@ -1,3 +1,4 @@
+<!-- 头部 -->
 <div class="ui inverted vertical masthead center aligned segment" id="j-head">
     <div class="ui text container description">
         <h1 class="ui inverted header">
@@ -5,11 +6,52 @@
         </h1>
         <h2>
             <p>想要什么，现在就去创造</p>
-            <div class="ui huge primary button">立即创建<i class="right arrow icon"></i></div>
+            <div class="ui animated huge primary button" id="j-create-app">
+                <div class="visible content">立即创建<i class="right arrow icon"></i></div>
+                <div class="hidden content"><i class="dashboard icon"></i>申请应用</div>
+            </div>
         </h2>
     </div>
 </div>
 
+<!-- 创建应用模态框 -->
+<div class="ui small basic test modal" id="j-create-app-modal">
+    <div class="ui icon header">
+        <i class="dashboard icon"></i> 申请应用
+    </div>
+    <div class="content">
+        <form class="ui form">
+            <div class="field">
+                <div class="fields" ms-class="one:!customPath" ms-class-1="two:customPath">
+                    <div class="field ui input">
+                        <input type="text" name="name" placeholder="应用名称">
+                    </div>
+                    <div class="field ui labeled input" ms-visible="customPath">
+                        <div class="ui label">wokuer.com/app/</div>
+                        <input type="text" name="path" placeholder="应用地址">
+                    </div>
+                </div>
+                <div class="ui segment">
+                    <div class="ui toggle checkbox" id="j-custom-path">
+                        <input class="hidden" id="app-create-custom-path" type="checkbox" name="custom_path">
+                        <label for="app-create-custom-path">自定义路径</label>
+                    </div>
+                </div>
+            </div>
+            <div class="ui error message"></div>
+        </form>
+    </div>
+    <div class="actions">
+        <div class="ui red basic cancel inverted button">
+            <i class="remove icon"></i> No
+        </div>
+        <div class="ui green ok inverted button">
+            <i class="checkmark icon"></i> Yes
+        </div>
+    </div>
+</div>
+
+<!-- 介绍内容 -->
 <div class="ui vertical stripe segment introduction">
     <div class="ui middle aligned stackable grid container">
         <div class="row">
