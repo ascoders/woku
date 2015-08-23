@@ -75,31 +75,66 @@ function menuAutoColor() {
 // 创建按钮点击后弹出模态框
 function showCreateApp() {
     $('#j-create-app').click(function () {
-        $('#j-create-app-modal').modal({
+        var appModal = $('#j-create-app-modal')
+        appModal.modal({
             blurring: true,
             onApprove: function () {
                 appForm.form('validate form')
 
                 // 如果验证不通过，窗口不关闭
-                if (!appForm.form('s valid')) {
+                if (!appForm.form('is valid')) {
                     return false
+                }
+
+                // 提交按钮loading
+                $('#j-create-app-modal .actions .ok').addClass('loading')
+
+                var name = appForm.find('input[name="name"]').val()
+                var path = appForm.find('input[name="path"]').val()
+
+                // 如果path为空，则与name相同
+                if (path === '') {
+                    path = name
                 }
 
                 // 创建新app
                 wk.post({
                     url: '/api/apps',
                     data: {
-                        name: vm.name,
-                        path: vm.path,
-                        type: vm.type
+                        name: name,
+                        path: path
                     },
                     success: function () {
                         wk.notice(vm.name + ' 已创建成功！', 'green')
 
+                        // 关闭模态框
+                        appModal.modal('hide')
+
                         // 跳转到游戏首页
-                        avalon.router.navigate('/a/' + vm.path)
+                        avalon.router.navigate('/app/' + path)
+                    },
+                    error: function (message) {
+                        var errorMessage = '未知错误'
+
+                        if (message.indexOf('Duplicate') > -1 && message.indexOf('name') > -1 && message.indexOf(name) > -1) {
+                            errorMessage = '应用名称 ' + name + ' 已被占用'
+                        }
+
+                        if (message.indexOf('Duplicate') > -1 && message.indexOf('path') > -1 && message.indexOf(path) > -1) {
+                            errorMessage = '应用路径 ' + path + ' 已被占用'
+                        }
+
+                        appForm.form("add errors", [errorMessage])
+                        appForm.addClass('error')
+                    },
+                    always: function () {
+                        // 提交按钮unloading
+                        $('#j-create-app-modal .actions .ok').removeClass('loading')
                     }
                 })
+
+                // 不会自动关闭
+                return false
             }
         }).modal('show')
     })

@@ -22,11 +22,12 @@ func (this *Controller) Add(req *http.Request) (int, []byte) {
 
 	// 添加当前用户id到管理员参数中
 	req.ParseForm()
+	req.Form.Set("type", "other")
 	req.Form.Set("manager", strconv.Itoa(this.currentUser.Id))
 
 	// 插入app
 	if status, response := this.Restful.Add(req); status == 200 {
-		return this.Success(string(response))
+		return this.Success("创建成功")
 	} else {
 		return this.Error(string(response))
 	}

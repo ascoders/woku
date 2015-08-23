@@ -21,9 +21,9 @@ func init() {
     as.Router.Routes.Get("/api/categorys/:id", category.Get)
 		
     app := app.New()
-    as.Router.Routes.Get("/api/apps", app.Gets)
-    as.Router.Routes.Get("/api/apps/type/:type", app.Type)
     as.Router.Routes.Get("/api/apps/:path", app.Get)
     as.Router.Routes.Post("/api/apps", app.User, app.Add)
+    as.Router.Routes.Get("/api/apps", app.Gets)
+    as.Router.Routes.Get("/api/apps/type/:type", app.Type)
 		
 }
