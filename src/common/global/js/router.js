@@ -426,40 +426,45 @@ require(['mmState'], function () {
             abstract: false,
             child: null,
 
-            // 父级模块名
-            parentModule: '',
+            // 父级控制器名
+            parentController: '',
+
+            // 父级state全名
+            parentStateName: ''
         }, opts)
 
         // 如果模块名为function
         // 模块名过滤特殊字符
         if (typeof opts.module === 'function') {
-            opts.stateName = opts.module().replace(/\//g, '').replace(/\./g, '')
+            opts.stateName = opts.module({}).replace('undefined', '[params]').replace(/\//g, '').replace(/\./g, '')
         } else {
             opts.stateName = opts.module.replace(/\//g, '').replace(/\./g, '')
         }
-        if (typeof opts.parentModule === 'function') {
-            opts.parentStateName = opts.parentModule().replace(/\//g, '').replace(/\./g, '')
-        } else {
-            opts.parentStateName = opts.parentModule.replace(/\//g, '').replace(/\./g, '')
-        }
 
-        // 设置模块全名
+        // 如果父级模块名不为空，则拼接模块全名
         if (opts.parentStateName !== '') {
             opts.stateName = opts.parentStateName + '.' + opts.stateName
         }
 
-        // 当父级模块名不为空时，控制器为父级模块名
-        var controller = opts.parentModule || opts.controller
-
         // 设置路由属性
         avalon.state(opts.stateName, {
-            controller: controller,
+            controller: opts.controller,
             url: opts.url,
             abstract: opts.abstract,
             views: [{
                 name: "container@" + opts.parentStateName,
-                templateUrl: '/static/' + opts.module + '/index.html',
-                controllerUrl: [opts.module + '/index'],
+                templateUrl: function (params) {
+                    if (typeof opts.module === 'function') {
+                        return '/static/' + opts.module(params) + '/index.html'
+                    }
+                    return '/static/' + opts.module + '/index.html'
+                },
+                controllerUrl: function (params) {
+                    if (typeof opts.module === 'function') {
+                        return opts.module(params) + '/index'
+                    }
+                    return opts.module + '/index'
+                },
                 ignoreChange: function (changeType) {
                     if (!opts.ignoreChange) {
                         return false
@@ -473,6 +478,16 @@ require(['mmState'], function () {
         if (opts.child !== null) {
             for (var key in opts.child) {
                 opts.child[key].parentModule = opts.module
+                opts.child[key].parentStateName = opts.stateName
+
+                // 如果模块名不为function，则定义父级controller
+                if (typeof opts.module !== 'function') {
+                    opts.child[key].controller = opts.module
+                } else {
+                    // 否则为自己的controller
+                    opts.child[key].controller = opts.controller
+                }
+
                 state(opts.child[key])
             }
         }
