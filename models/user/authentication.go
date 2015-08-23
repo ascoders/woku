@@ -1,29 +1,17 @@
 package user
 
 import (
-	"github.com/ascoders/as"
+	"errors"
 	"math/rand"
 	"strconv"
-	"errors"
 	"time"
 )
 
 // 用户密码是否正确（以及账户状态判断）
 func (this *Model) Authentication(account string, password string) (*User, error) {
-	userData := &User{}
-
-	if err := as.Lib.Valid.Email(account); err == nil {
-		// 根据邮箱查找用户
-		userData, err = this.GetByEmail(account)
-		if err != nil {
-			return nil, errors.New("账号不存在")
-		}
-	} else {
-		// 根据用户名查找用户
-		userData, err = this.GetByNickname(account)
-		if err != nil {
-			return nil, errors.New("帐号不存在")
-		}
+	userData, userDataError := this.GetByAccount(account)
+	if userDataError != nil {
+		return nil, errors.New("账号不存在")
 	}
 
 	// 账户锁定情况
@@ -31,6 +19,7 @@ func (this *Model) Authentication(account string, password string) (*User, error
 		long := userData.StopTime.Sub(time.Now())
 		return nil, errors.New("账号距离解锁还有 " + strconv.FormatFloat(long.Seconds(), 'f', 0, 64) + " 秒")
 	}
+
 	// 校验密码
 	if userData.Password != EncodePassword(password) {
 		if userData.ErrorChance == 1 {
@@ -59,10 +48,21 @@ func (this *Model) Authentication(account string, password string) (*User, error
 		}
 	}
 
-	// 重置验证次数
-	this.UpdateMap(userData.Id, map[string]interface{}{
-		"error_chance": 6,
-	})
+	// 更新最后登陆时间和登陆次数
+	userData.LastLogin = time.Now()
+	userData.LoginCount++
+
+	// 更新密码错误次数
+	userData.ErrorChance = 6
+
+	if err := this.UpdateMap(userData.Id, map[string]interface{}{
+		"last_login":   userData.LastLogin,
+		"login_count":  userData.LoginCount,
+		"error_chance": userData.ErrorChance,
+	}); err != nil {
+		return nil, errors.New("用户信息更新失败")
+	}
+
 	return userData, nil
 }
 

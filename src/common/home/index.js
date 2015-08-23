@@ -1,21 +1,8 @@
-ctrl.$onEnter = function (param, rs, rj) {
-    document.title = '我酷游戏'
-    avalon.vmodels.global.menu.current = ''
-    avalon.vmodels.global.menu.dark = true
-}
-
-ctrl.$onRendered = function () {
-    init()
-    listen()
-}
-
-ctrl.$onBeforeUnload = function () {
-    // 菜单变白色
-    avalon.vmodels.global.menu.dark = false
-}
-
-// app表单
+// 创建app表单
 var appForm
+
+// 创建app模态框
+var appModal
 
 // 页面初始化
 function init() {
@@ -75,7 +62,7 @@ function menuAutoColor() {
 // 创建按钮点击后弹出模态框
 function showCreateApp() {
     $('#j-create-app').click(function () {
-        var appModal = $('#j-create-app-modal')
+        appModal = $('#j-create-app-modal')
         appModal.modal({
             blurring: true,
             onApprove: function () {
@@ -104,17 +91,14 @@ function showCreateApp() {
                         name: name,
                         path: path
                     },
-                    success: function () {
+                    done: function () {
                         wk.notice(vm.name + ' 已创建成功！', 'green')
-
-                        // 关闭模态框
-                        appModal.modal('hide')
 
                         // 跳转到游戏首页
                         avalon.router.navigate('/app/' + path)
                     },
-                    error: function (message) {
-                        var errorMessage = '未知错误'
+                    fail: function (message) {
+                        var errorMessage = message
 
                         if (message.indexOf('Duplicate') > -1 && message.indexOf('name') > -1 && message.indexOf(name) > -1) {
                             errorMessage = '应用名称 ' + name + ' 已被占用'
@@ -122,6 +106,11 @@ function showCreateApp() {
 
                         if (message.indexOf('Duplicate') > -1 && message.indexOf('path') > -1 && message.indexOf(path) > -1) {
                             errorMessage = '应用路径 ' + path + ' 已被占用'
+                        }
+
+                        // 未登录
+                        if (errorMessage === '未登录') {
+                            errorMessage = '未登录 <a href="/auth/login" router>立即登录</a>'
                         }
 
                         appForm.form("add errors", [errorMessage])
@@ -150,4 +139,25 @@ function customPath() {
             vm.customPath = false
         }
     })
+}
+
+ctrl.$onEnter = function (param, rs, rj) {
+    document.title = '我酷游戏'
+    avalon.vmodels.global.menu.current = ''
+    avalon.vmodels.global.menu.dark = true
+}
+
+ctrl.$onRendered = function () {
+    init()
+    listen()
+}
+
+ctrl.$onBeforeUnload = function () {
+    // 菜单变白色
+    avalon.vmodels.global.menu.dark = false
+
+    // 关闭模态框
+    if (appModal) {
+        appModal.modal('hide')
+    }
 }

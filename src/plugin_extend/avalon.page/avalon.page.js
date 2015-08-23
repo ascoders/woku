@@ -147,9 +147,9 @@ define(["text!plugin_extend/avalon.page/avalon.page.html"], function (templateHt
                 wk.get({
                     url: opts.ajax.url,
                     data: data,
-                    success: function (data) {
+                    done: function (data) {
                         // 调用回调函数
-                        opts.ajax.success(data)
+                        opts.ajax.done(data)
 
                         // 设置分页
                         vm.createPagin(data.count)

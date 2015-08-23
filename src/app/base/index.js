@@ -5,7 +5,7 @@ ctrl.$onEnter = function (param, rs, rj) {
     // 获取基础数 据
     wk.get({
         url: '/api/apps/' + param.path,
-        success: function (data) {
+        done: function (data) {
             vm.app = data
         }
     })

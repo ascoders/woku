@@ -45,8 +45,8 @@ wk.ajax = function (method, opts) {
     var defaultOpts = {
         url: '',
         data: '',
-        success: function (data) {},
-        error: function () {},
+        done: function () {},
+        fail: function () {},
         always: function () {}
     }
     opts = $.extend(defaultOpts, opts)
@@ -64,7 +64,7 @@ wk.ajax = function (method, opts) {
                 },
             })
             .done(function (data, status, xhr) {
-                opts.success(data)
+                opts.done(data)
             })
             .fail(function (xhr, status, error) {
                 var message = ''
@@ -73,7 +73,7 @@ wk.ajax = function (method, opts) {
                 } else {
                     message = xhr.responseText
                 }
-                opts.error(message)
+                opts.fail(message)
             })
             .always(function () {
                 opts.always()

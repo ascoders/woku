@@ -46,14 +46,31 @@ ctrl.$onRendered = function () {
             }
         },
         onSuccess: function () {
-            // 刷新验证码
-            vm.freshCap()
+            // 按钮loading
+            $('#j-info-submit').addClass('loading')
 
-            vm.steps.email.locked = false
-            vm.step = 'email'
+            // 验证用户名是否已被注册
+            wk.get({
+                url: '/api/users/' + vm.data.nickname,
+                done: function () {
+                    infoForm.form("add errors", ['用户名已被注册'])
+                    infoForm.addClass('error')
+                },
+                fail: function () {
+                    // 刷新验证码
+                    vm.freshCap()
 
-            // 邮箱输入框获取焦点
-            $('input[name="email"]').focus()
+                    vm.steps.email.locked = false
+                    vm.step = 'email'
+
+                    // 邮箱输入框获取焦点
+                    $('input[name="email"]').focus()
+                },
+                always: function () {
+                    // 按钮loading
+                    $('#j-info-submit').removeClass('loading')
+                }
+            })
         }
     })
 
@@ -76,6 +93,9 @@ ctrl.$onRendered = function () {
             }
         },
         onSuccess: function () {
+            // 按钮loading
+            $('#j-email-submit').addClass('loading')
+
             wk.post({
                 url: '/api/users/authentication',
                 data: {
@@ -85,7 +105,7 @@ ctrl.$onRendered = function () {
                     capid: vm.data.capid,
                     captcha: vm.data.captcha
                 },
-                success: function (data) {
+                done: function (data) {
                     //刷新验证码
                     vm.freshCap()
 
@@ -93,14 +113,16 @@ ctrl.$onRendered = function () {
                     vm.steps.success.locked = false
                     vm.step = 'success'
                 },
-                error: function (message) {
-                    wk.notice({
-                        title: '注册失败',
-                        content: message
-                    })
+                fail: function (message) {
+                    emailForm.form("add errors", [message])
+                    emailForm.addClass('error')
 
                     //刷新验证码
                     vm.freshCap()
+                },
+                always: function () {
+                    // 按钮unloading
+                    $('#j-email-submit').removeClass('loading')
                 }
             })
         }

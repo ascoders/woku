@@ -1,11 +1,11 @@
-<div class="ui fixed pointing menu" ms-class='inverted:menuDark'>
+<div class="ui fixed pointing menu" ms-class='inverted:menu.dark'>
     <div class='ui container'>
-        <a ms-href="/app/{{app.path}}" router class="header item" id='j-logo' ms-class="active:menuName == ''">
+        <a ms-href="/app/{{app.path}}" router class="header item" id='j-logo' ms-class="active:menu.current == 'app.home'">
             <img class="logo" src="../index/image/app.png"> {{app.name}}
         </a>
 
         <div class="item">
-            <div class="ui icon input" ms-class='transparent:!menuDark'>
+            <div class="ui icon input" ms-class='transparent:!menu.dark'>
                 <input type="text" placeholder="应用内搜索...">
                 <i class="search link icon"></i>
             </div>
@@ -14,7 +14,11 @@
         <a class="item" href="/app" router ms-class="active:menuName == 'app'">浏览</a>
 
         <div class="right menu">
-            <a class="item" ms-class="active:menuName == 'login'" ms-if='!my.isLogin' href='/auth/login' router>登录</a>
+            <a ms-if="app.manager == my.info.id" class="item" ms-class="active:menu.current == 'app.manage'" ms-href="/app/{{app.path}}/manage" router>
+                <i class="ui setting icon"></i>管理
+            </a>
+
+            <a class="item" ms-class="active:menu.current == 'login'" ms-if='!my.isLogin' href='/auth/login' router>登录</a>
 
             <div class="ui simple dropdown item" ms-if='my.isLogin'>
                 <div class="text">

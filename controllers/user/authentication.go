@@ -21,21 +21,6 @@ func (this *Controller) Authentication(req *http.Request, session sessions.Sessi
 		return this.Error(err.Error())
 	}
 
-	// 更新最后登陆时间和登陆次数
-	userData.LastLogin = time.Now()
-	userData.LoginCount++
-
-	// 更新密码错误次数
-	userData.ErrorChance = 6
-
-	if err := this.model.UpdateMap(userData.Id, map[string]interface{}{
-		"last_login":   userData.LastLogin,
-		"login_count":  userData.LoginCount,
-		"error_chance": userData.ErrorChance,
-	}); err != nil {
-		return this.Error(err.Error())
-	}
-
 	// 生成session
 	session.Set("id", userData.Id)
 
@@ -129,7 +114,7 @@ func (this *Controller) CreateEmailAuthentication(req *http.Request, session ses
 	return this.Success(AuthenticationInfo(userData))
 }
 
-// 获得当前登录的用户
+// 获得当前登录的用户（可以获取敏感信息）
 // @router /users/current [get]
 func (this *Controller) Current(session sessions.Session) (int, []byte) {
 	uid := session.Get("id")

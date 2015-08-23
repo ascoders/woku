@@ -47,15 +47,13 @@ ctrl.$onRendered = function () {
                     account: form.find('[name=account]').val(),
                     password: form.find('[name=password]').val()
                 },
-                success: function (data) {
+                done: function (data) {
                     avalon.vmodels.global.my.setInfo(data)
                     wk.jumpLastLocation()
                 },
-                error: function (message) {
-                    wk.notice({
-                        title: '登陆失败',
-                        content: message
-                    })
+                fail: function (message) {
+                    form.form("add errors", [message])
+                    form.addClass('error')
                 }
             })
         }

@@ -26,7 +26,7 @@ var global = avalon.define({
                 data: {
                     id: global.my.id
                 },
-                success: function (data) {
+                done: function (data) {
                     global.my.isLogin = false
                     global.my.info = {}
 
