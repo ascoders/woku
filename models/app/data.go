@@ -34,4 +34,7 @@ type App struct {
 
 	// 创建时间
 	Created time.Time `json:"created" sql:"type:timestamp"`
+
+	// 网站开关闸门
+	Gate bool `json:"gate" sql:"default:true"`
 }
