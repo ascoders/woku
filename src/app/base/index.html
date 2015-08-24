@@ -11,7 +11,7 @@
             </div>
         </div>
 
-        <a class="item" href="/app" router ms-class="active:menuName == 'app'">浏览</a>
+        <a class="item" href="/app" router ms-class="active:menu.name == 'app'">浏览</a>
 
         <div class="right menu">
             <a ms-if="app.manager == my.info.id" class="item" ms-class="active:menu.current == 'app.manage'" ms-href="/app/{{app.path}}/manage" router>

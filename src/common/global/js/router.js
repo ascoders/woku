@@ -66,11 +66,16 @@ require(['mmState'], function () {
             url: '/'
         }, {
             module: 'app/base/manage',
-            url: '/manage/{type}',
+            url: '/manage',
+            abstract: true,
             child: [{
+                module: 'app/base/manage/index',
+                url: '/'
+            }, {
                 module: function (params) {
-                    return 'app/base/manage/' + params.type;
-                }
+                    return 'app/base/manage/' + params.type
+                },
+                url: '/{type}'
             }]
         }]
     })
