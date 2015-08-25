@@ -1,9 +1,9 @@
 package app
 
 import (
-	"time"
-
 	"github.com/ascoders/as"
+	"time"
+	"woku/models/app/manager"
 )
 
 type App struct {
@@ -15,10 +15,11 @@ type App struct {
 	// 名称 索引
 	Name string `json:"name" sql:"type:char(10);unique" valid:"required;minLength(2);maxLength(10)"`
 
-	// 管理员id 关联后无法修改
-	Manager int `json:"manager" sql:"type:int unsigned"` // 管理员id
+	// 所有者id 关联后无法修改
+	Owner int `json:"owner" sql:"type:int unsigned"` // 管理员id
 
-	// Managers  []string      `json:"managers"`             // 版主id列表（协助版主只能操作帖子，不能进管理台）
+	// 管理员列表
+	Managers []manager.Manager
 
 	// 所属分类
 	Type string `json:"type" sql:"type:char(10);index"`

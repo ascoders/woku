@@ -14,7 +14,7 @@
         <a class="item" href="/app" router ms-class="active:menu.name == 'app'">浏览</a>
 
         <div class="right menu">
-            <a ms-if="app.manager == my.info.id" class="item" ms-class="active:menu.current == 'app.manage'" ms-href="/app/{{app.path}}/manage" router>
+            <a ms-if="app.owner == my.info.id" class="item" ms-class="active:menu.current == 'app.manage'" ms-href="/app/{{app.path}}/manage" router>
                 <i class="ui setting icon"></i>管理
             </a>
 

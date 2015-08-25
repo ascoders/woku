@@ -8,6 +8,7 @@ import (
 // 获取总分类信息
 // @router /apps [get]
 func (this *Controller) Gets(req *http.Request) (int, []byte) {
+	this.model.Test()
 	return this.Restful.Gets(req, nil, []string{"name", "path", "created"})
 }
 

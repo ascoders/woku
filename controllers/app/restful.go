@@ -1,18 +1,20 @@
 package app
 
 import (
+	"github.com/ascoders/as"
 	"github.com/go-martini/martini"
 	"net/http"
 	"strconv"
+	"woku/models/app"
 )
 
-// 获取某个app信息
+// 获取
 // @router /apps/:path [get]
 func (this *Controller) Get(param martini.Params) (int, []byte) {
 	return this.Must(this.model.FindByPath(param["path"]))
 }
 
-// 新增app
+// 新增
 // @router /apps (user) [post]
 func (this *Controller) Add(req *http.Request) (int, []byte) {
 	// 每位用户最多创建20个应用
@@ -34,3 +36,18 @@ func (this *Controller) Add(req *http.Request) (int, []byte) {
 
 	return this.Error("创建失败，请稍后再试")
 }
+
+// 修改
+// @router /apps/:id (user) [patch]
+func (this *Controller) Update(req *http.Request) (int, []byte) {
+	updateMap := as.Lib.Http.ReqFormToMap(req, "name", "type", "logo", "icon", "gate")
+
+	appData := &app.App{}
+	if err := as.Lib.Parse.Struct(appData, updateMap); err != nil {
+		return this.Error(err.Error())
+	}
+
+	return this.Success(appData)
+}
+
+// 删除（暂时不允许删除）
