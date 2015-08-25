@@ -31,7 +31,7 @@ var vm = avalon.define({
         // 刷新验证码
         wk.post({
             url: '/api/captcha',
-            success: function (data) {
+            done: function (data) {
                 vm.data.capid = data.captchaCode
             }
         })

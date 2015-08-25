@@ -7,8 +7,11 @@ ctrl.$onEnter = function (param, rs, rj) {
         url: '/api/apps/' + param.path,
         done: function (data) {
             vm.app = data
+            rs()
         }
     })
+
+    return false
 }
 
 ctrl.$onRendered = function () {

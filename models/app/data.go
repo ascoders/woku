@@ -10,10 +10,10 @@ type App struct {
 	as.Data
 
 	// 英文路径 唯一索引
-	Path string `json:"path" sql:"type:char(10);unique_index" valid:"required;minLength(2);maxLength(10)"`
+	Path string `json:"path" sql:"type:char(10);unique_index" valid:"minLength(2);maxLength(10)"`
 
 	// 名称 索引
-	Name string `json:"name" sql:"type:char(10);unique" valid:"required;minLength(2);maxLength(10)"`
+	Name string `json:"name" sql:"type:char(10);unique" valid:"minLength(2);maxLength(10)"`
 
 	// 所有者id 关联后无法修改
 	Owner int `json:"owner" sql:"type:int unsigned"` // 管理员id

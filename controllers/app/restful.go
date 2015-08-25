@@ -17,15 +17,19 @@ func (this *Controller) Get(param martini.Params) (int, []byte) {
 // 新增
 // @router /apps (user) [post]
 func (this *Controller) Add(req *http.Request) (int, []byte) {
+	// path name必填
+	if err := as.Lib.Http.Require(req, "path", "name"); err != nil {
+		return this.Error(err.Error)
+	}
+
 	// 每位用户最多创建20个应用
 	if this.model.UserAppCount(this.currentUser.Id) >= 20 {
 		return this.Error("创建应用数量已达上限")
 	}
 
 	// 添加当前用户id到管理员参数中
-	req.ParseForm()
 	req.Form.Set("type", "other")
-	req.Form.Set("manager", strconv.Itoa(this.currentUser.Id))
+	req.Form.Set("owner", strconv.Itoa(this.currentUser.Id))
 
 	// 插入app
 	if status, response := this.Restful.Add(req); status == 200 {
@@ -39,15 +43,19 @@ func (this *Controller) Add(req *http.Request) (int, []byte) {
 
 // 修改
 // @router /apps/:id (user) [patch]
-func (this *Controller) Update(req *http.Request) (int, []byte) {
-	updateMap := as.Lib.Http.ReqFormToMap(req, "name", "type", "logo", "icon", "gate")
+func (this *Controller) Update(param martini.Params, req *http.Request) (int, []byte) {
+	updateMap := this.ReqFormToMap(req, "name", "type", "logo", "icon", "gate")
 
 	appData := &app.App{}
 	if err := as.Lib.Parse.Struct(appData, updateMap); err != nil {
 		return this.Error(err.Error())
 	}
 
-	return this.Success(appData)
+	if err := this.model.UpdateMap(param["id"], updateMap, appData); err != nil {
+		return this.Error(err.Error())
+	}
+
+	return this.Success("ok")
 }
 
 // 删除（暂时不允许删除）

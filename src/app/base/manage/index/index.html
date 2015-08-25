@@ -4,7 +4,8 @@
 
     <div class="ui compact segment">
         <div class="ui toggle checkbox" id="j-gate-checkbox">
-            <input id="j-gate" type="checkbox" checked class="hidden">
+            {{app.gate}}
+            <input id="j-gate" type="checkbox" ms-checked='app.gate' class="hidden">
             <label id="j-gate-label" for="j-gate">允许访问</label>
         </div>
     </div>
