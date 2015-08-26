@@ -51,7 +51,7 @@ func (this *Controller) Update(param martini.Params, req *http.Request) (int, []
 		return this.Error(err.Error())
 	}
 
-	if err := this.model.UpdateMap(param["id"], updateMap, appData); err != nil {
+	if err := this.model.UpdateMap(param["id"], updateMap); err != nil {
 		return this.Error(err.Error())
 	}
 
