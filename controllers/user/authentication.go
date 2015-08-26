@@ -119,7 +119,7 @@ func (this *Controller) CreateEmailAuthentication(req *http.Request, session ses
 func (this *Controller) Current(session sessions.Session) (int, []byte) {
 	uid := session.Get("id")
 	if uid == nil {
-		return this.Success(false)
+		return this.Error("未登录")
 	}
 
 	// 查询用户

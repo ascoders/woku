@@ -4,27 +4,32 @@ function listen() {
     $('#j-gate-checkbox').checkbox({
         onChecked: function () {
             serviceGate(true)
-            $('#j-gate-label').text('允许访问')
         },
         onUnchecked: function () {
             serviceGate(false)
-            $('#j-gate-label').text('禁止访问')
         }
     })
 }
 
 // 请求资源 是否允许访问
 function serviceGate(isOpen) {
+    wk.notice({
+        title: '访问控制',
+        content: '操作失败，请稍后再试'
+    })
     wk.patch({
         url: '/api/apps/' + avalon.vmodels['app/base'].app.id,
         data: {
             gate: isOpen
         },
         done: function () {
-
+            avalon.vmodels['app/base'].app.gate = isOpen
         },
         fail: function () {
-
+            wk.notice({
+                title: '访问控制',
+                content: '操作失败，请稍后再试'
+            })
         }
     })
 }

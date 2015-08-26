@@ -4,13 +4,9 @@
 wk.get({
     url: '/api/users/current',
     done: function (data) {
-        if (data === false) {
-            return
-        }
-
         global.my.setInfo(data)
     },
     fail: function () {
-        global.$myDeferred.resolve(); // 未登录
+        global.$myDeferred.resolve() // 未登录
     }
 })

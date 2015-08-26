@@ -4,9 +4,11 @@
 
     <div class="ui compact segment">
         <div class="ui toggle checkbox" id="j-gate-checkbox">
-            {{app.gate}}
             <input id="j-gate" type="checkbox" ms-checked='app.gate' class="hidden">
-            <label id="j-gate-label" for="j-gate">允许访问</label>
+            <label id="j-gate-label" for="j-gate">
+                <span ms-if="app.gate">允许访问</span>
+                <span ms-if="!app.gate">禁止访问</span>
+            </label>
         </div>
     </div>
     <p>该设置对整个站点生效，您（拥有者）不会受到限制。</p>
