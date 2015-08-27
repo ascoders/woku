@@ -54,6 +54,12 @@ var global = avalon.define({
         current: '',
         // 主题颜色
         dark: false
+    },
+
+    // 页尾
+    footer: {
+        // 是否展现
+        show: true
     }
 })
 

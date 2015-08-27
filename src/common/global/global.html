@@ -17,7 +17,7 @@
 
 <body ms-controller='global'>
 
-    <div class="ui fixed pointing menu" ms-class='inverted:menu.dark' ms-if='menu.show'>
+    <div class="ui fixed pointing menu top-menu" ms-class='inverted:menu.dark' ms-if='menu.show'>
         <div class='ui container'>
             <a href="/" router class="header item" id='j-logo' ms-class="active:menu.current == ''">
                 <img class="logo" src="image/logo.png"> 我酷
@@ -62,7 +62,7 @@
     </div>
 
     <!-- 页面底部 -->
-    <div class="ui inverted vertical footer segment" id="footer">
+    <div ms-if="footer.show" class="ui inverted vertical footer segment" id="footer">
         <div class="ui center aligned container">
             <div class="ui stackable inverted divided grid">
                 <div class="three wide column">

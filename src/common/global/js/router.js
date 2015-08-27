@@ -75,6 +75,7 @@ require(['mmState'], function () {
                 module: function (params) {
                     return 'app/base/manage/' + params.type
                 },
+                ignoreChange: false,
                 url: '/{type}'
             }]
         }]
@@ -475,7 +476,8 @@ require(['mmState'], function () {
                         return false
                     }
                     if (changeType) return true
-                }
+                },
+                cacheController: opts.ignoreChange
             }]
         })
 

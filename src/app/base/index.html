@@ -1,4 +1,4 @@
-<div class="ui fixed pointing menu" ms-class='inverted:menu.dark'>
+<div class="ui fixed pointing menu top-menu" ms-class='inverted:menu.dark'>
     <div class='ui container'>
         <a ms-href="/app/{{app.path}}" router class="header item" id='j-logo' ms-class="active:menu.current == 'app.home'">
             <img class="logo" src="../index/image/app.png"> {{app.name}}
@@ -14,8 +14,8 @@
         <a class="item" href="/app" router ms-class="active:menu.name == 'app'">浏览</a>
 
         <div class="right menu">
-            <a ms-if="app.owner == my.info.id" class="item" ms-class="active:menu.current == 'app.manage'" ms-href="/app/{{app.path}}/manage" router>
-                <i class="ui setting icon"></i>管理
+            <a ms-if="app.owner == my.info.id" class="ui icon item" ms-class="active:menu.current == 'app.manage'" ms-href="/app/{{app.path}}/manage" router>
+                <i class="ui wrench icon"></i>
             </a>
 
             <a class="item" ms-class="active:menu.current == 'login'" ms-if='!my.isLogin' href='/auth/login' router>登录</a>

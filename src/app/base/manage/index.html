@@ -1,11 +1,15 @@
-<div class="ui bottom attached pushable main">
-    <div class="ui visible left vertical sidebar menu">
-        <a router ms-href='/app/{{app.path}}/manage' class="item" ms-class="active:type == ''">
-            <i class="dashboard icon"></i>全局
-        </a>
-        <a router ms-href='/app/{{app.path}}/manage/category' class="item" ms-class="active:type == 'category'">
-            <i class="sidebar icon"></i>导航栏
-        </a>
-    </div>
-    <div class="pusher app-container" ms-view="container"></div>
+<div class="ui left fixed vertical menu left-menu">
+    <a router ms-href='/app/{{app.path}}/manage' class="item" ms-class="active:type == ''">
+        <i class="dashboard icon"></i>全局
+    </a>
+
+    <a router ms-href='/app/{{app.path}}/manage/menu' class="item" ms-class="active:type == 'menu'">
+        <i class="sidebar icon"></i>菜单
+    </a>
+
+    <a router ms-href='/app/{{app.path}}/manage/category' class="item" ms-class="active:type == 'category'">
+        <i class="block layout icon"></i>分类
+    </a>
 </div>
+
+<div class="pusher app-container" ms-view="container"></div>

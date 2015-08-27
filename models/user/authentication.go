@@ -1,6 +1,7 @@
 package user
 
 import (
+	"fmt"
 	"errors"
 	"math/rand"
 	"strconv"
@@ -9,6 +10,7 @@ import (
 
 // 用户密码是否正确（以及账户状态判断）
 func (this *Model) Authentication(account string, password string) (*User, error) {
+	fmt.Println(account)
 	userData, userDataError := this.GetByAccount(account)
 	if userDataError != nil {
 		return nil, errors.New("账号不存在")

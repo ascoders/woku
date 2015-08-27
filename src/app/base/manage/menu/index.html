@@ -1,0 +1,30 @@
+<div class="ui basic segment">
+    <h4 class="ui horizontal divider header">设置菜单</h4>
+
+    <div class="ui pointing menu" ms-class='inverted:menu.dark'>
+        <div class='ui container'>
+            <div class="item disabled">
+                {{app.name}}
+            </div>
+
+            <div class="item">
+                <div class="ui icon input" ms-class='transparent:!menu.dark'>
+                    <input type="text" placeholder="应用内搜索...">
+                    <i class="search link icon"></i>
+                </div>
+            </div>
+
+            <a class="item" href="/app" router ms-class="active:menu.name == 'app'">浏览</a>
+
+            <div class="right menu">
+                <div class="ui icon item disabled">
+                    <i class="wrench icon"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="setting-placeholder">
+        点击菜单选项进行配置
+    </div>
+</div>
