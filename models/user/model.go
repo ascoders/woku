@@ -20,5 +20,5 @@ var (
 
 func init() {
 	ModelInstance = &Model{}
-	ModelInstance.Register(&User{})
+	ModelInstance.Register(&Data{})
 }

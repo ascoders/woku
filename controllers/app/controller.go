@@ -8,7 +8,7 @@ import (
 
 type Controller struct {
 	as.Controller
-	currentUser *user.User
+	currentUser *user.Data
 	model       *app.Model
 }
 

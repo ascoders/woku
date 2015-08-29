@@ -6,8 +6,8 @@ import (
 )
 
 // 通过账号名获取用户
-func (this *Model) GetByAccount(account string) (*User, error) {
-	userData := &User{}
+func (this *Model) GetByAccount(account string) (*Data, error) {
+	userData := &Data{}
 
 	if err := as.Lib.Valid.Email(account); err == nil {
 		// 根据邮箱查找用户
@@ -27,15 +27,15 @@ func (this *Model) GetByAccount(account string) (*User, error) {
 }
 
 // 通过id获取用户
-func (this *Model) GetById(id int) (*User, error) {
-	data := &User{}
+func (this *Model) GetById(id int) (*Data, error) {
+	data := &Data{}
 	err := this.Db.First(data, id).Error
 	return data, err
 }
 
 // 通过邮箱获取用户
-func (this *Model) GetByEmail(email string) (*User, error) {
-	data := &User{}
+func (this *Model) GetByEmail(email string) (*Data, error) {
+	data := &Data{}
 	err := this.Db.First(data, map[string]interface{}{
 		"email": email,
 	}).Error
@@ -43,8 +43,8 @@ func (this *Model) GetByEmail(email string) (*User, error) {
 }
 
 // 通过用户名获取用户
-func (this *Model) GetByNickname(nickname string) (*User, error) {
-	data := &User{}
+func (this *Model) GetByNickname(nickname string) (*Data, error) {
+	data := &Data{}
 	err := this.Db.First(data, map[string]interface{}{
 		"nickname": nickname,
 	}).Error

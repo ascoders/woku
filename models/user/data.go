@@ -11,7 +11,7 @@ import (
 	"time"
 )
 
-type User struct {
+type Data struct {
 	as.Data
 
 	// 昵称 唯一索引
@@ -51,4 +51,8 @@ type User struct {
 
 	// 密钥
 	Token string `json:"token" sql:"type:char(32)" valid:"-"`
+}
+
+func (this *Data) TableName() string {
+	return "user"
 }

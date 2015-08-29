@@ -15,6 +15,7 @@
 // 说明
 // _root 根节点id
 
+var fs = require("fs")
 var jshint = require('jshint').JSHINT
 
 // 设置指定目录
@@ -86,14 +87,28 @@ fis.match('*/*/vm.js', {
     release: false
 })
 
+// 不产出lib
+fis.match('*/*/lib.js', {
+    release: false
+})
+
 // 聚合vm文件
 fis.match('*/*/index.js', {
     preprocessor: function (content, file, settings) {
         var moduleName = file.subdirname.substr(1)
-        return 'define("' + moduleName + '", ["css!' + moduleName + '/index.css"__DEPEND__], function (css__OUTPUT__) {\n' +
-            'var _root = \'#c-' + moduleName.replace(/\//g, '-') + '\'\n' +
-            '__inline("vm.js")' +
-            '\nreturn avalon.controller(function (ctrl) {\n' + content +
+
+        var inlineLib = fs.existsSync(file.dirname + '/lib.js') ? '\n__inline("lib.js")' : ''
+
+        var lessExist = fs.existsSync(file.dirname + '/index.less')
+        var requireCss = lessExist ? '"css!' + moduleName + '/index.css"' : ''
+        var cssOutput = lessExist ? 'css' : ''
+
+        return 'define("' + moduleName + '", [' + requireCss + '__DEPEND__], function (' + cssOutput + '__OUTPUT__) {' +
+            '\nvar _root = \'#c-' + moduleName.replace(/\//g, '-') + '\'' +
+            inlineLib +
+            '\n__inline("vm.js")' +
+            '\nreturn avalon.controller(function (ctrl) {' +
+            '\n' + content +
             '})})'
     }
 })
@@ -150,6 +165,10 @@ fis
         optimizer: fis.plugin('uglify-js')
     })
     .match('*.less', {
+        // fis-optimizer-clean-css 插件进行压缩，已内置
+        optimizer: fis.plugin('clean-css')
+    })
+    .match('*.css', {
         // fis-optimizer-clean-css 插件进行压缩，已内置
         optimizer: fis.plugin('clean-css')
     })

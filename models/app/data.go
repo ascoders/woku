@@ -6,7 +6,7 @@ import (
 	"woku/models/app/manager"
 )
 
-type App struct {
+type Data struct {
 	as.Data
 
 	// 英文路径 唯一索引
@@ -19,7 +19,7 @@ type App struct {
 	Owner int `json:"owner" sql:"type:int unsigned"` // 管理员id
 
 	// 管理员列表
-	Managers []manager.Manager
+	Managers []manager.Data
 
 	// 所属分类
 	Type string `json:"type" sql:"type:char(10);index"`
@@ -38,4 +38,8 @@ type App struct {
 
 	// 网站开关闸门
 	Gate bool `json:"gate" sql:"default:true"`
+}
+
+func (this *Data) TableName() string {
+	return "app"
 }

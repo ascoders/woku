@@ -3,8 +3,8 @@ package router
 import (
 	"github.com/ascoders/as"
 	"woku/controllers/app"
-	"woku/controllers/article"
-	"woku/controllers/category"
+	"woku/controllers/app/article"
+	"woku/controllers/app/category"
 	"woku/controllers/user"
 )
 

@@ -4,7 +4,7 @@ import (
 	"github.com/ascoders/as"
 )
 
-type Manager struct {
+type Data struct {
 	as.Data
 
 	// app外键
@@ -14,6 +14,6 @@ type Manager struct {
 	UserId int `json:"user_id" sql:"type:int unsigned"`
 }
 
-func (this *Manager) TableName() string {
-    return "app_manager"
+func (this *Data) TableName() string {
+	return "app_manager"
 }

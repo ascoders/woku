@@ -46,7 +46,7 @@ func (this *Controller) Add(req *http.Request) (int, []byte) {
 func (this *Controller) Update(param martini.Params, req *http.Request) (int, []byte) {
 	updateMap := this.ReqFormToMap(req, "name", "type", "logo", "icon", "gate")
 
-	appData := &app.App{}
+	appData := &app.Data{}
 	if err := as.Lib.Parse.Struct(appData, updateMap); err != nil {
 		return this.Error(err.Error())
 	}

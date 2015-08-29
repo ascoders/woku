@@ -1,17 +1,58 @@
 <div class="ui basic segment">
+
+    <p>分类是内容聚合的地方，创建分类以有效归档信息。</p>
+    <button class="ui primary button" ms-click="showCreateCategoryModal">
+        <i class="icon plus"></i>新增分类
+    </button>
+
+    <h4 class="ui horizontal divider header">有的分类</h4>
+
     <div class="ui link cards">
-        <div class="card">
-            <div class="image">
-                <img src="http://www.semantic-ui.cn/images/avatar2/large/kristy.png">
-            </div>
+
+        <a ms-href="/{{app.path}}/category/github" router class="card">
             <div class="content">
-                <div class="header">github笔记</div>
+                <div class="header">
+                    <i class="icon unordered list"></i> github笔记
+                </div>
             </div>
             <div class="extra content">
                 <span><i class="file text outline icon"></i>75 篇</span>
                 <span class="right floated">2013年创建</span>
             </div>
-            <div class="ui bottom attached button"><i class="setting icon"></i>编辑</div>
+            <div class="extra content">
+                <div class="ui two buttons">
+                    <div class="ui basic green button"><i class="icon setting"></i>编辑</div>
+                    <div class="ui basic red button">删除</div>
+                </div>
+            </div>
+        </a>
+
+    </div>
+</div>
+
+<!-- 创建分类模态框 -->
+<div class="ui small basic test modal" id="j-create-category-modal">
+    <div class="ui icon header">
+        <i class="block layout icon"></i>新增分类
+    </div>
+    <div class="content">
+        <form class="ui form">
+            <div class="field">
+                <div class="fields one">
+                    <div class="field ui input">
+                        <input type="text" name="name" placeholder="分类名称">
+                    </div>
+                </div>
+            </div>
+            <div class="ui error message"></div>
+        </form>
+    </div>
+    <div class="actions">
+        <div class="ui red basic cancel inverted button">
+            <i class="remove icon"></i> No
+        </div>
+        <div class="ui green ok inverted button">
+            <i class="checkmark icon"></i> Yes
         </div>
     </div>
 </div>

@@ -15,6 +15,10 @@ require(['mmState'], function () {
         onBeforeUnload: function () {
             // 清除window对象上所有绑定
             $(window).unbind()
+
+            // 删除所有模态框
+            $('.ui.modals').modal('hide')
+            $('.ui.modals').remove()
         }
     })
 

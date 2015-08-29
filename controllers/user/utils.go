@@ -54,7 +54,7 @@ func CheckSign(token string, req *http.Request) error {
 }
 
 // 用户注册&登陆 统一返回的信息格式（敏感信息）
-func AuthenticationInfo(user *user.User) map[string]interface{} {
+func AuthenticationInfo(user *user.Data) map[string]interface{} {
 	return map[string]interface{}{
 		"id":         user.Id,
 		"email":      user.Email,
@@ -67,7 +67,7 @@ func AuthenticationInfo(user *user.User) map[string]interface{} {
 }
 
 // 获取某用户信息 统一返回的信息格式（非敏感信息）
-func NormalInfo(user *user.User) map[string]interface{} {
+func NormalInfo(user *user.Data) map[string]interface{} {
 	return map[string]interface{}{
 		"id":       user.Id,
 		"nickname": user.Nickname,

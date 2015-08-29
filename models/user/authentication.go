@@ -1,16 +1,16 @@
 package user
 
 import (
-	"fmt"
 	"errors"
+	"fmt"
 	"math/rand"
 	"strconv"
 	"time"
 )
 
 // 用户密码是否正确（以及账户状态判断）
-func (this *Model) Authentication(account string, password string) (*User, error) {
-	fmt.Println(account)
+func (this *Model) Authentication(account string, password string) (*Data, error) {
+	fmt.Println("account", account)
 	userData, userDataError := this.GetByAccount(account)
 	if userDataError != nil {
 		return nil, errors.New("账号不存在")
@@ -69,7 +69,7 @@ func (this *Model) Authentication(account string, password string) (*User, error
 }
 
 // 设置初始值（新增用户时）
-func (this *Model) SetDefaults(data *User) {
+func (this *Model) SetDefaults(data *Data) {
 	data.Token = CreateToken()
 	//随机分配头像
 	data.Portrait = strconv.Itoa(rand.Intn(9))

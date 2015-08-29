@@ -32,7 +32,7 @@ func (this *Controller) Authentication(req *http.Request, session sessions.Sessi
 // @router /users/authentication (captcha) [post]
 func (this *Controller) AuthenticationCreate(req *http.Request) (int, []byte) {
 	// url参数解析到结构体
-	userData := &user.User{}
+	userData := &user.Data{}
 	req.ParseForm()
 	req.Form.Set("password", user.EncodePassword(req.Form.Get("password")))
 	params := this.ReqFormToMap(req)
@@ -94,7 +94,7 @@ func (this *Controller) CreateEmailAuthentication(req *http.Request, session ses
 	}
 
 	// url参数解析到结构体
-	userData := &user.User{}
+	userData := &user.Data{}
 	params := this.ReqFormToMap(req, "email", "nickname", "password")
 	if err := this.Parse(userData, params); err != nil {
 		return this.Error(err.Error())
