@@ -3,17 +3,14 @@
 
 ```shell
 brew install mongodb
-brew install redis
+brew install mysql
 ```
 
 ## install for Windows
-需要 mongodb redis 服务
+手动安装 mongodb mysql 服务
 
 ## 依赖管理
 
 ```go
-go get github.com/ascoders/woku
+go get github.com/ascoders/as
 ```
-
-## todo
-- 第一次注册缓存未生成
