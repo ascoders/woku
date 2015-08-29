@@ -2,12 +2,12 @@
 ## install for MAC
 
 ```shell
-brew install mongodb
+brew install redis
 brew install mysql
 ```
 
 ## install for Windows
-手动安装 mongodb mysql 服务
+手动安装 redis mysql 服务
 
 ## 依赖管理
 
