@@ -15,7 +15,8 @@ type Controller struct {
 }
 
 func New() *Controller {
-	controller := &Controller{}
-	controller.NewModel(category.ModelInstance)
-	return controller
+	controllerInstance := &Controller{}
+	controllerInstance.NewModel(category.ModelInstance)
+	controllerInstance.model = category.ModelInstance
+	return controllerInstance
 }

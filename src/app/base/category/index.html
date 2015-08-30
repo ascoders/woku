@@ -1,0 +1,53 @@
+<div class="ui container main-container">
+    <div class="ui grid">
+        <div class="twelve wide column">
+
+            <h2 class="ui dividing header category-title">{{category.name}}</h2>
+
+            <!-- 有文章时显示 -->
+            <div ms-if="articles.size() != 0" class="ui items">
+                <a class="item">
+                    <div class="ui small image">
+                        <img src="/images/wireframe/image.png">
+                    </div>
+                    <div class="content">
+                        <div class="header">箭头谷露营</div>
+                        <div class="meta">
+                            <span class="price">1200 美元</span>
+                            <span class="stay">1 个月</span>
+                        </div>
+                        <div class="description">
+                            <p>324</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- 没有文章时显示 -->
+            <div ms-if="articles.size() == 0">
+                <div class="ui attached icon message">
+                    <i class="info circle icon"></i>
+                    <div class="content">
+                        <div class="header">
+                            您还没有创建文章吧？
+                        </div>
+                        <p>现在就发布文章丰富{{category.name}}的内容吧！</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 编辑器 -->
+            <textarea id="j-editor"></textarea>
+
+        </div>
+
+        <!-- 侧边栏 -->
+        <div class="four wide column">
+
+            <h2 class="ui header">Dogs Roles with Humans</h2>
+            <p></p>
+            <p></p>
+
+        </div>
+    </div>
+</div>

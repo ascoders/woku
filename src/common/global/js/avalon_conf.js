@@ -15,6 +15,12 @@ avalon.filters.cleanmark = function (str) {
     return str
 }
 
+// 已经加载jq了
+avalon.modules.jquery = {
+    exports: jQuery,
+    state: 2
+}
+
 //处理小数点
 avalon.filters.toFixed = function (str, number) {
     str = str.toFixed(number)
@@ -24,8 +30,6 @@ avalon.filters.toFixed = function (str, number) {
 require.config({
     baseUrl: "/static",
     paths: {
-        "jquery.autosize": "http://cdn.bootcss.com/autosize.js/1.18.15/jquery.autosize.min", // textarea大小自适应高度
-        "jquery.selection": "http://cdn.bootcss.com/jquery.selection/1.0.1/jquery.selection.min", //表单选择
         "jquery.qrcode": "http://cdn.bootcss.com/jquery.qrcode/1.0/jquery.qrcode.min", // 二维码
         "jquery.autocomplete": "http://cdn.bootcss.com/jquery.devbridge-autocomplete/1.2.7/jquery.devbridge-autocomplete.min", // 输入框自动补全
         "dropzone": "http://cdn.bootcss.com/dropzone/3.12.0/dropzone-amd-module.min", // 拖拽上传
@@ -33,10 +37,13 @@ require.config({
         "md5": "http://cdn.bootcss.com/blueimp-md5/1.1.0/js/md5.min", // md5加密
         "echarts": 'http://cdn.bootcss.com/echarts/2.1.10/echarts-all', // 百度表格
 
+        "autosize": "plugin/autosize", // textarea大小自适应高度
+
         "mmState": 'plugin/avalon/mmState',
         "mmRouter": 'plugin/avalon/mmRouter',
         "mmHistory": 'plugin/avalon/mmHistory',
         "mmPromise": 'plugin/avalon/mmPromise',
+        "jquery.selection": 'plugin/jquery/selection',
         "cookie": "http://cdn.bootcss.com/Cookies.js/1.2.1/cookies.min.js", // 操作cookie
         "jquery.typetype": "plugin/jquery/jquery.typetype", // 模拟输入
         "jquery.taboverride": "plugin/jquery/taboverride", // tab键变为缩进
@@ -48,41 +55,8 @@ require.config({
         "avalon.page": "plugin_extend/avalon.page/avalon.page" // 分页
     },
     shim: {
-        'jquery.timeago': {
-            deps: ['jquery']
-        },
-        'jquery.ui': {
-            deps: ['jquery']
-        },
-        'jquery.autosize': {
-            deps: ['jquery']
-        },
-        'jquery.taboverride': {
-            deps: ['jquery']
-        },
-        'jquery.selection': {
-            deps: ['jquery']
-        },
-        'jquery.qrcode': {
-            deps: ['jquery']
-        },
-        'jquery.typetype': {
-            deps: ['jquery']
-        },
-        'jquery.autocomplete': {
-            deps: ['jquery']
-        },
-        'jquery.tree': {
-            deps: ['jquery']
-        },
         'md5': {
             exports: 'md5'
-        },
-        'frontia': {
-            exports: 'baidu.frontia'
-        },
-        'jquery.contextMenu': {
-            deps: ['jquery']
         },
         'echarts': {
             exports: "echarts"

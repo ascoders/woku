@@ -68,20 +68,23 @@ require(['mmState'], function () {
         child: [{
             module: 'app/base/home',
             url: '/'
-        }, {
+        }, { // 管理
             module: 'app/base/manage',
             url: '/manage',
             abstract: true,
-            child: [{
+            child: [{ // 首页
                 module: 'app/base/manage/index',
                 url: '/'
-            }, {
+            }, { // 各模块
                 module: function (params) {
                     return 'app/base/manage/' + params.type
                 },
                 ignoreChange: false,
                 url: '/{type}'
             }]
+        }, { // 分类
+            module: 'app/base/category',
+            url: '/category/{name}'
         }]
     })
 

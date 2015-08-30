@@ -7,20 +7,24 @@ import (
 	"strconv"
 )
 
-// @router /apps/categorys/:id [get]
+// @router /app/categorys/:id [get]
 func (this *Controller) Get(param martini.Params) (int, []byte) {
 	return this.Must(this.model.Get(param["id"]))
 }
 
-// @router /apps/categorys (app,owner) [post]
+// @router /app/categorys [get]
+func (this *Controller) Gets(req *http.Request) (int, []byte) {
+	req.ParseForm()
+	appDatas := this.model.SelectByApp(req.Form.Get("app"))
+	return this.Success(appDatas)
+}
+
+// @router /app/categorys (app,owner) [post]
 func (this *Controller) Add(req *http.Request) (int, []byte) {
 	// name必填
 	if err := as.Lib.Http.Require(req, "name"); err != nil {
 		return this.Error(err.Error)
 	}
-	
-	// 判断是否重名
-	
 
 	// 添加所属appid到参数中
 	req.Form.Set("app_id", strconv.Itoa(this.app.Id))

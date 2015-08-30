@@ -13,7 +13,6 @@ ctrl.$onEnter = function (param, rs, rj) {
 
             // 如果禁止访问，且用户不是owner，跳转到不存在的页面
             $.when(avalon.vmodels.global.$myDeferred).done(function () {
-                console.log('123')
                 if (!vm.app.gate && avalon.vmodels.global.my.info.id !== vm.app.owner) {
                     avalon.router.navigate('/404')
                     return

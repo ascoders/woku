@@ -130,6 +130,14 @@ fis.match('*/*/index.js', {
             }
         }
 
+        var plugs = ['editor']
+        for (var val of plugs) {
+            if (content.indexOf(val) > -1) {
+                depend += ', "' + val + '"'
+                output += ', ' + val
+            }
+        }
+
         // 添加$id
         content = content.replace(/avalon.define\(\{/g, 'avalon.define({\n$id: \'' + moduleName + '\',')
 

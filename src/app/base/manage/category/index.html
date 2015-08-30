@@ -5,14 +5,14 @@
         <i class="icon plus"></i>新增分类
     </button>
 
-    <h4 class="ui horizontal divider header">有的分类</h4>
+    <h4 class="ui horizontal divider header">已有分类</h4>
 
-    <div class="ui link cards">
+    <div class="ui four link cards">
 
-        <a ms-href="/{{app.path}}/category/github" router class="card">
+        <a class="card" ms-repeat="categorys" ms-href="/app/{{app.path}}/category/{{el.id}}" router>
             <div class="content">
                 <div class="header">
-                    <i class="icon unordered list"></i> github笔记
+                    <i class="icon" ms-class="unordered list:el.type == 'bbs'" ms-class-1="book:el.type == 'doc'"></i> {{el.name}}
                 </div>
             </div>
             <div class="extra content">

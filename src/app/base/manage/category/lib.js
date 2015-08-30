@@ -46,7 +46,7 @@ function initCategoryModal() {
 
             // 创建新app
             wk.post({
-                url: '/api/apps/categorys',
+                url: '/api/app/categorys',
                 data: {
                     app: avalon.vmodels['app/base'].app.id,
                     name: name
@@ -72,6 +72,19 @@ function initCategoryModal() {
 
             // 不会自动关闭
             return false
+        }
+    })
+}
+
+// 获取分类数据
+function getCategorys(callback) {
+    wk.get({
+        url: '/api/app/categorys',
+        data: {
+            app: avalon.vmodels['app/base'].app.id
+        },
+        done: function (data) {
+            callback(data)
         }
     })
 }

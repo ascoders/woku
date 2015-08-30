@@ -1,4 +1,4 @@
-package category
+package article
 
 import (
 	"github.com/ascoders/as"
