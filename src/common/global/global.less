@@ -5,9 +5,9 @@
 
 // footer固定在底部
 #doc {
-    min-height: 100%;
     height: auto !important;
     height: 100%;
+    min-height: 100%;
     margin: 0 auto -393px;
     padding-top: 42px;
 }
@@ -17,6 +17,7 @@
     margin: 50px 0 0;
     padding: 50px 0;
 }
+
 #footer,
 #push {
     height: 343px;
@@ -28,30 +29,36 @@
 }
 
 // logo大小
-.ui.menu .container .item>img {
+.ui.menu .container .item > img {
     width: 22px;
     margin-right: 5px;
 }
 
 // avalon遮羞
 [ms-controller] {
-    visibility: hidden;
     display: none;
+    visibility: hidden;
 }
 
 // 编辑框样式
 .edit-box {
+    .effect {
+        position: relative;
+    }
     
     //预览框
     .preview-box {
         display: none;
+        
         .preview {
             word-wrap: break-word;
         }
+        
         .preview-text {
             margin-bottom: 10px;
         }
     }
+    
     .preview.border-bottom {
         border: 1px dotted #ccc;
     }
@@ -65,55 +72,66 @@
     
     //工具栏
     .tool-bar {
-        background: #f6f6f6;
-        border: 1px solid #ccc;
         font-size: 14px;
         user-select: none;
+        border: 1px solid #ccc;
+        background: #f6f6f6;
+        
         .i {
+            line-height: 30px;
             position: relative;
             height: 30px;
-            line-height: 30px;
             padding: 0 15px;
             cursor: hand;
             cursor: pointer;
             color: #444;
+            
             &:hover {
                 background: white;
             }
         }
+        
         ul {
             position: absolute;
+            z-index: 2;
             top: 23px;
             left: -1px;
             display: none;
+            padding: 0;
             list-style: none;
             border: 1px solid #ccc;
             border-top: none;
-            z-index: 2;
             background: #f6f6f6;
-            padding: 0;
+            
             li {
                 width: 60px;
-                text-align: center;
                 padding: 5px;
+                text-align: center;
+                
                 &:hover {
                     background: white;
                 }
             }
         }
+        
         table {
-            display: none;
             position: absolute;
-            left: 0;
-            top: 30px;
             z-index: 3;
+            top: 36px;
+            left: -1px;
+            display: none;
+            width: 150px;
+            height: 150px;
+            
             tr td {
                 border: 1px solid #ccc;
                 background: white;
             }
+            
             td.active {
                 background: #eee;
             }
+            
             td.error {
                 background: #ffd5d5;
             }

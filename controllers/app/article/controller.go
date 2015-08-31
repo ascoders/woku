@@ -2,15 +2,17 @@ package article
 
 import (
 	"github.com/ascoders/as"
-	"woku/models/user"
+	"woku/models/app/article"
 )
 
 type Controller struct {
 	as.Controller
+	model *article.Model
 }
 
 func New() *Controller {
-	controller := &Controller{}
-	controller.NewModel(user.ModelInstance)
-	return controller
+	controllerInstance := &Controller{}
+	controllerInstance.NewModel(article.ModelInstance)
+	controllerInstance.model = article.ModelInstance
+	return controllerInstance
 }

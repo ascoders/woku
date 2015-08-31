@@ -7,19 +7,19 @@ import (
 type Data struct {
 	as.Data
 
-	// 名称
-	Name string `json:"name" sql:"type:char(10);unique_index:idx_name_app" valid:"minLength(1);maxLength(10)"`
+	// 标题
+	Title string `json:"title" sql:"type:char(20)" valid:"minLength(3);maxLength(20)"`
+
+	// 内容
+	Content string `json:"content" sql:"varchar(10000)" valid:"minLength(15);maxLength(10000)"`
 
 	// 所属app的id
-	App string `json:"app" sql:"type:int unsigned;unique_index:idx_name_app;index"`
+	App int `json:"app" sql:"type:int unsigned"`
 
-	// 回复权限
-	SubmitRule string `json:"submitRule" sql:"type:enum('owner','login');default:'login'" valid:"enum(owner, login)`
-
-	// 分类
-	Type string `json:"type" sql:"type:enum('bbs','doc');default:'bbs'" valid:"enum(bbs,doc)"`
+	// 所属category的id
+	Category int `json:"category" sql:"type:int unsigned"`
 }
 
 func (this *Data) TableName() string {
-	return "app_category"
+	return "app_article"
 }

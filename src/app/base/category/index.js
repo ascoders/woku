@@ -10,6 +10,18 @@ ctrl.$onEnter = function (param, rs, rj) {
 
 ctrl.$onRendered = function () {
     //实例化markdown编辑器
-    var edit = $("#j-editor").editor();
+    var edit = $("#j-editor").editor({
+        onSubmit: function (text) {
+            console.log(text)
+        }
+    })
+
     edit.createDom()
+
+    // edit.load()
+}
+
+ctrl.$onBeforeUnload = function () {
+    // 卸载editor
+    // edit.unload()
 }

@@ -21,9 +21,9 @@ define('editor', ['marked', 'prettify', 'autosize', 'jquery.selection'], functio
         return r;
     }
 
-    $.fn.editor = function (options) {
+    $.fn.editor = function (opts) {
         //参数
-        var opts = $.extend({}, $.fn.editor.defaults, options);
+        opts = $.extend({}, $.fn.editor.defaults, opts);
         var _this = this;
 
         /* 初始化 */
@@ -32,15 +32,21 @@ define('editor', ['marked', 'prettify', 'autosize', 'jquery.selection'], functio
         _this.addClass('ui form attached fluid segment')
 
         // 添加容器
-        _this.wrap("<div class='f-cb edit-box'></div>"); //添加容器
+        _this.wrap("<div class='edit-box'></div>"); //添加容器
 
         // 整体容器
         var box = _this.parent();
 
+        // 页脚按钮
+        var footer = $('<div/>')
+        footer.addClass('ui bottom attached message')
+            .html('<button class="ui blue button" id="j-editor-submit">提交</button>')
+            .appendTo(box)
+
         // 预览框父级
         var previewBox = $('<div/>')
             .addClass('ui stacked segment preview-box')
-            .appendTo(box);
+            .appendTo(box)
 
         // 预览框文案
         var previewText = $('<div>')
@@ -87,7 +93,7 @@ define('editor', ['marked', 'prettify', 'autosize', 'jquery.selection'], functio
             "code": "代码块",
             "tag": "标签",
             "ordered list": "有序列表",
-            "unordered  list": "无序列表",
+            "unordered list": "无序列表",
             "minus": "分割线",
             "file image outline": "图片",
             "table": "表格"
@@ -198,68 +204,105 @@ define('editor', ['marked', 'prettify', 'autosize', 'jquery.selection'], functio
         $(document).on('click', ".tool-bar .effect", function () {
             switch ($(this).attr('type')) {
             case 'bold':
-                _this.selection().prepend('**', false)
-                _this.selection().after('**', false)
-                break;
+                _this.selection('insert', {
+                    text: '**',
+                    mode: 'before'
+                })
+                _this.selection('insert', {
+                    text: '**',
+                    mode: 'after'
+                })
+                _this.selection('replace', {
+                    text: _this.selection('get') || 'bold',
+                    mode: 'keep'
+                })
+                break
             case 'italic':
                 _this.selection('insert', {
                     text: '*',
                     mode: 'before'
-                });
+                })
                 _this.selection('insert', {
                     text: '*',
                     mode: 'after'
-                });
-                break;
-            case 'link':
+                })
+                _this.selection('replace', {
+                    text: _this.selection('get') || 'italic',
+                    mode: 'keep'
+                })
+                break
+            case 'linkify':
                 _this.selection('insert', {
-                    text: '[',
+                    text: '[' + (_this.selection('get') || 'title') + '](',
                     mode: 'before'
-                });
+                })
                 _this.selection('insert', {
-                    text: '](http://)',
+                    text: ')',
                     mode: 'after'
-                });
-                break;
-            case 'quote-left':
+                })
+                _this.selection('replace', {
+                    text: 'http://',
+                    mode: 'keep'
+                })
+                break
+            case 'quote left':
                 _this.selection('insert', {
                     text: '> ',
                     mode: 'before'
-                });
-                break;
+                })
+                _this.selection('replace', {
+                    text: _this.selection('get') || 'quote',
+                    mode: 'keep'
+                })
+                break
             case 'code':
-                var val = _this.selection().val
-                _this.selection().remove()
-                _this.selection().before('~~~js\n', false)
-                if (val !== '') {
-                    _this.selection().after(val + '\n', true)
-                } else {
-                    _this.selection().after('your code\n', true)
-                }
-                _this.selection().after('~~~', false)
-                break;
+                _this.selection('insert', {
+                    text: '~~~js\n',
+                    mode: 'before'
+                })
+                _this.selection('insert', {
+                    text: '\n~~~',
+                    mode: 'after'
+                })
+                _this.selection('replace', {
+                    text: _this.selection('get') || 'your code',
+                    mode: 'keep'
+                })
+                break
             case 'tag':
                 _this.selection('insert', {
                     text: '`',
                     mode: 'before'
-                });
+                })
                 _this.selection('insert', {
                     text: '`',
                     mode: 'after'
-                });
-                break;
-            case 'list-ol':
+                })
+                _this.selection('replace', {
+                    text: _this.selection('get') || 'tag',
+                    mode: 'keep'
+                })
+                break
+            case 'ordered list':
                 _this.selection('insert', {
                     text: '1. ',
                     mode: 'before'
-                });
-                break;
-            case 'list-ul':
+                })
+                _this.selection('replace', {
+                    text: _this.selection('get') || 'content',
+                    mode: 'keep'
+                })
+                break
+            case 'unordered list':
                 _this.selection('insert', {
                     text: '- ',
                     mode: 'before'
-                });
-                break;
+                })
+                _this.selection('replace', {
+                    text: _this.selection('get') || 'content',
+                    mode: 'keep'
+                })
+                break
             case 'minus':
                 var content = "\n\n---";
                 var lastLine = getLineContent(0);
@@ -523,11 +566,17 @@ define('editor', ['marked', 'prettify', 'autosize', 'jquery.selection'], functio
             }
         });
 
+        // 提交
+        $('#j-editor-submit').click(function () {
+            opts.onSubmit(_this.val())
+        })
+
         return this;
     }
 
     $.fn.editor.defaults = {
         uploadUrl: '',
-        uploadParams: []
+        uploadParams: [],
+        onSubmit: function () {}
     };
 });
