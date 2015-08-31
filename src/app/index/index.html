@@ -1,15 +1,14 @@
 <div class="ui bottom attached pushable main">
     <div class="ui visible inverted left vertical sidebar menu">
-        <a router href='/app' class="item" ms-class="active:type == ''"><i class="fire icon"></i>综合推荐</a>
-        <a router href='/app?type=brains' class="item" ms-class="active:type == 'brains'"><i class="cubes icon"></i>智益休闲</a>
-        <a router href='/app?type=other' class="item" ms-class="active:type == 'other'"><i class="grid layout icon"></i>其它</a>
+        <a router href="/app" class="item" ms-class="active:type == ''"><i class="fire icon"></i>综合推荐</a>
+        <a router href="/app?type=brains" class="item" ms-class="active:type == 'brains'"><i class="cubes icon"></i>智益休闲</a>
+        <a router href="/app?type=other" class="item" ms-class="active:type == 'other'"><i class="grid layout icon"></i>其它</a>
     </div>
     <div class="pusher app-container">
-
         <div class="ui basic segment">
             <div class="ui link eight cards">
 
-                <a class="card" ms-repeat='list' ms-href="/app/{{el.path}}" router>
+                <a class="card" ms-repeat="list" ms-href="/app/{{el.path}}" router>
                     <div class="image">
                         <img ms-src="{{el.icon}}">
                     </div>

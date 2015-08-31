@@ -17,7 +17,6 @@
     margin: 50px 0 0;
     padding: 50px 0;
 }
-
 #footer,
 #push {
     height: 343px;
@@ -46,16 +45,13 @@
     //预览框
     .preview-box {
         display: none;
-        
         .preview {
             word-wrap: break-word;
         }
-        
         .preview-text {
             margin-bottom: 10px;
         }
     }
-    
     .preview.border-bottom {
         border: 1px dotted #ccc;
     }
@@ -73,7 +69,6 @@
         border: 1px solid #ccc;
         font-size: 14px;
         user-select: none;
-        
         .i {
             position: relative;
             height: 30px;
@@ -82,12 +77,10 @@
             cursor: hand;
             cursor: pointer;
             color: #444;
-            
             &:hover {
                 background: white;
             }
         }
-        
         ul {
             position: absolute;
             top: 23px;
@@ -99,34 +92,28 @@
             z-index: 2;
             background: #f6f6f6;
             padding: 0;
-            
             li {
                 width: 60px;
                 text-align: center;
                 padding: 5px;
-                
                 &:hover {
                     background: white;
                 }
             }
         }
-        
         table {
             display: none;
             position: absolute;
             left: 0;
             top: 30px;
             z-index: 3;
-            
             tr td {
                 border: 1px solid #ccc;
                 background: white;
             }
-            
             td.active {
                 background: #eee;
             }
-            
             td.error {
                 background: #ffd5d5;
             }
