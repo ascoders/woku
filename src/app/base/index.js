@@ -1,4 +1,4 @@
-ctrl.$onEnter = function (param, rs, rj) {
+ctrl.$onEnter = function (param, rs) {
     // 隐藏公共菜单
     avalon.vmodels.global.menu.show = false
 

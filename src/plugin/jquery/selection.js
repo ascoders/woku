@@ -113,20 +113,20 @@ define('selection', [], function () {
                     end = 0,
                     temp;
                 // string
-                if (argL == 1 && $.type(args[0]) == "string") {
+                if (argL === 1 && $.type(args[0]) === "string") {
                     // 开始位置
                     start = value.indexOf(args[0]);
                     end = start + args[0].length;
-                    return start != -1 ? _setSelection(elem, start, end) : false;
+                    return start !== -1 ? _setSelection(elem, start, end) : false;
                 }
                 // number
-                else if (argL == 1 && $.type(args[0]) == "number") {
+                else if (argL === 1 && $.type(args[0]) === "number") {
                     start = Math.abs(parseInt(args[0], 10));
                     end = length;
                     return _setSelection(elem, start, end);
                 }
                 // number+number
-                else if (argL == 2 && $.type(args[0]) == "number" && $.type(args[1]) == "number") {
+                else if (argL === 2 && $.type(args[0]) === "number" && $.type(args[1]) === "number") {
                     start = Math.abs(parseInt(args[0], 10));
                     end = Math.abs(parseInt(args[1], 10));
                     if (start > end) {
@@ -213,7 +213,7 @@ define('selection', [], function () {
             // $().selection().backspace(length|0);
             backspace: function (length) {
                 var len = 0;
-                if ($.type(length) == "number") {
+                if ($.type(length) === "number") {
                     len = Math.abs(parseInt(length, 10));
                 }
                 return _changeSelection(elem, "", "backspace", len);
@@ -223,7 +223,7 @@ define('selection', [], function () {
             // $().selection().delete(length|0);
             "delete": function (length) {
                 var len = 0;
-                if ($.type(length) == "number") {
+                if ($.type(length) === "number") {
                     len = Math.abs(parseInt(length, 10));
                 }
                 return _changeSelection(elem, "", "delete", len);
@@ -253,7 +253,7 @@ define('selection', [], function () {
      */
 
     function _isStrOrNum(val) {
-        return $.type(val) == "string" || $.type(val) == "number";
+        return $.type(val) === "string" || $.type(val) === "number";
     }
 
 
@@ -267,7 +267,7 @@ define('selection', [], function () {
      * @return {Number} 位置
      */
 
-    function _getSelectionPosition(elem, index) {
+    function _getSelectionPosition(elem) {
         var sel, range, dupRange, pos = [],
             ae;
         elem.focus();
@@ -308,7 +308,7 @@ define('selection', [], function () {
         var position = _getSelectionPosition(elem),
             start = position[0],
             end = position[1];
-        if (start == -1 || end == -1) return null;
+        if (start === -1 || end === -1) return null;
         if (doc.activeElement) {
             return doc.activeElement.value.substring(start, end);
         } else {
@@ -380,7 +380,6 @@ define('selection', [], function () {
             switch (type) {
                 // 前插
             case "before":
-            default:
                 newVal = val.slice(0, start) + string + val.slice(start, len);
                 newStart = start;
                 newEnd = start + size;
@@ -420,7 +419,7 @@ define('selection', [], function () {
 
             elem.value = newVal;
 
-            if (Boolean(length) == true) {
+            if (Boolean(length) === true) {
                 _setSelection(elem, newStart, newEnd);
             } else {
                 _setSelection(elem, newEnd, newEnd);

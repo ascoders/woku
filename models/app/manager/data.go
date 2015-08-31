@@ -15,5 +15,5 @@ type Data struct {
 }
 
 func (this *Data) TableName() string {
-	return "app_manager"
+    return "app_manager"
 }

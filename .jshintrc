@@ -1,0 +1,18 @@
+{
+    "eqeqeq": true,
+    "freeze": true,
+    "indent": true,
+    "latedef": "nofunc",
+    "noarg": true,
+    "quotmark": false,
+    "unused": true,
+    "maxdepth": 4,
+    "maxcomplexity": 4,
+    "asi": true,
+    "boss": true,
+    "notypeof": true,
+    "sub": true,
+    "browser": true,
+    "devel": true,
+    "jquery": true
+}
