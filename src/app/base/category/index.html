@@ -24,19 +24,21 @@
             </div>
 
             <!-- 没有文章时显示 -->
-            <div ms-if="articles.size() == 0">
-                <div class="ui attached icon message">
-                    <i class="info circle icon"></i>
-                    <div class="content">
-                        <div class="header">
-                            您还没有创建文章吧？
-                        </div>
-                        <p>现在就发布文章丰富{{category.name}}的内容吧！</p>
+            <div ms-if="articles.size() == 0" class="ui attached icon message">
+                <i class="info circle icon"></i>
+                <div class="content">
+                    <div class="header">
+                        您还没有创建文章吧？
                     </div>
+                    <p>现在就发布文章丰富{{category.name}}的内容吧！</p>
                 </div>
             </div>
 
             <!-- 编辑器 -->
+            <div class="ui labeled attached input">
+                <div class="ui label">标题</div>
+                <input type="text" id="j-editor-title" placeholder="mysite.com">
+            </div>
             <textarea id="j-editor"></textarea>
 
         </div>

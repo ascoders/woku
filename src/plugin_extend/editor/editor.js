@@ -29,7 +29,7 @@ define('editor', ['marked', 'prettify', 'autosize', 'jquery.selection'], functio
         /* 初始化 */
 
         // textarea增加class
-        _this.addClass('ui form attached fluid segment')
+        _this.addClass('ui form attached fluid segment f-d-b f-n')
 
         // 添加容器
         _this.wrap("<div class='edit-box'></div>"); //添加容器
@@ -100,7 +100,7 @@ define('editor', ['marked', 'prettify', 'autosize', 'jquery.selection'], functio
         };
 
         // 刷新dom
-        this.createDom = function () {
+        this.load = function () {
             // 创建提示tips
             for (var key in buttons) {
                 var button = $("<div/>")
@@ -153,7 +153,7 @@ define('editor', ['marked', 'prettify', 'autosize', 'jquery.selection'], functio
             }
         }
 
-        /* --------------- createDom end -------------------- */
+        /* --------------- load end -------------------- */
 
         //响应下拉菜单工具
         $(document).on('mouseenter mouseleave', ".j-ul-list", function (e) {
