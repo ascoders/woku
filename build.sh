@@ -14,5 +14,10 @@ then
   npm install fis-parser-less
 fi
 
+if [[ $1 == "ide" ]]
+then
+    /Applications//LiteIDE.app/Contents/MacOS/LiteIDE
+fi
+
 echo 'run fis3 dev mode..'
 fis3 release -d static -r src -f fis-conf.js -w -l

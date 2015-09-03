@@ -18,7 +18,7 @@ require(['mmState'], function () {
 
             // 删除所有模态框
             $('.ui.modals').modal('hide')
-            $('.ui.modals').remove()
+                //$('.ui.modals').remove()
         }
     })
 

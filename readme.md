@@ -14,3 +14,7 @@ brew install mysql
 ```go
 go get github.com/ascoders/as
 ```
+
+# TODO
+- 登录成功页面设计
+- 模态框切换页面未移除的bug

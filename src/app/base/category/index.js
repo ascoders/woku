@@ -1,4 +1,4 @@
-ctrl.$onEnter = function (param, rs, rj) {
+ctrl.$onEnter = function (param) {
     // 获取分类信息
     wk.get({
         url: '/api/app/categorys/' + param.name,
@@ -9,14 +9,12 @@ ctrl.$onEnter = function (param, rs, rj) {
 }
 
 ctrl.$onRendered = function () {
-    //实例化markdown编辑器
+    // 实例化markdown编辑器
     var edit = $("#j-editor").editor({
-        onSubmit: function (text) {
-            console.log(text)
-        }
+        onSubmit: createArticle
     })
 
-    edit.createDom()
+    edit.load()
 
     // edit.load()
 }
