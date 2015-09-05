@@ -5,7 +5,7 @@ import (
 )
 
 // 通过路径查找
-func (this *Model) FindByPath(path string) (*Data, error) {
+func (this *Model) GetByPath(path string) (*Data, error) {
 	appData := &Data{}
 	err := this.Db.First(appData, map[string]interface{}{
 		"path": path,
@@ -23,7 +23,7 @@ func (this *Model) SelectByType(_type string) ([]*Data, error) {
 }
 
 // 通过id查找
-func (this *Model) FindById(id interface{}) (*Data, error) {
+func (this *Model) GetById(id interface{}) (*Data, error) {
 	appData := &Data{}
 	err := this.Db.First(appData, map[string]interface{}{
 		"id": as.Lib.Strings.ParseInt(id),

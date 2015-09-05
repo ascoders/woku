@@ -1,0 +1,68 @@
+<div class="ui stackable grid container f-m-t-35" id="j-container">
+    <!-- 左侧 -->
+    <div class="twelve wide column">
+        <!-- 文章框 -->
+        <div class="ui piled segment">
+            <!-- 标题 -->
+            <h2 class="ui aligned header">{{article.title}}</h2>
+
+            <!-- 正文 -->
+            <p class="text-content">{{article.content}}</p>
+        </div>
+
+        <!-- 回复 -->
+        <div class="ui comments">
+            <h3 class="ui dividing header">评论</h3>
+
+            <div ms-repeat="comments" class="comment">
+                <a class="avatar">
+                    <img ms-src="el.author.portrait">
+                </a>
+                <div class="content">
+                    <a class="author">{{el.author.nickname}}</a>
+                    <div class="metadata">
+                        <span class="date timeago" ms-attr-title="el.created"></span>
+                    </div>
+                    <div class="text">{{el.content}}</div>
+                    <div class="actions">
+                        <a class="reply">回复</a>
+                    </div>
+                </div>
+            </div>
+
+            <form class="ui reply form">
+                <div class="field">
+                    <textarea ms-duplex="form.content" maxlength="255"></textarea>
+                </div>
+                <div class="ui blue labeled submit icon button" ms-click="form.submit"><i class="icon edit"></i>回复</div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 侧边栏 -->
+    <div class="ui rail">
+        <div class="ui sticky">
+            <h3 class="ui header">Stuck Content</h3>
+            <p class="ui message">aa</p>
+            <p>aa</p>
+            <p>aa</p>
+            <p>aa</p>
+            <p>aa</p>
+            <p>aa</p>
+            <p>aa</p>
+            <p>aa</p>
+            <p>aa</p>
+            <p>aa</p>
+            <p>aa</p>
+            <p>aa</p>
+            <p>aa</p>
+            <p>aa</p>
+            <p>aa</p>
+            <p>aa</p>
+            <p>aa</p>
+            <p>aa</p>
+            <p>aa</p>
+            <p>aa</p>
+        </div>
+    </div>
+</div>

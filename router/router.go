@@ -5,6 +5,7 @@ import (
 	"woku/controllers/app"
 	"woku/controllers/app/article"
 	"woku/controllers/app/category"
+	"woku/controllers/app/comment"
 	"woku/controllers/user"
 )
 
@@ -14,5 +15,6 @@ func init() {
 		article.Controller{},
 		user.Controller{},
 		category.Controller{},
+		comment.Controller{},
 	)
 }

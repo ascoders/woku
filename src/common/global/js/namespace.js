@@ -96,28 +96,6 @@ wk.delete = function (opts) {
     return wk.ajax('DELETE', opts)
 }
 
-//字符串截取方法，支持中文
-wk.subStr = function (str, start, end) {
-    var _start = 0;
-    for (var i = 0; i < start; i++) {
-        if (escape(str.charCodeAt(i)).indexOf("%u") >= 0) {
-            _start += 2;
-        } else {
-            _start += 1;
-        }
-    }
-    var _end = _start;
-    for (var i = start; i < end; i++) {
-        if (escape(str.charCodeAt(i)).indexOf("%u") >= 0) {
-            _end += 2;
-        } else {
-            _end += 1;
-        }
-    }
-    var r = str.substr(_start, _end);
-    return r;
-}
-
 // 上传组件
 wk.createDropzone = function (obj, url, data, accept, callback) {
     require(['dropzone', 'md5'], function (Dropzone, md5) {

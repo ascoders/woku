@@ -1,4 +1,4 @@
-<div class="ui container main-container">
+<div class="ui container f-m-t-35">
     <div class="ui grid">
         <div class="twelve wide column">
 
@@ -6,18 +6,18 @@
 
             <!-- 有文章时显示 -->
             <div ms-if="articles.size() != 0" class="ui items">
-                <a class="item">
+                <a ms-repeat="articles" ms-href="/app/{{app.path}}/article/{{el.id}}" router class="item">
                     <div class="ui small image">
-                        <img src="/images/wireframe/image.png">
+                        <img src="image/image.png">
                     </div>
                     <div class="content">
-                        <div class="header">箭头谷露营</div>
+                        <div class="header">{{el.title}}</div>
                         <div class="meta">
                             <span class="price">1200 美元</span>
                             <span class="stay">1 个月</span>
                         </div>
                         <div class="description">
-                            <p>324</p>
+                            <p class="timeago" ms-attr-title="{{el.created}}"></p>
                         </div>
                     </div>
                 </a>
@@ -30,14 +30,15 @@
                     <div class="header">
                         您还没有创建文章吧？
                     </div>
-                    <p>现在就发布文章丰富{{category.name}}的内容吧！</p>
+                    <p>现在就发布文章丰富{{category.name}}的内容吧！
+                    </p>
                 </div>
             </div>
 
             <!-- 编辑器 -->
-            <div class="ui labeled attached input">
+            <div class="ui labeled attached fluid input message f-p-0">
                 <div class="ui label">标题</div>
-                <input type="text" id="j-editor-title" placeholder="mysite.com">
+                <input type="text" id="j-editor-title" placeholder="若不填写，则为内容的前15个字">
             </div>
             <textarea id="j-editor"></textarea>
 

@@ -1,4 +1,4 @@
-package app
+package comment
 
 import (
 	"github.com/ascoders/as"

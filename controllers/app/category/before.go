@@ -12,7 +12,7 @@ func (this *Controller) App(req *http.Request, res http.ResponseWriter) {
 	req.ParseForm()
 
 	var err error
-	if this.app, err = app.ModelInstance.FindById(req.Form.Get("app")); err != nil {
+	if this.app, err = app.ModelInstance.GetById(req.Form.Get("app")); err != nil {
 		res.Write([]byte("归属应用不存在"))
 		return
 	}

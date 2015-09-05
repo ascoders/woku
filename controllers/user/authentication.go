@@ -1,6 +1,7 @@
 package user
 
 import (
+	"fmt"
 	"github.com/ascoders/as"
 	"github.com/martini-contrib/sessions"
 	"math/rand"
@@ -14,7 +15,7 @@ import (
 // @router /users/authentication [get]
 func (this *Controller) Authentication(req *http.Request, session sessions.Session) (int, []byte) {
 	req.ParseForm()
-
+	fmt.Println("req传过来", req.Form)
 	// 验证用户
 	userData, err := this.model.Authentication(req.Form.Get("account"), req.Form.Get("password"))
 	if err != nil {

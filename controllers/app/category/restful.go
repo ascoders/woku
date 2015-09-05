@@ -30,11 +30,5 @@ func (this *Controller) Add(req *http.Request) (int, []byte) {
 	req.Form.Set("app_id", strconv.Itoa(this.app.Id))
 
 	// 插入
-	if status, response := this.Restful.Add(req); status == 200 {
-		return this.Success("创建成功")
-	} else {
-		return this.Error(string(response))
-	}
-
-	return this.Error("创建失败，请稍后再试")
+	return this.Restful.Add(req)
 }

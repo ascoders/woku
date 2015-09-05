@@ -3,28 +3,28 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name='format-detection' content='telephone=no'>
+<meta name="format-detection" content="telephone=no">
 
-<meta name='keywords' content=''>
-<meta name='description' content=''>
+<meta name="keywords" content="">
+<meta name="description" content="">
 <meta property="qc:admins" content="53260245576773571556375" />
 
-<link href='image/favicon.ico' rel='shortcut icon'>
+<link href="image/favicon.ico" rel="shortcut icon">
 <link href="../../plugin/semantic/semantic.css" rel="stylesheet">
-<link href="global.less" rel='stylesheet'>
+<link href="global.less" rel="stylesheet">
 
 <title>我酷</title>
 
-<body ms-controller='global'>
+<body ms-controller="global">
 
-    <div class="ui fixed pointing menu top-menu" ms-class='inverted:menu.dark' ms-if='menu.show'>
-        <div class='ui container'>
-            <a href="/" router class="header item" id='j-logo' ms-class="active:menu.current == ''">
+    <div class="ui fixed pointing menu top-menu" ms-class="inverted:menu.dark" ms-if="menu.show">
+        <div class="ui container">
+            <a href="/" router class="header item" id="j-logo" ms-class="active:menu.current == ''">
                 <img class="logo" src="image/logo.png"> 我酷
             </a>
 
             <div class="item">
-                <div class="ui icon input" ms-class='transparent:!menu.dark'>
+                <div class="ui icon input" ms-class="transparent:!menu.dark">
                     <input type="text" placeholder="搜搜看吧...">
                     <i class="search link icon"></i>
                 </div>
@@ -35,9 +35,9 @@
             <a class="item" ms-class="active:menu.current == 'blog'">博客</a>
 
             <div class="right menu">
-                <a class="item" ms-class="active:menu.current == 'login'" ms-if='!my.isLogin' href='/auth/login' router>登录</a>
+                <a class="item" ms-class="active:menu.current == 'login'" ms-if="!my.isLogin" href="/auth/login" router>登录</a>
 
-                <div class="ui simple dropdown item" ms-if='my.isLogin'>
+                <div class="ui simple dropdown item" ms-if="my.isLogin">
                     <div class="text">
                         <img class="ui avatar image" ms-src="my.info.portrait"> {{my.info.nickname}}
                     </div>
@@ -58,7 +58,7 @@
     <!-- 页中部位置，引入子元素模版 -->
     <div id="doc">
         <div ms-view="container"></div>
-        <div id="push"></div>
+        <div ms-if="footer.show" id="push"></div>
     </div>
 
     <!-- 页面底部 -->
@@ -103,7 +103,7 @@
                 <a class="item" href="#">Site Map</a>
                 <a class="item" href="#">Contact Us</a>
                 <p class="item">&copy; 2015 合肥我酷网络科技有限公司 All Rights Reserved</p>
-                <a class='item' href='http://www.miitbeian.gov.cn/' target='_blank'>皖ICP备14002099号-1</a>
+                <a class="item" href="http://www.miitbeian.gov.cn/" target="_blank">皖ICP备14002099号-1</a>
             </div>
         </div>
     </div>
@@ -111,4 +111,4 @@
 
 <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
 <script src="../../plugin/semantic/semantic.js"></script>
-<script src='../../plugin/avalon/avalon.js' data-main='/static/common/global/global.js'></script>
+<script src="../../plugin/avalon/avalon.js" data-main="/static/common/global/global.js"></script>

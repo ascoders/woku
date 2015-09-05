@@ -1,26 +1,4 @@
-define('editor', ['marked', 'prettify', 'autosize', 'jquery.selection'], function (marked, prettify, autosize) {
-    // 字符串截取方法，支持中文
-    function subStr(str, start, end) {
-        var _start = 0;
-        for (var i = 0; i < start; i++) {
-            if (escape(str.charCodeAt(i)).indexOf("%u") >= 0) {
-                _start += 2;
-            } else {
-                _start += 1;
-            }
-        }
-        var _end = _start;
-        for (var i = start; i < end; i++) {
-            if (escape(str.charCodeAt(i)).indexOf("%u") >= 0) {
-                _end += 2;
-            } else {
-                _end += 1;
-            }
-        }
-        var r = str.substr(_start, _end);
-        return r;
-    }
-
+define('editor', ['marked', 'prettify', 'autosize', 'selection'], function (marked, prettify, autosize) {
     $.fn.editor = function (opts) {
         //参数
         opts = $.extend({}, $.fn.editor.defaults, opts);
@@ -40,8 +18,13 @@ define('editor', ['marked', 'prettify', 'autosize', 'jquery.selection'], functio
         // 页脚按钮
         var footer = $('<div/>')
         footer.addClass('ui bottom attached message')
-            .html('<button class="ui blue button" id="j-editor-submit">提交</button>')
+            .html('<button class="ui blue button" id="j-editor-submit">' + opts.submitName + '</button>')
             .appendTo(box)
+
+        // 页脚提示文案
+        var message = $('<p/>')
+            .addClass('f-dn')
+            .appendTo(footer)
 
         // 预览框父级
         var previewBox = $('<div/>')
@@ -77,8 +60,6 @@ define('editor', ['marked', 'prettify', 'autosize', 'jquery.selection'], functio
 
         //延时渲染的timeout
         var renderTimeout = null;
-
-        //tabOverride.tabSize(4).autoIndent(true).set(_this); //tab键
 
         //是否支持markdown
         var markdown = true;
@@ -151,6 +132,38 @@ define('editor', ['marked', 'prettify', 'autosize', 'jquery.selection'], functio
                     break;
                 }
             }
+        }
+
+        // 进入加载状态
+        this.loading = function () {
+            $('#j-editor-submit').addClass('loading')
+        }
+
+        // 取消加载状态
+        this.unloading = function () {
+            $('#j-editor-submit').removeClass('loading')
+        }
+
+        // 显示错误
+        this.error = function (text) {
+            // disabled按钮
+            $('#j-editor-submit').addClass('disabled')
+
+            var count = 3
+            footer.addClass('error')
+            message.text(text + ' ' + count + '秒后关闭')
+            message.show()
+            var interval = setInterval(function () {
+                count--
+                if (count <= 0) {
+                    clearInterval(interval)
+                    footer.removeClass('error')
+                    message.hide()
+                    $('#j-editor-submit').removeClass('disabled')
+                    return
+                }
+                message.text(text + ' ' + count + '秒后关闭')
+            }, 1000)
         }
 
         /* --------------- load end -------------------- */
@@ -524,7 +537,7 @@ define('editor', ['marked', 'prettify', 'autosize', 'jquery.selection'], functio
         // 获得当前行的内容 0:当前行 1:上一行
         var getLineContent = function (line) {
             var selectStart = _this.selection('getPos').start;
-            var beforeWords = subStr(_this.val(), 0, selectStart);
+            var beforeWords = _this.val().substr(0, selectStart)
             var wordArray = beforeWords.split('\n');
             var lastLine = wordArray[wordArray.length - line - 1];
             return lastLine;
@@ -539,21 +552,21 @@ define('editor', ['marked', 'prettify', 'autosize', 'jquery.selection'], functio
             if (e.keyCode == 13 && e.type == "keyup") {
                 var lastLine = getLineContent(1);
 
-                if (subStr(lastLine, 0, 2) == "> " && subStr(lastLine, 2, 3) != "") {
+                if (lastLine.substr(0, 2) == "> " && lastLine.substr(2, 3) != "") {
                     _this.selection('insert', {
                         text: '> ',
                         mode: 'before'
                     });
                 }
 
-                if (subStr(lastLine, 0, 3) == "1. " && subStr(lastLine, 3, 4) != "") {
+                if (lastLine.substr(0, 3) == "1. " && lastLine.substr(3, 4) != "") {
                     _this.selection('insert', {
                         text: '1. ',
                         mode: 'before'
                     });
                 }
 
-                if (subStr(lastLine, 0, 2) == "- " && subStr(lastLine, 2, 3) != "") {
+                if (lastLine.substr(0, 2) == "- " && lastLine.substr(2, 3) != "") {
                     _this.selection('insert', {
                         text: '- ',
                         mode: 'before'
@@ -577,6 +590,7 @@ define('editor', ['marked', 'prettify', 'autosize', 'jquery.selection'], functio
     $.fn.editor.defaults = {
         uploadUrl: '',
         uploadParams: [],
+        submitName: '提交',
         onSubmit: function () {}
     };
 });

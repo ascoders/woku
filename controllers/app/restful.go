@@ -11,7 +11,7 @@ import (
 // 获取
 // @router /apps/:path [get]
 func (this *Controller) Get(param martini.Params) (int, []byte) {
-	return this.Must(this.model.FindByPath(param["path"]))
+	return this.Must(this.model.GetByPath(param["path"]))
 }
 
 // 新增
@@ -32,13 +32,7 @@ func (this *Controller) Add(req *http.Request) (int, []byte) {
 	req.Form.Set("owner", strconv.Itoa(this.currentUser.Id))
 
 	// 插入app
-	if status, response := this.Restful.Add(req); status == 200 {
-		return this.Success("创建成功")
-	} else {
-		return this.Error(string(response))
-	}
-
-	return this.Error("创建失败，请稍后再试")
+	return this.Restful.Add(req)
 }
 
 // 修改

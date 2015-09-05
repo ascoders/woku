@@ -1,22 +1,20 @@
 ctrl.$onEnter = function (param) {
-    // 获取分类信息
-    wk.get({
-        url: '/api/app/categorys/' + param.name,
-        done: function (data) {
-            vm.category = data
-        }
+    getCategoryInfo(param.id, function (data) {
+        document.title = data.name
+        vm.category = data
+    })
+
+    getArticleLists(param.id, function (data) {
+        vm.articles = data.list
+
+        require(['timeago'], function () {
+            $('.timeago').timeago()
+        })
     })
 }
 
 ctrl.$onRendered = function () {
-    // 实例化markdown编辑器
-    var edit = $("#j-editor").editor({
-        onSubmit: createArticle
-    })
-
-    edit.load()
-
-    // edit.load()
+    initEditor()
 }
 
 ctrl.$onBeforeUnload = function () {

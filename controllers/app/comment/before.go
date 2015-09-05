@@ -1,9 +1,10 @@
-package article
+package comment
 
 import (
 	"github.com/martini-contrib/sessions"
 	"net/http"
 	"woku/models/app"
+	"woku/models/app/article"
 	"woku/models/app/category"
 	"woku/models/user"
 )
@@ -25,25 +26,38 @@ func (this *Controller) Login(session sessions.Session, res http.ResponseWriter)
 	}
 }
 
-// 获取所属category的信息
-// @param category
-func (this *Controller) Category(req *http.Request, res http.ResponseWriter) {
+// 获取文章信息
+func (this *Controller) Article(req *http.Request, res http.ResponseWriter) {
 	req.ParseForm()
 
 	var err error
-	if this.category, err = category.ModelInstance.GetById(req.Form.Get("category")); err != nil {
-		res.Write([]byte("归属分类不存在"))
+
+	if this.article, err = article.ModelInstance.GetById(req.Form.Get("article")); err != nil {
+		res.Write([]byte(err.Error()))
 		return
 	}
 }
 
-// 根据分类获取所属app的信息
+// 根据文章查找所属分类
+func (this *Controller) Category(req *http.Request, res http.ResponseWriter) {
+	req.ParseForm()
+
+	var err error
+
+	if this.category, err = category.ModelInstance.GetById(this.article.Category); err != nil {
+		res.Write([]byte(err.Error()))
+		return
+	}
+}
+
+// 根据分类查找所属应用
 func (this *Controller) App(req *http.Request, res http.ResponseWriter) {
 	req.ParseForm()
 
 	var err error
+
 	if this.app, err = app.ModelInstance.GetById(this.category.App); err != nil {
-		res.Write([]byte("归属应用不存在"))
+		res.Write([]byte(err.Error()))
 		return
 	}
 

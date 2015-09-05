@@ -1,4 +1,4 @@
-<div class="ui container center main">
+<div class="ui container center f-m-t-35 f-m-b-35 f-pr">
     <div class="ui steps grid">
         <a ms-repeat="steps" class="step" ms-click='setStep($key)' ms-class="active:step == $key" ms-class-1="disabled:$val.locked">
             <i class="icon" ms-class="{{$val.icon}}"></i>
@@ -17,7 +17,7 @@
                 <div class="field">
                     <div class="ui left labeled icon input">
                         <div class="ui label">用户名</div>
-                        <input type="text" name='nickname' placeholder="推荐英文" ms-duplex="data.nickname">
+                        <input type="text" name="nickname" placeholder="推荐英文" ms-duplex="data.nickname">
                         <i class="user icon"></i>
                     </div>
                 </div>

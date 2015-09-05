@@ -10,7 +10,7 @@ import (
 
 // 用户密码是否正确（以及账户状态判断）
 func (this *Model) Authentication(account string, password string) (*Data, error) {
-	fmt.Println("account", account)
+	fmt.Println("Authentication,account", account)
 	userData, userDataError := this.GetByAccount(account)
 	if userDataError != nil {
 		return nil, errors.New("账号不存在")
